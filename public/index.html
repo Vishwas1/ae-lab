@@ -1,21 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Sample Site</title>
 
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <style>
-        body { padding-top:50px; }
-    </style>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://forum.aeternity.com/uploads/db0917/optimized/2X/7/712d06bf19a65d01061d234824706ad31b012acb_2_32x32.png">
+
+    <title>Aeternity</title>
+    <!-- Bootstrap core CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="css/template.css" rel="stylesheet">
 </head>
+
 <body>
 
+    <!-- Fixed navbar -->
     <div class="container">
-        <div class="jumbotron">
-            <h1>Hi There!</h1>
+        <div class="page-header">
+            <h1><img src="https://forum.aeternity.com/uploads/db0917/original/1X/543f494a818af66690a1298689af3fdd0c6389a1.png"> | Labs</h1>
+            <ul class="nav navbar-nav pull-right">
+                
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Network
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Test</a></li>
+                        <li><a href="#">Public</a></li>
+                        <li><a href="#">Custom</a></li>
+                    </ul>
+                </li>
+                
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel with-nav-tabs panel-default">
+                    <div class="panel-heading">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab1default" data-toggle="tab">Introduction</a></li>
+                            <li><a href="#tab2default" data-toggle="tab">Account Creator</a></li>
+                            <li><a href="#tab3default" data-toggle="tab">Build Transaction</a></li>
+                            <li><a href="#tab4default" data-toggle="tab">Sign Transaction</a></li>
+                            <li><a href="#tab5default" data-toggle="tab">Decode Transaction</a></li>
+                        </ul>
+                    </div>
+                    <div class="panel-body">
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="tab1default">
+                                <div class="container">
+                                    <h2 class="mt-5">Aeternity Labs.</h2>
+                                    <p class="">The aeternity lab is a set of tools that enables people to try out and learn about the Stellar network. <p>
+                                    <p>The laboratory can build transactions, sign them, and submit them to the network. It can also make requests to any of the Horizon endpoints.</p>
+                                    <p>Back to <a href="/docs/4.4/examples/sticky-footer/">the default sticky footer</a> minus the navbar.</p>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab2default">
+                                <div class="container">
+                                    <h2 class="mt-5">1. Keypair generator</h2>
+                                    <p>These keypairs can be used on the Aeternity network where one is required. </p>
+                                    <p>For example, it can be used as an account
+                                    master key, account signer, and/or as a stellar-core node key.</p>
+                                    
+                                    <p>
+                                        <button type="button" class="btn btn-primary" onclick="generateKeyPair()" >Generate Keypair</button>
+                                        <table class="table table-bordered">
+                                            <tr>
+                                                <th>Public Key</th>
+                                                <td id="publicKey"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Secret Key</th>
+                                                <td id="secretKey"></td>
+                                            </tr>
+                                        </table>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab3default">
+                                <form action="#" class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="sender">Sender:</label>
+                                        <input type="text" class="form-control" id="sender">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="reciever">Receiver:</label>
+                                        <input type="text" class="form-control" id="reciever">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="amount">Amount:</label>
+                                        <input type="text" class="form-control" id="amount">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="payload">Payload:</label>
+                                        <input type="text" class="form-control" id="payload">
+                                    </div>
+                                    
+                                    <button type="button" onclick="buildTx()" class="btn btn-default">Build Tx</button>
+                                </form>
+                                <form action="#" class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="sender">Raw Tx:</label>
+                                        <textarea placeholder="To get raw tx fill the form and press buildTx button" class="form-control" rows="12" cols="50" ></textarea>
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="tab4default">
+                                <form action="#" class="col-md-6">
+                                    
+                                    <div class="form-group">
+                                        <label for="sender">Raw Tx:</label>
+                                        <textarea placeholder="Copy and paste Raw Transaction from previous tab." class="form-control" rows="8"
+                                            cols="50"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sender">Private Key:</label>
+                                        <input type="text" class="form-control" id="privateKeyInput" placeholder="Copy and paste private key from previous tab." >
+                                    </div>
+                                <button type="button" onclick="buildTx()" class="btn btn-default">Sign Tx</button>
+                                </form>
+                                <form action="#" class="col-md-6">
+                                
+                                    <div class="form-group">
+                                        <label for="sender">Signed Tx:</label>
+                                        <textarea placeholder="To get signed tx fill the form and press signTx button" class="form-control" rows="8"
+                                            cols="50"></textarea>
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="tab5default">
+                                <form action="#" class="col-md-6">
+                                
+                                    <div class="form-group">
+                                        <label for="sender">Decode Tx:</label>
+                                        <textarea placeholder="Paste Signed Transaction from previous tab." class="form-control" rows="8"
+                                            cols="50"></textarea>
+                                    </div>
+                                    
+                                    <button type="button" onclick="buildTx()" class="btn btn-default">Decode Tx</button>
+                                </form>
+                                <form action="#" class="col-md-6">
+                                
+                                    <div class="form-group">
+                                        <label for="sender">Signed Tx:</label>
+                                        <textarea placeholder="{}" class="form-control" rows="8"
+                                            cols="50"></textarea>
+                                    </div>
+                                
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">Place sticky footer content here.</span>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="js/accountCreator.js"></script>
+    <script src="js/buildTransaction.js"></script>
+    <script src="js/signTransaction.js"></script>
+    <script src="js/decodeTransaction.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <script src="https://v4-alpha.getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script> -->
 </body>
+
 </html>
