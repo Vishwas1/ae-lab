@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "node server.js ",
     "dev": "nodemon server.js"
   },
   "repository": {
@@ -28,7 +28,9 @@
   },
   "homepage": "https://github.com/Vishwas1/ae-lab#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "@aeternity/aepp-sdk": "^7.2.1",
+    "express": "^4.17.1",
+    "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
