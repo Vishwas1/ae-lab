@@ -1,22 +1,21 @@
 'use strict';
 module.exports = function(app) {
   var wallet = require('../controllers/walletController');
-
-
-  app.route('network')
+    
+  app.route('/network')
     .post(wallet.setNetwork)
 
-  app.route('account')
-    .get(wallet.createAccount);
+  app.route('/account')
+    .get(wallet.generateKeyPair);
   
-  app.route('build')
+  app.route('/build')
     .post(wallet.buildTx);
 
-  app.route('sign')
+  app.route('/sign')
     .post(wallet.signTx);
 
-  app.route('decode')
-    .get(wallet.parseTx);
+  app.route('/decode')
+    .post(wallet.parseTx);
 
 
   // app.route('/tasks')

@@ -1,0 +1,19 @@
+{
+    "blockHash": "mh_2UmrawJw4G6ybzPLQt99ugRsy1YFGSD2zuj2uqXUvAS6d98e2j",
+    "blockHeight": 233901,
+    "hash": "th_Hr5RtPwb7Kr7FkTZn3PmWpQ6pWTY3oQJysrf3osDRgo1KMGtn",
+    "signatures": [
+        "sg_7UFLJcdtZEL4FwHNdRLoL3tiCLuaNqscTEej7MSQrUhYZ7j9NjAmELUNe9uhE9WwaXF57hmjkAixMY9Pu39wPPwi4BcN8"
+    ],
+    "tx": {
+        "amount": 1000,
+        "fee": 16800000000000,
+        "nonce": 73,
+        "payload": "ba_aGVsbG+Vlcnf",
+        "recipientId": "ak_2dATVcZ9KJU5a8hdsVtTv21pYiGWiPbmVcU1Pz72FFqpk9pSRR",
+        "senderId": "ak_2dATVcZ9KJU5a8hdsVtTv21pYiGWiPbmVcU1Pz72FFqpk9pSRR",
+        "type": "SpendTx",
+        "version": 1
+    },
+    "rawTx": "tx_+KILAfhCuEAxc854jMSMGda45t9aELS9MFB9si742H/BB+9yKMheIGEs2skixJdVVrydCcfvZC2XilvvYrtMhANDUOnYA0kDuFr4WAwBoQHVzwhADpiCIvJutLAsj4kHdFdGchGm5tlV7bcHScajO6EB1c8IQA6YgiLybrSwLI+JB3RXRnIRpubZVe23B0nGozuCA+iGD0eOCEAAAEmFaGVsbG9atQpo"
+}
