@@ -1,4 +1,12 @@
-const { Crypto, TxBuilder } = require('@aeternity/aepp-sdk')
+const { Crypto, TxBuilder,Node, RpcWallet, RpcAepp, MemoryAccount } = require('@aeternity/aepp-sdk')
+
+
+
+const url = process.env.TEST_URL || 'https://sdk-testnet.aepps.com'
+const internalUrl = process.env.TEST_INTERNAL_URL || 'https://sdk-testnet.aepps.com'
+const compilerUrl = process.env.COMPILER_URL || 'https://compiler.aepps.com'
+const networkId = process.env.TEST_NETWORK_ID || 'ae_devnet'
+
 
 const  generateKeyPair  = (req, res) => {
   console.log('here')
@@ -7,6 +15,37 @@ const  generateKeyPair  = (req, res) => {
     publicKey : publicKey,
     secretKey : secretKey
   })
+}
+
+const getSDKInstance = async () => {
+  const node = await Node({ url, internalUrl })
+  const aepp = await RpcAepp({
+    name: 'AEPP',
+    nodes: [{ name: 'test', instance: node }],
+    onNetworkChange (params) {
+    },
+    onAddressChange: (addresses) => {
+    },
+    onDisconnect (a) {
+    }
+  })
+  return aepp
+}
+
+const spendTx = async (req, res) => {
+  const { secretKey, publicKey, signedTx } =  req.body;
+  const account = MemoryAccount({ keypair: { secretKey: secretKey, publicKey: publicKey } })
+  const nodes = [{ name: 'testnet-node', instance: node }]
+  const sdkInstance = await Universal({
+    nodes,
+    accounts: [account]
+  })
+
+  // const signed = await sdkInstance.signTransaction(spendTx)
+  res.json(await sdkInstance.sendTransaction(signedTx, {
+    waitMined : false,
+    verify : true
+  }))
 }
 
 const signTx = (req, res)  => {
@@ -70,20 +109,28 @@ module.exports = {
     });
   },
   generateKeyPair: (req, res) => {
-    console.log('here')
     const  { publicKey, secretKey } = Crypto.generateKeyPair()
     res.json({
       publicKey : publicKey,
       secretKey : secretKey
     })
   },
-  buildTx: (req, res) => {
-    const { sender, receiver,  amount } =  req.body;
-     
-    res.json({
+  buildTx: async (req, res) => {
+    let { sender, receiver,  amount, payload } = req.body;
 
+    /**Test params */
+    sender = "ak_2dATVcZ9KJU5a8hdsVtTv21pYiGWiPbmVcU1Pz72FFqpk9pSRR"
+    receiver = "ak_2dATVcZ9KJU5a8hdsVtTv21pYiGWiPbmVcU1Pz72FFqpk9pSRR"
+    amount = 1000
+    payload = "ba_aGVsbG+Vlcnf"
+
+    const aepp =  await getSDKInstance();
+    const rawTx = await aepp.spendTx({ senderId: sender, recipientId: receiver, amount: amount, payload: payload })
+    res.json({
+      rawTx
     })
   },
   signTx,
-  parseTx
+  parseTx,
+  spendTx
 }

@@ -9,13 +9,16 @@ module.exports = function(app) {
     .get(wallet.generateKeyPair);
   
   app.route('/build')
-    .post(wallet.buildTx);
+    .get(wallet.buildTx);
 
   app.route('/sign')
     .post(wallet.signTx);
 
   app.route('/decode')
     .post(wallet.parseTx);
+
+  app.route('/spend')
+    .post(wallet.spendTx)
 
 
   // app.route('/tasks')
