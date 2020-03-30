@@ -40,13 +40,63 @@
                     <div class="panel-body">
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="tab1default">
-
+                                <div class="container">
+                                    <h2 class="mt-5">Aeternity Labs.</h2>
+                                    <p class="">The aeternity lab is a set of tools that enables people to try out and learn about the Stellar network. <p>
+                                    <p>The laboratory can build transactions, sign them, and submit them to the network. It can also make requests to any of the Horizon endpoints.</p>
+                                    <p>Back to <a href="/docs/4.4/examples/sticky-footer/">the default sticky footer</a> minus the navbar.</p>
+                                </div>
                             </div>
                             <div class="tab-pane fade" id="tab2default">
-
+                                <div class="container">
+                                    <h2 class="mt-5">1. Keypair generator</h2>
+                                    <p>These keypairs can be used on the Aeternity network where one is required. </p>
+                                    <p>For example, it can be used as an account
+                                    master key, account signer, and/or as a stellar-core node key.</p>
+                                    
+                                    <p>
+                                        <button type="button" class="btn btn-primary" onclick="generateKeyPair()" >Generate Keypair</button>
+                                        <table class="table table-bordered">
+                                            <tr>
+                                                <th>Public Key</th>
+                                                <td id="publicKey"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Secret Key</th>
+                                                <td id="secretKey"></td>
+                                            </tr>
+                                        </table>
+                                    </p>
+                                </div>
                             </div>
                             <div class="tab-pane fade" id="tab3default">
-
+                                <form action="#" class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="sender">Sender:</label>
+                                        <input type="text" class="form-control" id="sender">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="reciever">Receiver:</label>
+                                        <input type="text" class="form-control" id="reciever">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="amount">Amount:</label>
+                                        <input type="text" class="form-control" id="amount">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="payload">Payload:</label>
+                                        <input type="text" class="form-control" id="payload">
+                                    </div>
+                                    
+                                    <button type="button" onclick="buildTx()" class="btn btn-default">Build Tx</button>
+                                </form>
+                                <form action="#" class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="sender">Raw Tx:</label>
+                                        <textarea placeholder="To get raw tx fill the form and press buildTx button" class="form-control" rows="12" cols="50"></textarea>
+                                    </div>
+                                    
+                                </form>
                             </div>
                             <div class="tab-pane fade" id="tab4default">
 
