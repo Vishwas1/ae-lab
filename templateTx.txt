@@ -11,7 +11,7 @@
         "nonce": 73,
         "payload": "ba_aGVsbG+Vlcnf",
         "recipientId": "ak_2dATVcZ9KJU5a8hdsVtTv21pYiGWiPbmVcU1Pz72FFqpk9pSRR",
-        "senderId": "ak_2dATVcZ9KJU5a8hdsVtTv21pYiGWiPbmVcU1Pz72FFqpk9pSRR",
+        "senderId":    "ak_2dATVcZ9KJU5a8hdsVtTv21pYiGWiPbmVcU1Pz72FFqpk9pSRR",
         "type": "SpendTx",
         "version": 1
     },
