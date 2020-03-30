@@ -32,7 +32,7 @@ const getSDKInstance = async () => {
   return aepp
 }
 
-const spendTx = (req, res) => {
+const spendTx = async (req, res) => {
   const { secretKey, publicKey, signedTx } =  req.body;
   const account = MemoryAccount({ keypair: { secretKey: secretKey, publicKey: publicKey } })
   const nodes = [{ name: 'testnet-node', instance: node }]
