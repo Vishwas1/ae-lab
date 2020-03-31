@@ -51,6 +51,8 @@
                             <li><a href="#tab3default" data-toggle="tab">Build Transaction</a></li>
                             <li><a href="#tab4default" data-toggle="tab">Sign Transaction</a></li>
                             <li><a href="#tab5default" data-toggle="tab">Decode Transaction</a></li>
+                            <li><a href="#tab6default" data-toggle="tab">Send Transaction</a></li>
+                            <li><a href="#tab7default" data-toggle="tab">Contract editor</a></li>
                         </ul>
                     </div>
                     <div class="panel-body">
@@ -165,6 +167,30 @@
                                     </div>
                                 
                                 </form>
+                            </div>
+                            <div class="tab-pane fade" id="tab6default">
+                                <form action="#" class="col-md-6">
+                                
+                                    <div class="form-group">
+                                        <label for="sender">Signed Tx:</label>
+                                        <textarea placeholder="Paste Signed Transaction from previous tab." class="form-control" rows="8"
+                                            cols="50" id="decode_signedTx"></textarea>
+                                    </div>
+                                    
+                                    <button type="button" onclick="decodeTx()" class="btn btn-primary">Submit Tx</button>
+                                </form>
+                                <form action="#" class="col-md-6">
+                                
+                                    <div class="form-group">
+                                        <label for="sender">Result :</label>
+                                        <textarea placeholder="{}" class="form-control" rows="8"
+                                            cols="50" id="decode_parsedTx"></textarea>
+                                    </div>
+                                
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="tab7default">
+                               Smart contract editor comming soon.
                             </div>
                         </div>
                     </div>
