@@ -9,7 +9,7 @@ module.exports = function(app) {
     .get(wallet.generateKeyPair);
   
   app.route('/build')
-    .get(wallet.buildTx);
+    .post(wallet.buildTx);
 
   app.route('/sign')
     .post(wallet.signTx);
@@ -20,15 +20,6 @@ module.exports = function(app) {
   app.route('/spend')
     .post(wallet.spendTx)
 
-
-  // app.route('/tasks')
-  //   .get(todoList.list_all_tasks)
-  //   .post(todoList.create_a_task);
-
-  // app.route('/tasks/:taskId')
-  //   .get(todoList.read_a_task)
-  //   .put(todoList.update_a_task)
-  //   .delete(todoList.delete_a_task);
 };
 
 
