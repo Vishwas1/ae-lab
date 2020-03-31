@@ -1,9 +1,18 @@
 
-function generateKeyPair(params) {
+
+
+const host =  window.location.origin
+const url = `${host}/account`;
+
+generateKeyPair = async (params)  => {
     console.log('Account Creator')
+    
+    const resp = await fetch(url);    
+    const json = await resp.json();
+    
     let pubKey = document.getElementById('publicKey')
-    pubKey.textContent = "GCR7TGFGWWMRFQACXFNX7XQ2NNQRA3E7JSBZ44W6KKNOOAZLM7V3N2ZW"
+    pubKey.textContent = json.publicKey;
 
     let secretKey = document.getElementById('secretKey')
-    secretKey.textContent = "SDAZYYZ7DBGCPVUZ46OHF3O2YL3FNK3HGXJQNFYPHT5FBE23Z55Z4JOK"
+    secretKey.textContent = json.secretKey;
 }
