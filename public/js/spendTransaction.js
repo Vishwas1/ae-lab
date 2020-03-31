@@ -8,7 +8,9 @@ async function submitTx(params) {
     const body = {
         secretKey: $('#spend_privateKey').val(),
         publicKey: $('#spend_publicKey').val(),
-        rawTx: $('#spend_rawTx').val()
+        rawTx: $('#spend_rawTx').val(),
+        verify: $('#spend_verify').is(":checked"), 
+        waitMined: $('#spend_waitMining').is(":checked")
     }
 
     const resp =  await fetch(url, {

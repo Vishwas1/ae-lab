@@ -183,6 +183,15 @@
                                         <label for="sender">Public Key:</label>
                                         <input type="text" class="form-control" id="spend_publicKey" placeholder="Spender public key (starting with ak_....)" >
                                     </div>
+                                    <!-- Default unchecked -->
+                                    <div class="custom-control custom-checkbox col-md-6">
+                                        <input type="checkbox" class="custom-control-input" id="spend_verify" title="Check to validate your transction before submittting">
+                                        <label class="custom-control-label" for="defaultUnchecked">Verify Tx</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox col-md-6">
+                                        <input type="checkbox" class="custom-control-input" id="spend_waitMining" title="Check to wait till mining is done. This may take sometime">
+                                        <label class="custom-control-label" for="defaultUnchecked">Wait Mining</label>
+                                    </div>
                                     <button type="button" onclick="submitTx()" class="btn btn-primary submitTx has-spinner">Submit Tx</button>
                                 </form>
                                 <form action="#" class="col-md-6">

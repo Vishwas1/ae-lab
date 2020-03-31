@@ -24,7 +24,7 @@ const getSDKInstance = async () => {
 }
 
 const spendTx = async (req, res) => {
-  const { secretKey, publicKey, rawTx } =  req.body;
+  const { secretKey, publicKey, rawTx, verify, waitMined } =  req.body;
 
   const node = await Node({ url, internalUrl })
   const account = MemoryAccount({ keypair: { secretKey: secretKey, publicKey: publicKey } })
@@ -36,8 +36,8 @@ const spendTx = async (req, res) => {
 
   const signed = await sdkInstance.signTransaction(rawTx)
   res.json(await sdkInstance.sendTransaction(signed, {
-    waitMined : false,
-    verify : true
+    waitMined : waitMined,
+    verify : verify
   }))
 }
 
