@@ -10,11 +10,11 @@
     }
   },
   "host": "localhost:3000",
-  "basePath": "/api/v1",
+  "basePath": "/",
   "tags": [
     {
-      "name": "Users",
-      "description": "API for users in the system"
+      "name": "account",
+      "description": "API to generate keypair"
     }
   ],
   "schemes": [
@@ -27,19 +27,42 @@
     "application/json"
   ],
   "paths": {
-    "/network": {
+    "/account": {
+      "get": {
+        "tags": [
+          "Create Account"
+        ],
+        "summary": "Generate a new keypair",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/account"
+            }
+          }
+        }
+      }
+    },
+    "/build": {
       "post": {
         "tags": [
-          "aenetwork"
+          "build transaction"
         ],
-        "description": "Set network",
+        "description": "Build a AE transaction",
         "parameters": [
           {
-            "network": "user",
+            "name" : "buildTx",
             "in": "body",
-            "description": "User that we want to create",
+            "description": "Building a AE transaction",
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/build",
+              "type" : "Object",
+              "properties" : {
+                "sender": "string",
+	              "receiver": "string",
+	              "amount": "number",
+	              "payload": "string"
+              }
             }
           }
         ],
@@ -48,118 +71,116 @@
         ],
         "responses": {
           "200": {
-            "description": "New user is created",
+            "description": "AE transaction is built",
             "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Get all users in system",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Users"
+              "$ref": "#/definitions/build"
             }
           }
         }
       }
     },
-    "/users/{userId}": {
-      "parameters": [
-        {
-          "name": "userId",
-          "in": "path",
-          "required": true,
-          "description": "ID of user that we want to find",
-          "type": "string"
-        }
-      ],
-      "get": {
+    "/sign": {
+      "post": {
         "tags": [
-          "Users"
+          "build transaction"
         ],
-        "summary": "Get user with given ID",
-        "responses": {
-          "200": {
-            "description": "User is found",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
-        }
-      },
-      "delete": {
-        "summary": "Delete user with given ID",
-        "tags": [
-          "Users"
-        ],
-        "responses": {
-          "200": {
-            "description": "User is deleted",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
-        }
-      },
-      "put": {
-        "summary": "Update user with give ID",
-        "tags": [
-          "Users"
-        ],
+        "description": "To sign a raw transaction",
         "parameters": [
           {
-            "name": "user",
+            "name" : "signTx",
             "in": "body",
-            "description": "User with new values of properties",
+            "description": "To sign a raw transaction",
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/build",
+              "type" : "Object",
+              "properties" : {
+                "rawTx": "string",
+	              "publicKey": "string",
+	              "secretKey": "string"
+              }
             }
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
-            "description": "User is updated",
+            "description": "Transaction is signed",
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/build"
             }
           }
         }
       }
-    }
-  },
-  "definitions": {
-    "User": {
-      "required": [
-        "email",
-        "_id"
-      ],
-      "properties": {
-        "_id": {
-          "type": "string",
-          "uniqueItems": true
-        },
-        "email": {
-          "type": "string",
-          "uniqueItems": true
-        },
-        "lastName": {
-          "type": "string"
-        },
-        "firstName": {
-          "type": "string"
+    },
+    "/decode": {
+      "post": {
+        "tags": [
+          "parse transaction"
+        ],
+        "description": "To parse a raw or signed transaction",
+        "parameters": [
+          {
+            "name" : "buildTx",
+            "in": "body",
+            "description": "To parse a raw or signed transaction",
+            "schema": {
+              "$ref": "#/definitions/decode",
+              "type" : "Object",
+              "properties" : {
+                "tx": "string"
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "AE transaction is parsed",
+            "schema": {
+              "$ref": "#/definitions/decode"
+            }
+          }
         }
       }
     },
-    "Users": {
-      "type": "array",
-      "$ref": "#/definitions/User"
+    "/spend": {
+      "post": {
+        "tags": [
+          "spend transaction"
+        ],
+        "description": "To spend money",
+        "parameters": [
+          {
+            "name" : "spendTx",
+            "in": "body",
+            "description": "To spend money",
+            "schema": {
+              "$ref": "#/definitions/spend",
+              "type" : "Object",
+              "properties" : {
+                "signedTx": "string",
+	              "secretKey": "string",
+	              "publicKey": "string"
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Transaction sent to dlt.. Please check the network for the status",
+            "schema": {
+              "$ref": "#/definitions/spend"
+            }
+          }
+        }
+      }
     }
   }
 }

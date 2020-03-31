@@ -1,0 +1,102 @@
+{
+	"variables": [],
+	"info": {
+		"name": "ae-labs",
+		"_postman_id": "565378bb-99a7-a776-7e5f-3548cf51fcb8",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/account",
+			"request": {
+				"url": "localhost:3000/account",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/build",
+			"request": {
+				"url": "localhost:3000/build",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"sender\": \"ak_2H8Wqi8jvF33QJF1AVKVCbmt2ZMkEa3FNtE8iVd5EctRZ3VGDN\",\n\t\"receiver\": \"ak_JeCacn51hekpG5md5ssMcSa2zuM9xkifAzioKiDDLFu2aULsF\",\n\t\"amount\": 1000,\n\t\"payload\": \"ba_aGVsbG+Vlcnf\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/sign",
+			"request": {
+				"url": "localhost:3000/sign",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"rawTx\" : \"tx_+FgMAaEBqFH64qZfJCthAKP4qNulJBLJLJ3C2wUjfd8k3j/3lGShASgOkL3NPSsKay+TBFpL9fMLt8pQbegzLfapoAmxcSUdggPohg9HjghAAAABhWhlbGxvn6WgCQ==\",\n\t\"secretKey\" : \"68bbc4ae1f60510f71ad099d864aa338032cdd98482a787d100c010e6934a1b7a851fae2a65f242b6100a3f8a8dba52412c92c9dc2db05237ddf24de3ff79464\",\n\t\"publicKey\" : \"ak_2H8Wqi8jvF33QJF1AVKVCbmt2ZMkEa3FNtE8iVd5EctRZ3VGDN\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/decode",
+			"request": {
+				"url": "localhost:3000/decode",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"tx\" : \"tx_+KILAfhCuEAnTkqZimwwF3AZdAVIunJkD944XNWHG+kxTis3Q0qF0NauYvCjTsIeELQM53gMa1rBEeLZtMNiyZQXi7YuGSgPuFr4WAwBoQGoUfripl8kK2EAo/io26UkEsksncLbBSN93yTeP/eUZKEBKA6Qvc09KwprL5MEWkv18wu3ylBt6DMt9qmgCbFxJR2CA+iGD0eOCEAAAAGFaGVsbG8YiD5x\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/spend",
+			"request": {
+				"url": "localhost:3000/spend",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"signedTx\" : \"tx_+KILAfhCuEAnTkqZimwwF3AZdAVIunJkD944XNWHG+kxTis3Q0qF0NauYvCjTsIeELQM53gMa1rBEeLZtMNiyZQXi7YuGSgPuFr4WAwBoQGoUfripl8kK2EAo/io26UkEsksncLbBSN93yTeP/eUZKEBKA6Qvc09KwprL5MEWkv18wu3ylBt6DMt9qmgCbFxJR2CA+iGD0eOCEAAAAGFaGVsbG8YiD5x\",\n\t\"secretKey\" : \"68bbc4ae1f60510f71ad099d864aa338032cdd98482a787d100c010e6934a1b7a851fae2a65f242b6100a3f8a8dba52412c92c9dc2db05237ddf24de3ff79464\",\n\t\"publicKey\" : \"ak_2H8Wqi8jvF33QJF1AVKVCbmt2ZMkEa3FNtE8iVd5EctRZ3VGDN\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
