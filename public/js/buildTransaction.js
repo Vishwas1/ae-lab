@@ -1,6 +1,8 @@
 
 async function buildTx(params) {
     console.log('Build TX')
+    $('.buildTx').buttonLoader('start');
+
     const url = `${host}/build`;
     
     const body = {
@@ -19,6 +21,7 @@ async function buildTx(params) {
         body : JSON.stringify(body)
     })
     const json = await resp.json();
+    $('.buildTx').buttonLoader('stop');
 
     let rawTx = document.getElementById('build_rawTx')
     rawTx.textContent = json.rawTx;

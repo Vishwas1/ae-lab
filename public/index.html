@@ -11,6 +11,7 @@
     <title>Aeternity</title>
     <!-- Bootstrap core CSS -->
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
@@ -72,7 +73,7 @@
                                     master key, account signer, and/or as a aeternity-core node key.</p>
                                     
                                     <p>
-                                        <button type="button" class="btn btn-primary" onclick="generateKeyPair()" >Generate Keypair</button>
+                                        <button type="button" class="btn btn-primary generateKeyPair has-spinner" onclick="generateKeyPair()" >Generate Keypair</button>
                                         <table class="table table-bordered">
                                             <tr>
                                                 <th>Public Key</th>
@@ -109,11 +110,11 @@
                                         <input type="text" class="form-control" id="payload">
                                     </div>
                                     
-                                    <button type="button" onclick="buildTx()" class="btn btn-primary">Build Tx</button>
+                                    <button type="button" onclick="buildTx()" class="btn btn-primary buildTx has-spinner">Build Tx</button>
                                 </form>
                                 <form action="#" class="col-md-6">
                                     <div class="form-group">
-                                        <label for="sender">Raw Tx:</label>
+                                        <label for="sender">Raw Tx:</label> 
                                         <textarea placeholder="To get raw tx fill the form and press buildTx button" class="form-control" rows="12" cols="50" id="build_rawTx"></textarea>
                                     </div>
                                     
@@ -135,7 +136,7 @@
                                         <label for="sender">Public Key:</label>
                                         <input type="text" class="form-control" id="sign_publicKey" placeholder="Senders public key" >
                                     </div>
-                                <button type="button" onclick="signTx()" class="btn btn-primary">Sign Tx</button>
+                                <button type="button" onclick="signTx()" class="btn btn-primary signTx has-spinner">Sign Tx</button>
                                 </form>
                                 <form action="#" class="col-md-6">
                                 
@@ -156,7 +157,7 @@
                                             cols="50" id="decode_signedTx"></textarea>
                                     </div>
                                     
-                                    <button type="button" onclick="decodeTx()" class="btn btn-primary">Decode Tx</button>
+                                    <button type="button" onclick="decodeTx()" class="btn btn-primary decodeTx has-spinner">Decode Tx</button>
                                 </form>
                                 <form action="#" class="col-md-6">
                                 
@@ -214,6 +215,8 @@
     <script src="js/buildTransaction.js"></script>
     <script src="js/signTransaction.js"></script>
     <script src="js/decodeTransaction.js"></script>
+    <script src="js/jquery.buttonLoader.min.js"></script>
+
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!-- <script src="https://v4-alpha.getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script> -->
 </body>

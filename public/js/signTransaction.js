@@ -1,7 +1,8 @@
 async function signTx() {
   console.log('Sign TX')
   const url = `${host}/sign`;
-  
+    $('.signTx').buttonLoader('start');
+
   const body = {
       secretKey: $('#sign_privateKey').val(),
       publicKey: $('#sign_publicKey').val(),
@@ -17,7 +18,7 @@ async function signTx() {
       body : JSON.stringify(body)
   })
   const json = await resp.json();
-
+  $('.signTx').buttonLoader('stop');
   let rawTx = document.getElementById('sign_signedTx')
   rawTx.textContent = json.signTx;
 }

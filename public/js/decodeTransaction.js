@@ -1,7 +1,8 @@
 async function decodeTx() {
   console.log('Decode TX')
   const url = `${host}/decode`;
-  
+  $('.decodeTx').buttonLoader('start');
+
   const body = {
     tx: $('#decode_signedTx').val(),
   }
@@ -18,5 +19,9 @@ async function decodeTx() {
 
   let rawTx = document.getElementById('decode_parsedTx')
   console.log(json.parsedTx.tx)
-  rawTx.textContent = JSON.stringify(json.parsedTx.tx);
+  // $('.generateKeyPair').buttonLoader('stop');
+  setTimeout(function () {
+    $('.decodeTx').buttonLoader('stop');
+    rawTx.textContent = JSON.stringify(json.parsedTx.tx);
+  }, 2000);
 }
