@@ -147,19 +147,19 @@
                                 <form action="#" class="col-md-6">
                                 
                                     <div class="form-group">
-                                        <label for="sender">Decode Tx:</label>
+                                        <label for="sender">Signed/Raw Tx:</label>
                                         <textarea placeholder="Paste Signed Transaction from previous tab." class="form-control" rows="8"
-                                            cols="50"></textarea>
+                                            cols="50" id="decode_signedTx"></textarea>
                                     </div>
                                     
-                                    <button type="button" onclick="buildTx()" class="btn btn-default">Decode Tx</button>
+                                    <button type="button" onclick="decodeTx()" class="btn btn-default">Decode Tx</button>
                                 </form>
                                 <form action="#" class="col-md-6">
                                 
                                     <div class="form-group">
-                                        <label for="sender">Signed Tx:</label>
+                                        <label for="sender">Parsed Tx:</label>
                                         <textarea placeholder="{}" class="form-control" rows="8"
-                                            cols="50"></textarea>
+                                            cols="50" id="decode_parsedTx"></textarea>
                                     </div>
                                 
                                 </form>
