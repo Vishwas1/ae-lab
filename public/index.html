@@ -23,20 +23,23 @@
     <!-- Fixed navbar -->
     <div class="container">
         <div class="page-header">
-            <h1><img src="https://forum.aeternity.com/uploads/db0917/original/1X/543f494a818af66690a1298689af3fdd0c6389a1.png"> | Labs</h1>
+            <h1><img class="logo" src="https://forum.aeternity.com/uploads/db0917/original/1X/543f494a818af66690a1298689af3fdd0c6389a1.png"> | Laboratory</h1>
             <ul class="nav navbar-nav pull-right">
                 
+           
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Network
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Test
                         <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
+                    <!-- <ul class="dropdown-menu">
                         <li><a href="#">Test</a></li>
                         <li><a href="#">Public</a></li>
                         <li><a href="#">Custom</a></li>
-                    </ul>
+                    </ul> -->
                 </li>
-                
             </ul>
+            <label class="pull-right" style="padding-top:1%">
+                https://testnet.aeternal.io
+            </label>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -57,7 +60,6 @@
                                     <h2 class="mt-5">Aeternity Labs.</h2>
                                     <p class="">The aeternity lab is a set of tools that enables people to try out and learn about the Stellar network. <p>
                                     <p>The laboratory can build transactions, sign them, and submit them to the network. It can also make requests to any of the Horizon endpoints.</p>
-                                    <p>Back to <a href="/docs/4.4/examples/sticky-footer/">the default sticky footer</a> minus the navbar.</p>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="tab2default">
@@ -105,7 +107,7 @@
                                         <input type="text" class="form-control" id="payload">
                                     </div>
                                     
-                                    <button type="button" onclick="buildTx()" class="btn btn-default">Build Tx</button>
+                                    <button type="button" onclick="buildTx()" class="btn btn-primary">Build Tx</button>
                                 </form>
                                 <form action="#" class="col-md-6">
                                     <div class="form-group">
@@ -131,7 +133,7 @@
                                         <label for="sender">Public Key:</label>
                                         <input type="text" class="form-control" id="sign_publicKey" placeholder="Senders public key" >
                                     </div>
-                                <button type="button" onclick="signTx()" class="btn btn-default">Sign Tx</button>
+                                <button type="button" onclick="signTx()" class="btn btn-primary">Sign Tx</button>
                                 </form>
                                 <form action="#" class="col-md-6">
                                 
@@ -152,7 +154,7 @@
                                             cols="50" id="decode_signedTx"></textarea>
                                     </div>
                                     
-                                    <button type="button" onclick="decodeTx()" class="btn btn-default">Decode Tx</button>
+                                    <button type="button" onclick="decodeTx()" class="btn btn-primary">Decode Tx</button>
                                 </form>
                                 <form action="#" class="col-md-6">
                                 
@@ -173,7 +175,7 @@
 
     <footer class="footer">
         <div class="container">
-            <span class="text-muted">Place sticky footer content here.</span>
+            <span class="text-muted">Built by Hypermine Labs.</span>
         </div>
     </footer>
 
