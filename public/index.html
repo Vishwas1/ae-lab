@@ -150,7 +150,7 @@
                                 <form action="#" class="col-md-6">
                                 
                                     <div class="form-group">
-                                        <label for="sender">Signed/Raw Tx:</label>
+                                        <label for="sender">Signed / Raw Tx:</label>
                                         <textarea placeholder="Paste Signed Transaction from previous tab." class="form-control" rows="8"
                                             cols="50" id="decode_signedTx"></textarea>
                                     </div>
@@ -171,19 +171,26 @@
                                 <form action="#" class="col-md-6">
                                 
                                     <div class="form-group">
-                                        <label for="sender">Signed Tx:</label>
-                                        <textarea placeholder="Paste Signed Transaction from previous tab." class="form-control" rows="8"
-                                            cols="50" id="decode_signedTx"></textarea>
+                                        <label for="sender">Raw Tx:</label>
+                                        <textarea placeholder="Paste raw Transaction from previous tab." class="form-control" rows="8"
+                                            cols="50" id="spend_rawTx"></textarea>
                                     </div>
-                                    
-                                    <button type="button" onclick="decodeTx()" class="btn btn-primary">Submit Tx</button>
+                                    <div class="form-group">
+                                        <label for="sender">Private Key:</label>
+                                        <input type="text" class="form-control" id="spend_privateKey" placeholder="Spender private key" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sender">Public Key:</label>
+                                        <input type="text" class="form-control" id="spend_publicKey" placeholder="Spender public key (starting with ak_....)" >
+                                    </div>
+                                    <button type="button" onclick="submitTx()" class="btn btn-primary submitTx has-spinner">Submit Tx</button>
                                 </form>
                                 <form action="#" class="col-md-6">
                                 
                                     <div class="form-group">
                                         <label for="sender">Result :</label>
                                         <textarea placeholder="{}" class="form-control" rows="8"
-                                            cols="50" id="decode_parsedTx"></textarea>
+                                            cols="50" id="spend_result"></textarea>
                                     </div>
                                 
                                 </form>
@@ -214,7 +221,9 @@
     <script src="js/buildTransaction.js"></script>
     <script src="js/signTransaction.js"></script>
     <script src="js/decodeTransaction.js"></script>
+    <script src="js/spendTransaction.js"></script>
     <script src="js/jquery.buttonLoader.min.js"></script>
+
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!-- <script src="https://v4-alpha.getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script> -->

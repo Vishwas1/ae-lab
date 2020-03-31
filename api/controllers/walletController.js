@@ -24,7 +24,7 @@ const getSDKInstance = async () => {
 }
 
 const spendTx = async (req, res) => {
-  const { secretKey, publicKey, signedTx } =  req.body;
+  const { secretKey, publicKey, rawTx } =  req.body;
 
   const node = await Node({ url, internalUrl })
   const account = MemoryAccount({ keypair: { secretKey: secretKey, publicKey: publicKey } })
@@ -34,8 +34,8 @@ const spendTx = async (req, res) => {
     accounts: [account]
   })
 
-  // const signed = await sdkInstance.signTransaction(spendTx)
-  res.json(await sdkInstance.sendTransaction(signedTx, {
+  const signed = await sdkInstance.signTransaction(rawTx)
+  res.json(await sdkInstance.sendTransaction(signed, {
     waitMined : false,
     verify : true
   }))
@@ -57,6 +57,9 @@ const signTx = async (req, res) => {
     rawTx: rawTx,
     signTx: signed 
   });
+
+  const aepp =  await getSDKInstance();
+  await aepp.signTransaction(rawTx)
 }
 
 const parseTx = (req, res) => {
