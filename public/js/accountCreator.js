@@ -1,12 +1,9 @@
-
-
-
 const host =  window.location.origin
-const url = `${host}/account`;
 
 generateKeyPair = async (params)  => {
     console.log('Account Creator')
-    
+
+    const url = `${host}/account`;
     const resp = await fetch(url);    
     const json = await resp.json();
     

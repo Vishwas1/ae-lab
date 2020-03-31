@@ -90,15 +90,15 @@
                                 <form action="#" class="col-md-6">
                                     <div class="form-group">
                                         <label for="sender">Sender:</label>
-                                        <input type="text" class="form-control" id="sender">
+                                        <input type="text" class="form-control" placeholder="ak_1A4BQ7oJtGdM89rHxgw4J9dxGCSF5ySGLtHyMe75MTzATo5gg" id="sender">
                                     </div>
                                     <div class="form-group">
                                         <label for="reciever">Receiver:</label>
-                                        <input type="text" class="form-control" id="reciever">
+                                        <input type="text" class="form-control" placeholder="ak_1A4BQ7oJtGdM89rHxgw4J9dxGCSF5ySGLtHyMe75MTzATo5gg" id="reciever">
                                     </div>
                                     <div class="form-group">
                                         <label for="amount">Amount:</label>
-                                        <input type="text" class="form-control" id="amount">
+                                        <input type="text" placeholder="1000 (AEN)" class="form-control" id="amount">
                                     </div>
                                     <div class="form-group">
                                         <label for="payload">Payload:</label>
@@ -110,7 +110,7 @@
                                 <form action="#" class="col-md-6">
                                     <div class="form-group">
                                         <label for="sender">Raw Tx:</label>
-                                        <textarea placeholder="To get raw tx fill the form and press buildTx button" class="form-control" rows="12" cols="50" ></textarea>
+                                        <textarea placeholder="To get raw tx fill the form and press buildTx button" class="form-control" rows="12" cols="50" id="build_rawTx"></textarea>
                                     </div>
                                     
                                 </form>
@@ -121,20 +121,24 @@
                                     <div class="form-group">
                                         <label for="sender">Raw Tx:</label>
                                         <textarea placeholder="Copy and paste Raw Transaction from previous tab." class="form-control" rows="8"
-                                            cols="50"></textarea>
+                                            cols="50" id="sign_rawTx"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="sender">Private Key:</label>
-                                        <input type="text" class="form-control" id="privateKeyInput" placeholder="Copy and paste private key from previous tab." >
+                                        <input type="text" class="form-control" id="sign_privateKey" placeholder="Senders private key" >
                                     </div>
-                                <button type="button" onclick="buildTx()" class="btn btn-default">Sign Tx</button>
+                                    <div class="form-group">
+                                        <label for="sender">Public Key:</label>
+                                        <input type="text" class="form-control" id="sign_publicKey" placeholder="Senders public key" >
+                                    </div>
+                                <button type="button" onclick="signTx()" class="btn btn-default">Sign Tx</button>
                                 </form>
                                 <form action="#" class="col-md-6">
                                 
                                     <div class="form-group">
                                         <label for="sender">Signed Tx:</label>
                                         <textarea placeholder="To get signed tx fill the form and press signTx button" class="form-control" rows="8"
-                                            cols="50"></textarea>
+                                            cols="50" id="sign_signedTx"></textarea>
                                     </div>
                                     
                                 </form>
