@@ -1,14 +1,25 @@
-function buildTx(params) {
+
+async function buildTx(params) {
     console.log('Build TX')
-    let sender = document.getElementById('sender')
-    sender.textContent = "GCR7TGFGWWMRFQACXFNX7XQ2NNQRA3E7JSBZ44W6KKNOOAZLM7V3N2ZW"
+    const url = `${host}/build`;
+    
+    const body = {
+        sender: $('#sender').val(),
+        receiver: $('#reciever').val(),
+        amount: parseInt($('#amount').val()),
+        payload: "ba_aGVsbG+Vlcnf"// $('#payload').val() != "" ? $('#payload').val() : "ba_aGVsbG+Vlcnf"
+    }
 
-    let reciever = document.getElementById('reciever')
-    reciever.textContent = "SDAZYYZ7DBGCPVUZ46OHF3O2YL3FNK3HGXJQNFYPHT5FBE23Z55Z4JOK"
+    const resp =  await fetch(url, {
+        method : 'post',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body : JSON.stringify(body)
+    })
+    const json = await resp.json();
 
-    let amount = document.getElementById('amount')
-    amount.textContent = "100"
-
-    let payload = document.getElementById('payload')
-    payload.textContent = "SDAZYYZ7DBGCPVUZ46OHF3O2YL3FNK3HGXJQNFYPHT5FBE23Z55Z4JOK"
+    let rawTx = document.getElementById('build_rawTx')
+    rawTx.textContent = json.rawTx;
 }
