@@ -53,13 +53,11 @@ const signTx = async (req, res) => {
   })
 
   const signed = await sdkInstance.signTransaction(rawTx)
+  console.log(signed)
   res.json({
     rawTx: rawTx,
     signTx: signed 
   });
-
-  const aepp =  await getSDKInstance();
-  await aepp.signTransaction(rawTx)
 }
 
 const parseTx = (req, res) => {
