@@ -29,7 +29,12 @@
   "homepage": "https://github.com/Vishwas1/ae-lab#readme",
   "dependencies": {
     "@aeternity/aepp-sdk": "^7.2.1",
+    "aeproject-lib": "^2.2.0",
+    "aeproject-logger": "^2.2.0",
+    "aeproject-utils": "^2.2.0",
+    "commander": "^5.0.0",
     "express": "^4.17.1",
+    "prompts": "^2.3.2",
     "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
