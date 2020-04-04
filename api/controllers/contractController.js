@@ -1,0 +1,147 @@
+const {
+    Transaction,
+    MemoryAccount,
+    ChainNode,
+    ContractCompilerAPI,
+    Contract,
+    Node,
+    Ae
+  } = require('@aeternity/aepp-sdk')
+
+const statusTypeEnum = {
+    ERROR : 500,
+    OK : 200
+}
+
+const fnTypeEnum = {
+    SETTER: 1,
+    GETTER: 0
+}
+
+/**
+ * Private Methods
+ **/
+
+const getClient = async (keypair) => {
+    const ContractWithAE = await Contract
+     .compose(Transaction, MemoryAccount, ChainNode) // AE implementation
+     .compose(ContractCompilerAPI) // ContractBase implementation
+
+    const NODE_URL = 'https://sdk-testnet.aepps.com' 
+    const NODE_INTERNAL_URL = 'https://sdk-testnet.aepps.com'
+    const COMPILER_URL = 'https://compiler.aepps.com'
+
+    // const keypair = {
+    //     publicKey: publicKey, //"ak_nE3GbfpQWgJ1ffDyM9rd4mcztt9jREjqumuiBGvpgRbDYnJrQ",
+    //     secretKey: secretKey  // "82716111c60707bf769ca960091efa1cd250f36d5396d3b6604e49c71142756166b03f81fd9eae68d4dbb1a321b1f85d07f17834cda090cfe9c0ee0d37d913dd"
+    // }
+
+    const node = await Node({ url: NODE_URL, internalUrl: NODE_INTERNAL_URL })    
+
+    // created the client
+    const client = await ContractWithAE({ 
+        nodes: [{ name: 'testNode', instance: node }],
+        compilerUrl: COMPILER_URL, 
+        keypair })
+    return client;
+}
+
+const sendFormattedResponse =  async (res, message, statusTypeEnum) => {
+    return res.JSON({
+        data: message,
+        status: statusTypeEnum
+    })
+}
+
+const sanityCheck = (code,keypair) => {
+    if(!code) throw new Exception("Code is null or empty")
+    if(!keypair) throw new Exception("Keypair is null or empty")
+    if(!keypair.publicKey) throw new Exception("publicKey is null or empty")
+    if(!keypair.secretKey) throw new Exception("secretKey is null or empty")
+}
+
+/**
+ * Public Methods
+ **/
+
+const compileContract = async (req, res) => {
+    const data;
+    try{
+        const { code, keypair } = req.body;
+        sanityCheck(code,keypair);
+        const client = await getClient(keypair);
+        const compiled = await client.contractCompile(code)
+        data = compiled.bytecode;
+        return sendFormattedResponse(res, data, statusTypeEnum.OK);
+    }catch(e){
+        return sendFormattedResponse(res, e.message, statusTypeEnum.ERROR);
+    }
+}
+
+const deployContract = async (req, res) => {
+    const data;
+    try{
+        const { code, keypair } = req.body;
+        sanityCheck(code,keypair);
+
+        const client = await getClient(keypair);
+        const cInstance = await client.getContractInstance(code)
+        const deployed = await cInstance.deploy([])
+        data = deployed;
+        return sendFormattedResponse(res, data, statusTypeEnum.OK);
+    }catch(e){
+        return sendFormattedResponse(res, e.message, statusTypeEnum.ERROR);
+    }
+}
+
+const callContractMethod = async (req, res) => {
+    const data;
+    try{
+        const { code, keypair, fn, fnType, args } = req.body;
+        sanityCheck(code,keypair);
+        if(!fn) throw new Exception("Function name is not passed")
+        if(fnType != fnTypeEnum.SETTER || fnType != fnTypeEnum.GETTER) throw new Exception("Incorrect function type. It should be either SETTER or GETTER")
+        if(!Array.isArray(args)) throw new Exception("Incorrect argument type. It should be of type Array")
+
+        const client = await getClient(keypair);
+        const cInstance = await client.getContractInstance(code, { contractAddress: contractAddress })
+        
+        switch(fnType){
+            case fnTypeEnum.SETTER: {
+                data = await (await cInstance.methods[fn].send(args)).decode()
+                break;
+            }
+            case fnTypeEnum.GETTER: {
+                data = await (await cInstance.methods[fn].get(args)).decode()
+                break
+            }
+        }
+        return sendFormattedResponse(res, data, statusTypeEnum.OK);
+    }catch(e){
+        return sendFormattedResponse(res, e.message, statusTypeEnum.ERROR);
+    }
+}
+
+const getContractMethods = async (req, res) => {
+    const data;
+    try{
+        const { code, keypair, contractAddress } = req.body;
+        sanityCheck(code,keypair);
+        if(!contractAddress) throw new Exception("contractAddress is null or empty")
+
+        const client = await getClient(keypair);
+        const cInstance = await client.getContractInstance(code, { contractAddress: contractAddress })
+        data = cInstance.methods;
+
+        return sendFormattedResponse(res, data, statusTypeEnum.OK);
+    }catch(e){
+        return sendFormattedResponse(res, e.message, statusTypeEnum.ERROR);
+    }
+}
+
+module.exports = {
+    compileContract,
+    deployContract,
+    callContractMethod,
+    getContractMethods
+}
