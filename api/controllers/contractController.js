@@ -5,8 +5,7 @@ const {
     ContractCompilerAPI,
     Contract,
     Node,
-    Ae,
-    ChainNode
+    Ae
   } = require('@aeternity/aepp-sdk')
 
 const {
@@ -65,7 +64,9 @@ const compileContract = async (req, res) => {
         sanityCheck(code,keypair);
         const client = await getClient(keypair);
         const compiled = await client.contractCompile(code)
-        const data = compiled.bytecode;
+        const data = {
+            bytecode : compiled.bytecode
+        }
         return sendFormattedResponse(res, data, statusTypeEnum.OK);
     }catch(e){
         return sendFormattedResponse(res, e.message, statusTypeEnum.ERROR);
@@ -88,25 +89,39 @@ const deployContract = async (req, res) => {
 
 const callContractMethod = async (req, res) => {
     try{
-        const { code, keypair, fn, fnType, args } = req.body;
+        const { code, keypair, fn, fnType, args, contractAddress } = req.body;
         sanityCheck(code,keypair);
         if(!fn) throw new Error("Function name is not passed")
-        if(fnType != fnTypeEnum.SETTER || fnType != fnTypeEnum.GETTER) throw new Error("Incorrect function type. It should be either SETTER or GETTER")
+        // if(fnType != fnTypeEnum.SETTER || fnType != fnTypeEnum.GETTER) throw new Error("Incorrect function type. It should be either SETTER or GETTER")
+        if(!args) throw new Error("Arguments is null or empty")
         if(!Array.isArray(args)) throw new Error("Incorrect argument type. It should be of type Array")
+        if(!contractAddress) throw new Error("contractAddress is null or empty")
 
         const client = await getClient(keypair);
         const cInstance = await client.getContractInstance(code, { contractAddress: contractAddress })
-        let data;
-        switch(fnType){
-            case fnTypeEnum.SETTER: {
-                data = await (await cInstance.methods[fn].send(args)).decode()
-                break;
-            }
-            case fnTypeEnum.GETTER: {
-                data = await (await cInstance.methods[fn].get(args)).decode()
-                break
-            }
-        }
+        const options = {} // { amount: 0, fee: 3232, gas: 123}
+        let data = {}
+        
+        const response = await cInstance.call(fn, args, options)
+        
+        data.hash = response.hash;
+        data.gasPrice = response.result.gasPrice
+        data.gasUsed = response.result.gasUsed
+        data.height = response.result.height
+        data.contractId = response.result.contractId
+        data.callerPublicKey = response.result.callerId
+        data.decodedResult = response.decodedResult
+        
+        // switch(fnType){
+        //     case fnTypeEnum.SETTER: {
+        //         data = await (await cInstance.methods[fn].send(args)).decode()
+        //         break;
+        //     }
+        //     case fnTypeEnum.GETTER: {
+        //         data = await (await cInstance.methods[fn].get(args)).decode()
+        //         break
+        //     }
+        // }
         return sendFormattedResponse(res, data, statusTypeEnum.OK);
     }catch(e){
         return sendFormattedResponse(res, e.message, statusTypeEnum.ERROR);
@@ -121,8 +136,7 @@ const getContractMethods = async (req, res) => {
 
         const client = await getClient(keypair);
         const cInstance = await client.getContractInstance(code, { contractAddress: contractAddress })
-        const data = cInstance.methods;
-        return sendFormattedResponse(res, data, statusTypeEnum.OK);
+        return sendFormattedResponse(res, Object.keys(cInstance.methods), statusTypeEnum.OK);
     }catch(e){
         return sendFormattedResponse(res, e.message, statusTypeEnum.ERROR);
     }
