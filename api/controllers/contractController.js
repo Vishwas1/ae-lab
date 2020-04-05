@@ -5,13 +5,14 @@ const {
     ContractCompilerAPI,
     Contract,
     Node,
-    Ae
+    Ae,
+    ChainNode
   } = require('@aeternity/aepp-sdk')
 
-const statusTypeEnum = {
-    ERROR : 500,
-    OK : 200
-}
+const {
+    statusTypeEnum,
+    sendFormattedResponse
+} = require('../utils/utils')
 
 const fnTypeEnum = {
     SETTER: 1,
@@ -46,12 +47,6 @@ const getClient = async (keypair) => {
     return client;
 }
 
-const sendFormattedResponse =  async (res, message, statusTypeEnum) => {
-    return res.JSON({
-        data: message,
-        status: statusTypeEnum
-    })
-}
 
 const sanityCheck = (code,keypair) => {
     if(!code) throw new Exception("Code is null or empty")
