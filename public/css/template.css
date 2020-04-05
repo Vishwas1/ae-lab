@@ -327,5 +327,7 @@
 .console {
     border: 1px solid;
     color: white;
+    height: 100px !important;
     background: black;
+    overflow: scroll;
 }
