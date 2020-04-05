@@ -212,16 +212,54 @@
                                     <pre id="editor">/** Your Sophia code **/</pre>
                                 </div>
                                 <div class="col-md-4">
-                                   
                                     <form action="#" class="">
                                         <div class="form-group">
-                                            <button type="button" onclick="submitContract()" class="btn btn-primary submitContract has-spinner">Build</button>
+                                            <button type="button" data-toggle="modal" data-target="#keyInputModal" class="btn btn-primary submitContract has-spinner">Compile</button>
                                             <button type="button" onclick="deployContract()" class="btn btn-primary deployContract has-spinner">Deploy</button>
                                         </div>
                                         <div class="form-group">
-                                            <textarea placeholder="Call Result" class="form-control contract-result"  cols="50" id="spend_result"></textarea>
+                                            <textarea placeholder="Byte Code" class="form-control contract-result"  cols="50" id="spend_result"></textarea>
                                         </div>
                                 
+                                    </form>
+                                </div>
+                              </div>
+                              <hr/>
+                              
+                              <div class="row callFunction">
+                                <div class="col-md-8">
+                                    <form action="#" class="">
+                                        <div class="form-group">
+                                            <label>
+                                                ⬆ Call Function
+                                            </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>
+                                                Methods
+                                            </label>
+                                            <select class="form-control">
+                                                <option value="newFunctionName">
+                                                    newFunctionName
+                                                </option>
+                                            </select>
+                                            <label>
+                                                Args
+                                            </label>
+                                            <input class="form-control args" type="text" id="args"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-primary call has-spinner">
+                                                Call
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-md-4">
+                                    <form action="#" class="">
+                                        <div class="form-group">
+                                            <textarea placeholder="Call Result" class="form-control contract-result" cols="50" id="spend_result"></textarea>
+                                        </div>
                                     </form>
                                 </div>
                               </div>
@@ -232,7 +270,34 @@
             </div>
         </div>
     </div>
-
+    <div class="modal fade" id="keyInputModal" role="dialog">
+        <div class="modal-dialog">
+    
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Provide Your Keys</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="sender">Private Key:</label>
+                        <input type="text" class="form-control" id="modal_sign_privateKey" placeholder="Spender private key">
+                    </div>
+                    <div class="form-group">
+                        <label for="sender">Public Key:</label>
+                        <input type="text" class="form-control" id="modal_sign_publicKey"
+                            placeholder="Spender public key (starting with ak_....)">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="compileContract()" class="btn btn-default" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+    
+        </div>
+    </div>
     <footer class="footer">
         <div class="container">
             <a href="https://hypermine.in/" target="_blank"><span class="text-muted">All content on this site is copyright. All Rights Reserved. ©Hypermine 2020</span></a>
@@ -250,6 +315,7 @@
     <script src="js/signTransaction.js"></script>
     <script src="js/decodeTransaction.js"></script>
     <script src="js/spendTransaction.js"></script>
+    <script src="js/contractCompiler.js"></script>
     <script src="js/jquery.buttonLoader.min.js"></script>
     <script src="js/src/ace.js" type="text/javascript" charset="utf-8"></script>
     <!-- <script src="js/src/mode-javascript.js" type="text/javascript" charset="utf-8"></script> -->

@@ -318,4 +318,8 @@
     margin: 0px -4.65909px 0px 0px; 
     width: 354px; 
     height: 353px !important;
+    overflow-y: scroll;
+}
+.callFunction {
+    display: none;
 }
