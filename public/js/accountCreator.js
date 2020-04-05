@@ -11,11 +11,11 @@ generateKeyPair = async (params)  => {
     setTimeout(function () {
         $('.generateKeyPair').buttonLoader('stop');
         let pubKey = document.getElementById('publicKey')
-        pubKey.textContent = json.publicKey;
+        pubKey.textContent = json.data.publicKey;
 
         let secretKey = document.getElementById('secretKey')
-        secretKey.textContent = json.secretKey;
-    }, 2000);
+        secretKey.textContent = json.data.secretKey;
+    }, 1000);
 
     
 }

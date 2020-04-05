@@ -1,5 +1,9 @@
 const { Crypto, TxBuilder,Node, RpcWallet, RpcAepp, MemoryAccount, Universal } = require('@aeternity/aepp-sdk')
 
+const {
+  statusTypeEnum,
+  sendFormattedResponse
+} = require('../utils/utils')
 
 
 const url = process.env.TEST_URL || 'https://sdk-testnet.aepps.com'
@@ -24,49 +28,107 @@ const getSDKInstance = async () => {
 }
 
 const spendTx = async (req, res) => {
-  const { secretKey, publicKey, rawTx, verify, waitMined } =  req.body;
+  try{
+    const { secretKey, publicKey, rawTx, verify, waitMined } =  req.body;
 
-  const node = await Node({ url, internalUrl })
-  const account = MemoryAccount({ keypair: { secretKey: secretKey, publicKey: publicKey } })
-  const nodes = [{ name: 'testnet-node', instance: node }]
-  const sdkInstance = await Universal({
-    nodes,
-    accounts: [account]
-  })
+    if(!secretKey || secretKey == "") throw new Error("SecretKey is null or empty")
+    if(!publicKey || publicKey == "") throw new Error("publicKey is null or empty")
+    if(!rawTx || rawTx == "") throw new Error("Raw Transaction is null or empty")
 
-  const signed = await sdkInstance.signTransaction(rawTx)
-  res.json(await sdkInstance.sendTransaction(signed, {
-    waitMined : waitMined,
-    verify : verify
-  }))
+    const node = await Node({ url, internalUrl })
+    const account = MemoryAccount({ keypair: { secretKey: secretKey, publicKey: publicKey } })
+    const nodes = [{ name: 'testnet-node', instance: node }]
+    const sdkInstance = await Universal({
+      nodes,
+      accounts: [account]
+    })
+  
+    const signed = await sdkInstance.signTransaction(rawTx)
+    const data = await sdkInstance.sendTransaction(signed, {
+      waitMined : waitMined,
+      verify : verify
+    })
+
+    return sendFormattedResponse(res, data, statusTypeEnum.OK);
+  }catch(e){
+    return sendFormattedResponse(res, e.message, statusTypeEnum.ERROR);
+  }
 }
 
 const signTx = async (req, res) => {
-  const { secretKey, publicKey, rawTx } =  req.body;
+  try{
+    const { secretKey, publicKey, rawTx } =  req.body;
+    if(!secretKey || secretKey == "") throw new Error("SecretKey is null or empty")
+    if(!publicKey || publicKey == "") throw new Error("publicKey is null or empty")
+    if(!rawTx || rawTx == " ") throw new Error("Raw Transaction is null or empty")
 
-  const node = await Node({ url, internalUrl })
-  const account = MemoryAccount({ keypair: { secretKey: secretKey, publicKey: publicKey } })
-  const nodes = [{ name: 'testnet-node', instance: node }]
-  const sdkInstance = await Universal({
-    nodes,
-    accounts: [account]
-  })
 
-  const signed = await sdkInstance.signTransaction(rawTx)
-  console.log(signed)
-  res.json({
-    rawTx: rawTx,
-    signTx: signed 
-  });
+    const node = await Node({ url, internalUrl })
+    const account = MemoryAccount({ keypair: { secretKey: secretKey, publicKey: publicKey } })
+    const nodes = [{ name: 'testnet-node', instance: node }]
+    const sdkInstance = await Universal({
+      nodes,
+      accounts: [account]
+    })
+  
+    const signed = await sdkInstance.signTransaction(rawTx)
+    console.log(signed)
+    const data = {
+      rawTx: rawTx,
+      signTx: signed 
+    };
+    return sendFormattedResponse(res, data, statusTypeEnum.OK);
+  }catch(e){
+    return sendFormattedResponse(res, e.message, statusTypeEnum.ERROR);
+  }
+  
 }
 
 const parseTx = (req, res) => {
-  const { tx } =  req.body;
-  const deserializedTx = TxBuilder.unpackTx(tx)
-  res.json({
-    rawTx: tx,
-    parsedTx: deserializedTx 
-  });
+  try{
+    const { tx } =  req.body;
+    if(!tx || tx == " ") throw new Error("Signed Transaction is null or empty")
+
+    const deserializedTx = TxBuilder.unpackTx(tx)
+    const data = {
+      rawTx: tx,
+      parsedTx: deserializedTx 
+    }
+    return sendFormattedResponse(res, data, statusTypeEnum.OK);
+  }catch(e){
+    return sendFormattedResponse(res, e.message, statusTypeEnum.ERROR);
+  }
+}
+
+const buildTx = async (req, res) => {
+  try{
+    let { sender, receiver,  amount, payload } = req.body;
+    if(!sender || sender == " ") throw new Error("Spender publicKey is null or empty")
+    if(!receiver || receiver == " ") throw new Error("Receiver publicKey is null or empty")
+    if(!amount || amount == " ") throw new Error("Amount publicKey is null or empty")
+
+    const aepp =  await getSDKInstance();
+    const rawTx = await aepp.spendTx({ senderId: sender, recipientId: receiver, amount: amount, payload: payload })
+    const data = {
+      rawTx
+    }
+    return sendFormattedResponse(res, data, statusTypeEnum.OK);
+  }catch(e){
+    return sendFormattedResponse(res, e.message, statusTypeEnum.ERROR);
+  }
+}
+
+const generateKeyPair = (req, res) => {
+  try{
+    const  { publicKey, secretKey } = Crypto.generateKeyPair()
+    const data = {
+      publicKey : publicKey,
+      secretKey : secretKey
+    }
+    return sendFormattedResponse(res, data, statusTypeEnum.OK);
+  }catch(e){
+    return sendFormattedResponse(res, e.message, statusTypeEnum.ERROR);
+  }
 }
 
 module.exports = {
@@ -78,28 +140,8 @@ module.exports = {
       
     });
   },
-  generateKeyPair: (req, res) => {
-    const  { publicKey, secretKey } = Crypto.generateKeyPair()
-    res.json({
-      publicKey : publicKey,
-      secretKey : secretKey
-    })
-  },
-  buildTx: async (req, res) => {
-    let { sender, receiver,  amount, payload } = req.body;
-
-    /**Test params */
-    // sender = "ak_2dATVcZ9KJU5a8hdsVtTv21pYiGWiPbmVcU1Pz72FFqpk9pSRR"
-    // receiver = "ak_2dATVcZ9KJU5a8hdsVtTv21pYiGWiPbmVcU1Pz72FFqpk9pSRR"
-    // amount = 1000
-    // payload = "ba_aGVsbG+Vlcnf"
-
-    const aepp =  await getSDKInstance();
-    const rawTx = await aepp.spendTx({ senderId: sender, recipientId: receiver, amount: amount, payload: payload })
-    res.json({
-      rawTx
-    })
-  },
+  generateKeyPair,
+  buildTx,
   signTx,
   parseTx,
   spendTx
