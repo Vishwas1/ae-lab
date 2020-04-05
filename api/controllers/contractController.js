@@ -81,7 +81,11 @@ const deployContract = async (req, res) => {
         const client = await getClient(keypair);
         const cInstance = await client.getContractInstance(code)
         const deployed = await cInstance.deploy([])
-        return sendFormattedResponse(res, deployed, statusTypeEnum.OK);
+        const data = {
+            result : deployed,
+            methods : Object.keys(cInstance.methods)
+        }
+        return sendFormattedResponse(res, data, statusTypeEnum.OK);
     }catch(e){
         return sendFormattedResponse(res, e.message, statusTypeEnum.ERROR);
     }
