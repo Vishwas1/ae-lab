@@ -4,7 +4,7 @@ const statusTypeEnum = {
 }
 
 const sendFormattedResponse =  async (res, message, statusTypeEnum) => {
-    return res.JSON({
+    return res.json({
         data: message,
         status: statusTypeEnum
     })
