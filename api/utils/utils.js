@@ -1,11 +1,7 @@
-
-
 const statusTypeEnum = {
     ERROR : 500,
     OK : 200
 }
-
-
 
 const sendFormattedResponse =  async (res, message, statusTypeEnum) => {
     return res.JSON({
@@ -13,3 +9,9 @@ const sendFormattedResponse =  async (res, message, statusTypeEnum) => {
         status: statusTypeEnum
     })
 }
+
+module.exports = {
+    statusTypeEnum,
+    sendFormattedResponse
+}
+
