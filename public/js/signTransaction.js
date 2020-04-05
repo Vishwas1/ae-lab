@@ -19,8 +19,10 @@ async function signTx() {
   })
   const json = await resp.json();
   $('.signTx').buttonLoader('stop');
+  if(json && json.status != 200) alert(`Error: ${json.data}`)
+
   let rawTx = document.getElementById('sign_signedTx')
-  rawTx.textContent = json.signTx;
+  rawTx.textContent = json.data.signTx;
 }
 
 

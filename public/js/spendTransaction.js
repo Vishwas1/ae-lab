@@ -22,9 +22,11 @@ async function submitTx(params) {
         body : JSON.stringify(body)
     })
     const json = await resp.json();
+    $('.submitTx').buttonLoader('stop');
+    if(json && json.status != 200) return alert(`Error: ${json.data}`)
 
     let rawTx = document.getElementById('spend_result')
-    console.log(json)
-    rawTx.textContent = JSON.stringify(json);
-    $('.submitTx').buttonLoader('stop');
+    console.log(json.data)
+    rawTx.textContent = JSON.stringify(json.data);
+    
 }

@@ -23,6 +23,7 @@ async function buildTx(params) {
     const json = await resp.json();
     $('.buildTx').buttonLoader('stop');
 
+    if(json && json.status != 200) alert(`Error: ${json.data}`)
     let rawTx = document.getElementById('build_rawTx')
-    rawTx.textContent = json.rawTx;
+    rawTx.textContent = json.data.rawTx;
 }
