@@ -209,10 +209,12 @@
                             <div class="tab-pane fade" id="tab7default">
                               <div class="row">
                                 <div class="col-md-9">
-                                    <pre id="editor">/** Your Sophia code **/</pre>
+                                    <!-- <pre id="editor">/** Your Sophia code **/</pre> -->
+                                    <textarea placeholder="/** Your Sophia code **/" class="form-control" rows="8"
+                                            cols="50" id="source_code"></textarea>
                                     <div class="form-group">
                                         <button type="button" data-toggle="modal" data-target="#keyInputModal"
-                                            class="btn btn-primary submitContract has-spinner">Compile</button>
+                                            class="btn btn-primary compileContract has-spinner">Compile</button>
                                         <button type="button" onclick="deployContract()" class="btn btn-primary deployContract has-spinner">Deploy</button>
                                     </div>
                                 </div>
@@ -225,20 +227,21 @@
                                         </div>
                                         <div class="form-group">
                                             <label>
+                                                ContractId
+                                            </label>
+                                            <input  class="form-control" type="text" id="contractId" disabled/>
+                                            <label>
                                                 Methods
                                             </label>
-                                            <select class="form-control">
-                                                <option value="newFunctionName">
-                                                    newFunctionName
-                                                </option>
+                                            <select id="methods" class="form-control">
                                             </select>
                                             <label>
                                                 Args
                                             </label>
-                                            <input class="form-control args" type="text" id="args" />
+                                            <input placeholder="comma seperated arguments"  class="form-control args" type="text" id="args" />
                                         </div>
                                         <div class="form-group">
-                                            <button type="button" class="btn btn-primary call has-spinner">
+                                            <button type="button" onclick="callContractMethod()" class="btn btn-primary callContractMethod has-spinner">
                                                 Call
                                             </button>
                                         </div>
@@ -251,7 +254,7 @@
                                     <form action="#" class="">
                                         <div class="form-group">
                                             <label>Console</label>
-                                            <textarea class="console form-control" row="8" ></textarea> 
+                                            <textarea id="console" class="console form-control" row="8" ></textarea> 
                                         </div>
                                     </form>
                                 </div>
@@ -303,12 +306,13 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="js/cookie.js"></script>
     <script src="js/accountCreator.js"></script>
     <script src="js/buildTransaction.js"></script>
     <script src="js/signTransaction.js"></script>
     <script src="js/decodeTransaction.js"></script>
     <script src="js/spendTransaction.js"></script>
-    <script src="js/contractCompiler.js"></script>
+    <script src="js/contract.js"></script>
     <script src="js/jquery.buttonLoader.min.js"></script>
     <script src="js/src/ace.js" type="text/javascript" charset="utf-8"></script>
     <!-- <script src="js/src/mode-javascript.js" type="text/javascript" charset="utf-8"></script> -->
