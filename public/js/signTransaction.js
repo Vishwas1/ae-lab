@@ -3,9 +3,14 @@ async function signTx() {
   const url = `${host}/sign`;
     $('.signTx').buttonLoader('start');
 
+  const keypair = {
+    privateKey: $('#sign_privateKey').val(),
+    publicKey : $('#sign_publicKey').val()
+  }  
+  
   const body = {
-      secretKey: $('#sign_privateKey').val(),
-      publicKey: $('#sign_publicKey').val(),
+      secretKey: keypair.privateKey,
+      publicKey: keypair.publicKey,
       rawTx: $('#sign_rawTx').val()
   }
 
@@ -23,6 +28,20 @@ async function signTx() {
 
   let rawTx = document.getElementById('sign_signedTx')
   rawTx.textContent = json.data.signTx;
+  
+  checkCookie("privateKey", "sign_privateKey")
+  checkCookie("publicKey", "sign_publicKey")
+  checkCookie("rawTx", "sign_rawTx")
+  checkCookie("signedTx", "sign_signedTx")
+
+  checkCookie("privateKey", "spend_privateKey")
+  checkCookie("publicKey", "spend_publicKey")
+  checkCookie("rawTx", "spend_rawTx")
+  checkCookie("signedTx", "decode_signedTx")
+
+  checkCookie("privateKey", "modal_sign_privateKey")
+  checkCookie("publicKey", "modal_sign_publicKey")
+
 }
 
 

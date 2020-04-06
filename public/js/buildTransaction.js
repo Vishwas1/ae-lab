@@ -26,4 +26,6 @@ async function buildTx(params) {
     if(json && json.status != 200) alert(`Error: ${json.data}`)
     let rawTx = document.getElementById('build_rawTx')
     rawTx.textContent = json.data.rawTx;
+
+    checkCookie("rawTx", "build_rawTx")
 }
