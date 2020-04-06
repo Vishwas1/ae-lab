@@ -12,7 +12,7 @@ module.exports = function(app) {
     .post(contract.callContractMethod);
 
   app.route('/methods')
-    .get(contract.getContractMethods);
+    .post(contract.getContractMethods);
 
 };
 

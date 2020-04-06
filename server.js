@@ -18,8 +18,12 @@ app.get('/', function(req, res) {
 });
 
 
-const routes = require('./api/routes/walletRoute')
-routes(app);
+const walletRoutes = require('./api/routes/walletRoute')
+walletRoutes(app);
+
+const contractRoutes = require('./api/routes/contractRoute')
+contractRoutes(app);
+
 
 app.listen(port);
 console.log('AELabs RESTful API server started on: ' + port);
