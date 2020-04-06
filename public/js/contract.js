@@ -1,3 +1,35 @@
+const sampleContract = `
+/**
+ * #### Sample Contract ####
+ * 
+*/
+
+contract CryptoHamster =
+   datatype event = NewHamster(indexed int, string, hash)
+
+   record state = { hamsters : map(string, hash), next_id : int }
+
+   stateful entrypoint init() = { hamsters = {}, next_id = 0 }
+
+   entrypoint nameExists(name: string) : bool =
+      Map.member(name, state.hamsters)
+
+   stateful entrypoint createHamster(hamsterName: string) =
+      require(!nameExists(hamsterName), "Name is already taken")
+      createHamsterByNameDNA(hamsterName, generateDNA(hamsterName))
+   
+   entrypoint getHamsterDNA(hamsterName: string) : hash =
+      require(nameExists(hamsterName), "Hamster does not exist!")
+      state.hamsters[hamsterName]
+
+   stateful function createHamsterByNameDNA(name: string, dna: hash) =
+      put(state{hamsters[name] = dna, next_id = (state.next_id + 1)})
+      Chain.event(NewHamster(state.next_id, name, dna))
+ 
+   function generateDNA(name : string) : hash =
+      String.sha3(name)`
+
+$('#source_code').val(sampleContract)
 
 const compileContract = async () => {
     
@@ -40,7 +72,6 @@ const compileContract = async () => {
     
     $('#console').val(json.data.bytecode);
 }
-
 
 const deployContract = async () => {
     // console.log('Compile Contract')
@@ -95,8 +126,6 @@ const deployContract = async () => {
     methodSelect.innerHTML = selectHTML;
 
 }
-
-
 
 const callContractMethod = async () => {
     $('#console').val("");
