@@ -209,9 +209,9 @@
                             <div class="tab-pane fade" id="tab7default">
                               <div class="row">
                                 <div class="col-md-9">
-                                    <!-- <pre id="editor">/** Your Sophia code **/</pre> -->
-                                    <textarea placeholder="/** Your Sophia code **/" class="form-control" rows="8"
-                                            cols="50" id="source_code"></textarea>
+                                    <pre id="editor"></pre>
+                                    <!-- <textarea placeholder="/** Your Sophia code **/" class="form-control" rows="8"
+                                            cols="50" id="source_code"></textarea> -->
                                     <div class="form-group">
                                         <button type="button" data-toggle="modal" data-target="#keyInputModal"
                                             class="btn btn-primary compileContract has-spinner">Compile</button>
@@ -306,6 +306,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="js/src/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/cookie.js"></script>
     <script src="js/accountCreator.js"></script>
     <script src="js/buildTransaction.js"></script>
@@ -314,11 +315,11 @@
     <script src="js/spendTransaction.js"></script>
     <script src="js/contract.js"></script>
     <script src="js/jquery.buttonLoader.min.js"></script>
-    <script src="js/src/ace.js" type="text/javascript" charset="utf-8"></script>
+    
     <!-- <script src="js/src/mode-javascript.js" type="text/javascript" charset="utf-8"></script> -->
 
     <script>
-        var editor = ace.edit("editor");
+        // var editor = ace.edit("source_code");
         // var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
         //     editor.session.setMode(new JavaScriptMode());
     </script>

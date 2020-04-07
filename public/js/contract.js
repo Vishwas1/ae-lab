@@ -1,38 +1,54 @@
+const editor = ace.edit("editor")
+editor.setTheme("ace/theme/monokai");
+// editor.session.setMode("ace/mode/javascript");
+
 const sampleContract = `
-/**
- * #### Sample Contract ####
- * 
-*/
+/** Sample Sophia code **/
+contract ToDoList = 
 
-contract CryptoHamster =
-   datatype event = NewHamster(indexed int, string, hash)
+  // define contents of state as record state = { } to hold tasks.
+  record task = {
+    name : string,
+    completed : bool
+    }
+  
+  //The smart contract should be able to store several tasks and those tasks should be indexed
+  //Each task should contain a variable "name" and a variable "completed" which can only be true or false
+  record state = {
+    taskList  : map(int, task) 
+    }
 
-   record state = { hamsters : map(string, hash), next_id : int }
+  // initialize state with empty data
+  entrypoint init() : state = {
+      taskList =  {}
+    }
 
-   stateful entrypoint init() = { hamsters = {}, next_id = 0 }
+  // The entrypoint "add_task" is accepting a new task name,
+  //    define a new task and store it to the state,
+  //    Hint: put(state{}) allows you to mutate state
+  stateful entrypoint add_task(task_name: string) =
+    let task = {
+      name = task_name,
+      completed = false 
+      }
+    put(state{ taskList[ Map.size(state.taskList) + 1 ] = task })
+    
 
-   entrypoint nameExists(name: string) : bool =
-      Map.member(name, state.hamsters)
+  // set existing task of state to completed
+  stateful entrypoint set_task_completed(seq_id : int) =
+    put(state{ taskList[seq_id].completed = true })    
 
-   stateful entrypoint createHamster(hamsterName: string) =
-      require(!nameExists(hamsterName), "Name is already taken")
-      createHamsterByNameDNA(hamsterName, generateDNA(hamsterName))
-   
-   entrypoint getHamsterDNA(hamsterName: string) : hash =
-      require(nameExists(hamsterName), "Hamster does not exist!")
-      state.hamsters[hamsterName]
+  // return all tasks of state in format {name: string, completed: bool}
+  entrypoint get_tasks() : map(int, task) =
+    state.taskList
+`
 
-   stateful function createHamsterByNameDNA(name: string, dna: hash) =
-      put(state{hamsters[name] = dna, next_id = (state.next_id + 1)})
-      Chain.event(NewHamster(state.next_id, name, dna))
- 
-   function generateDNA(name : string) : hash =
-      String.sha3(name)`
-
-$('#source_code').val(sampleContract)
+// $('#source_code').val(sampleContract)
+editor.setValue(sampleContract);
 
 const compileContract = async () => {
     
+    const source = editor.getValue();
     $('#console').val("");
     $('.compileContract').buttonLoader('start');
 
@@ -47,7 +63,7 @@ const compileContract = async () => {
     setCookie("publicKey", keypair.publicKey, 30);
 
     const body = {
-        code : $('#source_code').val(),
+        code : source,
         keypair : {
             secretKey : keypair.privateKey,
             publicKey : keypair.publicKey	
@@ -79,7 +95,7 @@ const deployContract = async () => {
     $('.deployContract').buttonLoader('start');
 
     const url = `${host}/deploy`;
-    
+    const source = editor.getValue();    
     const keypair = {
         privateKey: getCookie("privateKey"),
         publicKey : getCookie("publicKey")
@@ -91,7 +107,7 @@ const deployContract = async () => {
     }
 
     const body = {
-        code : $('#source_code').val(),
+        code : source,
         keypair : {
             secretKey : keypair.privateKey,
             publicKey : keypair.publicKey	
@@ -143,6 +159,8 @@ const callContractMethod = async () => {
         return 
     }
 
+    const source = editor.getValue();    
+
     const contractAddress = $('#contractId').val();
     const fn = $('#methods').children('option:selected').val();
     if(contractAddress == "" || fn == "") {
@@ -154,7 +172,7 @@ const callContractMethod = async () => {
     const argsArr = commaSepArgs != "" ? commaSepArgs.split(',') : []
 
     const body = {
-        code : $('#source_code').val(),
+        code : source,
         keypair : {
             secretKey : keypair.privateKey,
             publicKey : keypair.publicKey	
