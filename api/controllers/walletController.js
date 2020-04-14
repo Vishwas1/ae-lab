@@ -1,4 +1,12 @@
-const { Crypto, TxBuilder,Node, RpcWallet, RpcAepp, MemoryAccount, Universal } = require('@aeternity/aepp-sdk')
+const { Crypto, TxBuilder,Node, RpcWallet, RpcAepp, MemoryAccount, Universal, Keystore } = require('@aeternity/aepp-sdk')
+
+const getPublicKey = () => {
+  const publickey = Keystore.getAddressFromPriv("63bc63d3efc1a3f67a777d4ab400fcc4cb8242e96b5f6b02fdb53171e007894e8f257e618ece9114df01ba1b713a4257f874cf27668064b6268c53bf1752bb0f")
+  if(publickey === "ak_263V5pB6dw6JnL2KoRhLpomKS6GzdWiwfr9euCU56L5LULkTfa") console.log("True")
+
+}
+getPublicKey()
+
 
 const {
   statusTypeEnum,
