@@ -45,11 +45,16 @@ function CH(role, kp, responderPk){
         channelReserve: 0,
         ttl: 1000, // Minimum block height to include the channel_create_tx
         host: 'localhost', //Host of the responder's node
-        port: 3001, // The port of the responders node
+        port:  3001, // The port of the responders node
         lockPeriod: 10, // Amount of blocks for disputing a solo close
         statePassword: 'correct horse battery staple',
         role: role
       }
+
+    if(role && role.RESPONDER) {
+        delete this.params.host
+        delete this.params.port
+    }
 
     this.account = (secretKey, publicKey) => {
         return MemoryAccount({ keypair: { secretKey: secretKey, publicKey: publicKey } })
@@ -79,10 +84,29 @@ buyerCh.open();
 
 
 
+wscat --connect 'testnet.aeternity.io/channel?
+channel_reserve=2&
+initiator_amount=70000000000000&
+initiator_id=ak_263V5pB6dw6JnL2KoRhLpomKS6GzdWiwfr9euCU56L5LULkTfa&
+lock_period=10&
+port=12340&
+protocol=json-rpc&
+push_amount=1&
+responder_amount=40000000000000&
+responder_id=ak_kUYScFPr6rZQMisugGggiNm13LkczJhER5uERERUV1iWNVbpd&role=responder'
 
+wss://testnet.aeternity.io:443/channel?
+channel_reserve=2&
+host=localhost&
+initiator_amount=70000000000000&
+initiator_id=ak_2W5Z2uyH8s1smQo2ZxgB8V3hH9VCJkXmGCaATmtRQjJUbQ8MNB&
+keep_running=false&
+lock_period=10&
+port=13179&
+protocol=json-rpc&
+push_amount=1&
+responder_amount=40000000000000&
+responder_id=ak_2b94FCuxybDzRCpVHVCKusRQerR81duJ7ryHDfZdPLAW8YRiub&
+role=initiator
 
-
-
-
-
-
+wscat --connect 'wss://testnet.aeternity.io:443/channel?channel_reserve=2&initiator_amount=70000000000000&initiator_id=ak_263V5pB6dw6JnL2KoRhLpomKS6GzdWiwfr9euCU56L5LULkTfa&keep_running=false&lock_period=10&port=13179&protocol=json-rpc&push_amount=1&responder_amount=40000000000000&responder_id=ak_kUYScFPr6rZQMisugGggiNm13LkczJhER5uERERUV1iWNVbpd&role=responder'
