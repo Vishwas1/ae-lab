@@ -1,8 +1,12 @@
-const express = require('express'),
-  app = express(),
-  port = process.env.PORT || 3000;
-  bodyParser = require('body-parser');
-
+const express = require('express')
+const app = express()
+const port = process.env.PORT || 3000
+const bodyParser = require('body-parser')
+const http = require('http')
+const ws = require('./wsserver')
+  
+const server = http.createServer(app) //Creating HTTP server using express
+ws(server)
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
@@ -25,6 +29,6 @@ const contractRoutes = require('./api/routes/contractRoute')
 contractRoutes(app);
 
 
-app.listen(port);
+server.listen(port);
 console.log('AELabs RESTful API server started on: ' + port);
 
