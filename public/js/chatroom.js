@@ -7,6 +7,7 @@ $(function () {
     var activeUser = $('#activeusr')
     var hideChat = $('#close')
     var showChat = $('#show-chat-btn')
+    var users = []
 
     hideChat.click(function (params) {
         $('#chat').hide();
@@ -71,18 +72,52 @@ $(function () {
             // from now user can start sending messages
         } else if (json.type === 'history') { // entire message history
             // insert every single message to the chat window
-            for (var i = 0; i < json.data.length; i++) {
-                addMessage(json.data[i].author, json.data[i].text,
-                    json.data[i].color, new Date(json.data[i].time));
+            const {history, userNames} = json.data
+            for (var i = 0; i < history.length; i++) {
+                addMessage(history[i].author, history[i].text,
+                    history[i].color, new Date(history[i].time));
             }
+            // activeUser.empty()
+            // userNames.forEach((user, i) => {
+            //     addUser(user);
+            // })
+
         } else if (json.type === 'message') { // it's a single message
             // let the user write another message
-            input.removeAttr('disabled');
+            input.removeAttr('disabled').focus();
             addMessage(json.data.author, json.data.text,
                 json.data.color, new Date(json.data.time));
-        } else if (json.type === 'newJoinee') {
-            const m = `${json.data} has joined the chat room!`
-            addMessage(undefined, m, undefined, undefined)
+            updateScroll()
+        } 
+        
+        // else if (json.type === 'newJoinee') {
+        //     const m = `${json.data} has joined the chat room!`
+        //     addMessage(undefined, m, undefined, undefined)
+        //     addUser(json.data);
+
+        // } 
+        
+        // else if(json.type === 'leftRoom'){
+        //     console.log('user got disconnected', json.data)
+        //     activeUser.empty()
+        //     json.data.forEach((user, i) => {
+        //         addUser(user);
+        //     })
+        // } 
+        // else if(json.type === 'activeUsers'){
+        //     const latestUsers = json.data;
+        //     console.log('new user got added', latestUsers)
+        //     activeUser.empty()
+        //     latestUsers.forEach((user, i) => {
+        //         addUser(user);
+        //     })
+        // }
+        else if(json.type === 'users'){
+            const latestUsers = json.data;
+            activeUser.empty()
+            latestUsers.forEach((user, i) => {
+                addUser(user);
+            })
         }
         else {
             console.log('Hmm..., I\'ve never seen JSON like this:', json);
@@ -108,6 +143,7 @@ $(function () {
             if (myName === false) {
                 myName = msg;
             }
+            input.focus()
         }
     });
     /**
@@ -127,10 +163,10 @@ $(function () {
      */
     function addMessage(author, message, color, dt) {
         if (author == undefined) {
-            content.prepend('<p><span style="font-style: italic; color: grey">' + message + '</span><p>')
+            content.append('<p><span style="font-style: italic; color: grey">' + message + '</span><p>')
             return
         }
-        content.prepend('<p><span style="color:' + color + '">'
+        content.append('<p><span style="color:' + color + '">'
             + author + '</span> @ ' + (dt.getHours() < 10 ? '0'
                 + dt.getHours() : dt.getHours()) + ':'
             + (dt.getMinutes() < 10
@@ -138,7 +174,11 @@ $(function () {
             + ': ' + message + '</p>');
     }
 
-    var users = ["Vishwas", "Vikram", "Amit", "Vishwas", "Vikram", "Amit", "Vishwas", "Vikram", "Amit", "Vishwas", "Vikram", "Amit"]
+    function updateScroll(){
+        var element = document.getElementById("content");
+        element.scrollTop = element.scrollHeight;
+    }
+    
     users.forEach((user, i) => {
         addUser(user);
     })

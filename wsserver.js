@@ -9,6 +9,7 @@ module.exports = (server) => {
     
     let clients = []
     let history = []
+    let userNames = []
     let colors = [ 'red', 'green', 'blue', 'magenta', 'purple', 'plum', 'orange' ];
     // ... in random order
     colors.sort((a,b) => { return Math.random() > 0.5; } )
@@ -36,16 +37,27 @@ module.exports = (server) => {
         console.log(`${TIME()} Client accepted`)
     
         let index = clients.push(connection) - 1;
+        let uIndex;
         let userName = false;
         let userColor = false;
     
         if(history.length > 0){
+            console.log(userNames)
             connection.sendUTF(JSON.stringify({
                 type: 'history',
-                data: history
+                data: {history, userNames}
             }))
         }
-    
+
+        if(userNames.length > 0){
+            clients.forEach((client, i) => {
+                client.sendUTF(JSON.stringify({
+                    type: 'users',
+                    data: userNames
+                }))                    
+            })                
+        }
+
         connection.on('message', (m) => {        
             if(m.type != 'utf8'){
                 client[index].sendUTF(JSON.stringify({
@@ -77,6 +89,18 @@ module.exports = (server) => {
                 })
             }else{
                 userName = htmlEntities(m.utf8Data)
+                
+                uindex = userNames.push(userName) - 1;
+                
+                
+                clients.forEach((client, i) => {
+                    client.sendUTF(JSON.stringify({
+                        type: 'users',
+                        data: userNames
+                    }))                    
+                })                
+                
+
                 userColor = colors.shift()
                 connection.sendUTF(JSON.stringify({
                     type : 'color',
@@ -100,7 +124,19 @@ module.exports = (server) => {
             if(userName !== false && userColor !== false){
                 console.log(`${TIME()} User ${userName} disconnected`)
                 clients.splice(index, 1)
+                userNames.splice(uindex, 1)
                 colors.push(userColor)
+
+                // const leftRoom = JSON.stringify({
+                //     type: 'leftRoom',
+                //     data: userNames
+                // })
+                clients.forEach((client, i) => {
+                    client.sendUTF(JSON.stringify({
+                        type: 'users',
+                        data: userNames
+                    }))                    
+                })                
             }
     
         })
