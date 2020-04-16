@@ -21,6 +21,7 @@ module.exports = (server) => {
       }
     
     originIsAllowed = (origin) => {
+        return true;
         if(allowedOrigins.indexOf(origin) === -1) return false
         // put logic here to detect whether the specified origin is allowed.
         return true;
