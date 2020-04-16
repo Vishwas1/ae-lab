@@ -84,7 +84,10 @@ $(function () {
             addMessage(json.data.author, json.data.text,
                 json.data.color, new Date(json.data.time));
             updateScroll()
-        } 
+        } else if (json.type === 'newJoinee'){
+            const m = `Guys, ${json.data} has entered into the chat room!`
+            addMessage(undefined, m);
+        }
         else if(json.type === 'users'){
             const latestUsers = json.data;
             activeUser.empty()
