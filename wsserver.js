@@ -126,11 +126,6 @@ module.exports = (server) => {
                 clients.splice(index, 1)
                 userNames.splice(uindex, 1)
                 colors.push(userColor)
-
-                // const leftRoom = JSON.stringify({
-                //     type: 'leftRoom',
-                //     data: userNames
-                // })
                 clients.forEach((client, i) => {
                     client.sendUTF(JSON.stringify({
                         type: 'users',

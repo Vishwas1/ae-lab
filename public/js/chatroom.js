@@ -36,7 +36,8 @@ $(function () {
     }
 
     // open connection
-    var connection = new WebSocket(`ws://${window.location.host}`);
+    const wsurl = window.location.protocol === "https:" ? `wss://${window.location.host}` : `ws://${window.location.host}`
+    var connection = new WebSocket(wsurl);
     connection.onopen = function () {
         // first we want users to enter their names
         input.removeAttr('disabled');
@@ -77,11 +78,6 @@ $(function () {
                 addMessage(history[i].author, history[i].text,
                     history[i].color, new Date(history[i].time));
             }
-            // activeUser.empty()
-            // userNames.forEach((user, i) => {
-            //     addUser(user);
-            // })
-
         } else if (json.type === 'message') { // it's a single message
             // let the user write another message
             input.removeAttr('disabled').focus();
@@ -89,29 +85,6 @@ $(function () {
                 json.data.color, new Date(json.data.time));
             updateScroll()
         } 
-        
-        // else if (json.type === 'newJoinee') {
-        //     const m = `${json.data} has joined the chat room!`
-        //     addMessage(undefined, m, undefined, undefined)
-        //     addUser(json.data);
-
-        // } 
-        
-        // else if(json.type === 'leftRoom'){
-        //     console.log('user got disconnected', json.data)
-        //     activeUser.empty()
-        //     json.data.forEach((user, i) => {
-        //         addUser(user);
-        //     })
-        // } 
-        // else if(json.type === 'activeUsers'){
-        //     const latestUsers = json.data;
-        //     console.log('new user got added', latestUsers)
-        //     activeUser.empty()
-        //     latestUsers.forEach((user, i) => {
-        //         addUser(user);
-        //     })
-        // }
         else if(json.type === 'users'){
             const latestUsers = json.data;
             activeUser.empty()
