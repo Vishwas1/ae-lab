@@ -12,7 +12,7 @@
     }
     #status { width:88px;display:block;float:left;margin-top:15px; }
     .chat {
-      position: absolute;
+      position: fixed;
       bottom: 0;
       left: 40%;
       background:#f5f5f5;
@@ -34,7 +34,7 @@
       height: 381px;
     }
     .show-chat-btn {
-      position: absolute;
+      position: fixed;
       bottom: 0;
       left: 90%;
     }
