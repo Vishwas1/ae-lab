@@ -8,9 +8,12 @@
       height: 381px;
     }
     #input { border-radius:2px; border:1px solid #ccc;
-        margin-top:10px; padding:5px; width: 65%;
+        margin-top:10px; padding:5px; width: 66%;
     }
-    #status { width:88px;display:block;float:left;margin-top:15px; }
+    #status { width: 34%;
+      display: block;
+      float: left;
+      margin-top: 2%; }
     .chat {
       position: fixed;
       bottom: 0;

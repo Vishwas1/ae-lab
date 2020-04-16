@@ -1,7 +1,6 @@
 const WebSocket = require('websocket')
-
+const allowedOrigins = ['http://localhost:3000', 'https://ae-labs.herokuapp.com/'];
 module.exports = (server) => {
-    console.log('Inside the websocket server')
     const TIME = () => new Date();
     const wss = new WebSocket.server({ 
         httpServer: server, // Tieing websocket to HTTP server
@@ -20,8 +19,19 @@ module.exports = (server) => {
             .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
       }
     
+    originIsAllowed = (origin) => {
+        if(allowedOrigins.indexOf(origin) === -1) return false
+        // put logic here to detect whether the specified origin is allowed.
+        return true;
+    }
     wss.on('request', (request) => {
         console.log(`${TIME()} Client connection from ${request.origin} receieved`)
+        if (!originIsAllowed(request.origin)) {
+            // Make sure we only accept requests from an allowed origin
+            request.reject();
+            console.log((TIME()) + ' Connection from origin ' + request.origin + ' rejected.');
+            return;
+        }
         const connection = request.accept(null, request.origin)
         console.log(`${TIME()} Client accepted`)
     
