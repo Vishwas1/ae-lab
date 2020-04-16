@@ -17,6 +17,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/template.css" rel="stylesheet">
+    <link href="css/chatroom.css" rel="stylesheet">
 </head>
 
 <body>
@@ -269,6 +270,35 @@
             </div>
         </div>
     </div>
+    <!-- Charoom code begin-->
+        <div class="show-chat-btn" id="show-chat-btn"><i class="fa fa-comments-o fa-5x"></i></div>
+        <div class="content chat" id="chat" style="z-index: 999;     display: none;">
+            <div class="row" style="padding-left:4px">
+                <div class="fa fa fa-close" id="close"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <label>Chat Room</label>
+        
+                    <div id="content" class="overflow-auto">
+        
+                    </div>
+                    <div>
+                        <span id="status">Connecting...</span>
+                        <input type="text" id="input" disabled="disabled" />
+        
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label> Active People</label>
+                    <div class="active-members list-group" id="activeusr">
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    <!--Chat Room COde End-->
+
     <div class="modal fade" id="keyInputModal" role="dialog">
         <div class="modal-dialog">
     
@@ -342,6 +372,7 @@
     <script src="js/decodeTransaction.js"></script>
     <script src="js/spendTransaction.js"></script>
     <script src="js/contract.js"></script>
+    <script src="js/chatroom.js"></script>
     <script src="js/jquery.buttonLoader.min.js"></script>
     
     <!-- <script src="js/src/mode-javascript.js" type="text/javascript" charset="utf-8"></script> -->
