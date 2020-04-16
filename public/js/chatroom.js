@@ -161,7 +161,7 @@ $(function () {
     function addUser(user) {
 
         // activeUser.append('<p class="border-bottom"><span style="font-style: italic; color: grey">' + user + '</span><p>')
-        activeUser.append('<a href="#" class="list-group-item"><i class="fa fa-circle" aria-hidden="true" style="color:green; padding-right: 4px"></i><span style="font-style: italic; color: grey">' + user + '</span></a>')
+        activeUser.prepend('<a href="#" class="list-group-item"><i class="fa fa-circle" aria-hidden="true" style="color:green; padding-right: 4px"></i><span style="font-style: italic; color: grey">' + user + '</span></a>')
     }
 
 
