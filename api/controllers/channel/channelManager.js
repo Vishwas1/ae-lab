@@ -40,9 +40,13 @@ function ChannelManager(network){
         }
     }
 
-    const getChannel = (channelId) => {
+    const getChannel = (channelId, publicKey) => {
         if(!channelList.hasOwnProperty(channelId)) return Promise.reject(`no channel found with id: ${channelId}`)
-        return channelList[channelId]
+        if(publicKey == undefined){
+            return channelList[channelId][Object.keys(channelList[channelId])[0]]
+        }
+
+        return channelList[channelId][publicKey]
     }
 
 
@@ -151,7 +155,8 @@ function ChannelManager(network){
           .then(channel => {
               const channelId = channel.id();
               console.log('channelId: ', channelId);
-              channelList[channelId] = {
+              if(channelList[channelId] == undefined) channelList[channelId] = {}
+              channelList[channelId][keypair.publicKey] = {
                     params: params,
                     channel: channel
                 }
@@ -180,7 +185,7 @@ function ChannelManager(network){
     this.update = async (params) => {
         const { channelId, keypair, senderPublicKey, receiverPublicKey, amount, memo } = params
         if(!channelId || !senderPublicKey || !receiverPublicKey || !amount) return Promise.reject(`either of these parameters are empty: channelId, senderPublicKey, receiverPublicKey, amount`)
-        const { channel } = getChannel(channelId)
+        const { channel } = getChannel(channelId, keypair.publicKey)
         const account = new Account(keypair, this.network)
         const wallet = await account.wallet()
         return channel.update(
@@ -205,11 +210,12 @@ function ChannelManager(network){
      * @returns {String} result.status Id of channel
      * @returns {String} result.signedTx Number of rounds in channel
      */ 
-    this.leave = async (channelId) => {
+    this.leave = async (channelId, publicKey) => {
         if(!channelId) return Promise.reject('please send the channelId')
-        const {channel} = getChannel(channelId)
+        if(!publicKey) return Promise.reject('please send the publicKey')
+        const {channel} = getChannel(channelId, publicKey)
         const result = await channel.leave();
-        channelList[channelId].offchainTx = result.signedTx
+        channelList[channelId][publicKey].offchainTx = result.signedTx
         return result
     }
 
@@ -223,7 +229,7 @@ function ChannelManager(network){
      */ 
     this.reconnect = async (channelId, keypair) => {
         if(!channelId) return Promise.reject('please send the channelId')
-        const { params, channel, offchainTx } = getChannel(channelId)
+        const { params, channel, offchainTx } = getChannel(channelId, keypair.publicKey)
         if(!offchainTx) return Promise.reject('can not reconnect before leaving the channel')
         const round = channel.round();
         const fsmId = channel.fsmId();
@@ -242,7 +248,7 @@ function ChannelManager(network){
           }).then(channel => {
                 return waitForChannelStatus(channel)('open')
           }).then(async (ch) => {
-                channelList[channelId].channel = ch
+                channelList[channelId][keypair.publicKey].channel = ch
                 return true 
           })
     }
@@ -258,7 +264,7 @@ function ChannelManager(network){
      */ 
     this.close = async (channelId, keypair) => {
         if(!channelId || !keypair) return Promise.reject('please send the channelId and keypair')
-        const {channel} = getChannel(channelId)
+        const {channel} = getChannel(channelId, keypair.publicKey)
         const account = new Account(keypair, this.network)
         const wallet = await account.wallet()
         const result = await channel.shutdown(

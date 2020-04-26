@@ -42,6 +42,8 @@ walletRoutes(app);
 const contractRoutes = require('./api/routes/contractRoute')
 contractRoutes(app);
 
+const channelRoutes =  require('./api/routes/channelRouter')
+channelRoutes(app)
 
 server.listen(port);
 console.log('AELabs RESTful API server started on: ' + port);
