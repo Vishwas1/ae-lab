@@ -53,6 +53,7 @@
             <div class="row" style="padding-left: 39px;">
                 <div class="col-md-12">
                     <h1 style="font-size: x-large;">Laboratory</h1>
+                    <span onclick="closeNav()">Close</span>
                 </div>
             </div>
             <div class="row" style="padding-left: 39px;">
@@ -319,219 +320,252 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="tab8default">
-                                <div id="pc_wallet" class="ex-widget-collapse panel panel-default">
-                                    <div class="panel-heading" data-toggle="collapse" data-parent="#pc_wallet"
-                                        data-target="#pc_wallet .panel-collapse">
-                                        <div class="panel-title">
-                                            Setup Wallets
-                                        </div>
-                                    </div>
-                                    <div class="panel-collapse collapse in" style="">
-                                        <div class="panel-body">
-                                            <div class="ex-widget-collapse__loader">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <!-- <h4 class="mt-5">Wallet 1</h4> -->
-                                                        <label>
-                                                            Wallet 1
-                                                        </label>
-                                                        <!-- <hr> -->
-                                                        <div class="form-group">
-                                                            Private Key:<input type="text" class="form-control"
-                                                                id="pc_w1_privateKey" placeholder="private key">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            Public Key:<input type="text" class="form-control"
-                                                                id="pc_w1_publicKey" placeholder="public key">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <button type="button" onclick="saveWallet('wallet1')"
-                                                                class="btn btn-primary saveWallet1 has-spinner">Save</button>
-                                                            <button type="button" onclick="updateBalance('wallet1')"
-                                                                class="btn btn-primary balanceWallet1 has-spinner">Balance</button>
-                                                            <label><span id="balanceWallet1_lbl">_ </span>
-                                                                (Aettos)</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div id="pc_wallet" class="ex-widget-collapse panel panel-default">
+                                            <div class="panel-heading" data-toggle="collapse" data-parent="#pc_wallet"
+                                                data-target="#pc_wallet .panel-collapse">
+                                                <div class="panel-title">
+                                                    Setup Wallets
+                                                </div>
+                                            </div>
+                                            <div class="panel-collapse collapse in" style="">
+                                                <div class="panel-body">
+                                                    <div class="ex-widget-collapse__loader">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <!-- <h4 class="mt-5">Wallet 1</h4> -->
+                                                                <!-- <label>
+                                                                    Wallet 1
+                                                                </label> -->
+                                                                <!-- <hr> -->
+                                                                <div class="form-group">
+                                                                    Alias:<input type="text" class="form-control"
+                                                                        id="pc_w1_alias" placeholder="set your alias">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    Private Key:<input type="text" class="form-control"
+                                                                        id="pc_w1_privateKey" placeholder="private key">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    Public Key:<input type="text" class="form-control"
+                                                                        id="pc_w1_publicKey" placeholder="public key">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <!-- <button type="button" onclick="saveWallet('wallet1')"
+                                                                        class="btn btn-primary saveWallet1 has-spinner">Save</button> -->
+                                                                    <button type="button" onclick="updateBalance('wallet1')"
+                                                                        class="btn btn-primary balanceWallet1 has-spinner">Balance</button>
+                                                                    <label><span id="balanceWallet1_lbl">_ </span>
+                                                                        (Aettos)</label>
+                                                                </div>
+                                                            </div>
+        
+                                                            <!-- <div class="col-md-6">
+                                                                <label>
+                                                                    Wallet 2
+                                                                </label>
+                                                                <div class="form-group">
+                                                                    Private Key:<input type="text" class="form-control"
+                                                                        id="pc_w2_privateKey" placeholder="private key">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    Public Key:<input type="text" class="form-control"
+                                                                        id="pc_w2_publicKey" placeholder="public key">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <button type="button" onclick="saveWallet('wallet2')"
+                                                                        class="btn btn-primary saveWallet2 has-spinner">Save</button>
+                                                                    <button type="button" onclick="updateBalance('wallet2')"
+                                                                        class="btn btn-primary balanceWallet2 has-spinner">Update
+                                                                        Balance</button>
+                                                                    <label><span id="balanceWallet2_lbl">_ </span>
+                                                                        (Aettos)</label>
+                                                                </div>
+                                                            </div> -->
                                                         </div>
                                                     </div>
-
-                                                    <div class="col-md-6">
-                                                        <!-- <h4 class="mt-5">Wallet 1 </h4> -->
-                                                        <label>
-                                                            Wallet 2
-                                                        </label>
-                                                        <!-- <hr> -->
-                                                        <div class="form-group">
-                                                            Private Key:<input type="text" class="form-control"
-                                                                id="pc_w2_privateKey" placeholder="private key">
+                                                </div>
+                                                <div id="pc_wallet_BodyWrapper" class="collapse in" style="">
+                                                    <div id="pc_wallet_Body" class="ex-widget-collapse__content k-chart"
+                                                        data-role="chart" style="position: relative;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div id="pc_setupChannel" class="ex-widget-collapse panel panel-default">
+                                            <div class="panel-heading" data-toggle="collapse" data-parent="#pc_setupChannel"
+                                                data-target="#pc_setupChannel .panel-collapse">
+                                                <div class="panel-title">
+                                                    Setup Payment Channel
+                                                </div>
+                                            </div>
+                                            <div class="panel-collapse collapse in" style="">
+                                                <div class="panel-body">
+                                                    <div class="ex-widget-collapse__loader">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <!-- <label>
+                                                                    Account 1
+                                                                </label>                                                         -->
+                                                                <div class="form-group">
+                                                                    My Peer Deposit:<input type="text" class="form-control"
+                                                                        id="pc_w1_deposit" placeholder="amount in aettos">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    Peer2 Deposit:<input type="text" class="form-control"
+                                                                       id="pc_w2_deposit" placeholder="amount in aettos">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    Peer2 Address:<input type="text" class="form-control"
+                                                                       id="pc_w2_publicKey" placeholder="public key of peer2">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <button type="button" onclick="setupChannel('wallet1')"
+                                                                        class="btn btn-primary setupChannel1 has-spinner">Initiate</button>
+                                                                    <button type="button" onclick="connectChannel('wallet1')"
+                                                                        class="btn btn-primary connectChannel1 has-spinner">Accept</button>
+                                                                </div>
+                                                            </div>
+                                                            <!-- <div class="col-md-6">
+                                                                <label>
+                                                                    Account 2
+                                                                </label>
+                                                                <div class="form-group">
+                                                                    Deposit:<input type="text" class="form-control"
+                                                                        id="pc_w2_deposit" placeholder="amount in aettos">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <button type="button" onclick="setupChannel('wallet2')"
+                                                                        class="btn btn-primary setupChannel2 ">Initiate</button>
+                                                                    <button type="button" onclick="connectChannel('wallet2')"
+                                                                        class="btn btn-primary connectChannel2 ">Accept</button>
+                                                                    <button type="button" onclick="leaveChannel('wallet2')"
+                                                                        class="btn btn-primary leaveChannel2 has-spinner">Leave</button>
+                                                                    <button type="button" onclick="reconnectChannel('wallet2')"
+                                                                        class="btn btn-primary reconnectChannel2 has-spinner">Reconnect</button>
+                                                                </div>
+                                                            </div> -->
                                                         </div>
-                                                        <div class="form-group">
-                                                            Public Key:<input type="text" class="form-control"
-                                                                id="pc_w2_publicKey" placeholder="public key">
+                                                        <hr>
+                                                        <div class="row">
+                                                            <div class="form-group">
+                                                                <div class="col-md-6">
+                                                                    <label>ChannelId</label>
+                                                                     <input type="text" class="form-control"
+                                                                        id="channelId">
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label>FsmId</label>
+                                                                    <input type="text" class="form-control"
+                                                                        id="fsmId">
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="form-group">
-                                                            <button type="button" onclick="saveWallet('wallet2')"
-                                                                class="btn btn-primary saveWallet2 has-spinner">Save</button>
-                                                            <button type="button" onclick="updateBalance('wallet2')"
-                                                                class="btn btn-primary balanceWallet2 has-spinner">Update
-                                                                Balance</button>
-                                                            <label><span id="balanceWallet2_lbl">_ </span>
-                                                                (Aettos)</label>
+                                                    </div>
+                                                    <div id="pc_setupChannel_BodyWrapper" class="collapse out" style="">
+                                                        <div id="pc_setupChannel_Body"
+                                                            class="ex-widget-collapse__content k-chart" data-role="chart"
+                                                            style="position: relative;">
+                                                            hello
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="pc_wallet_BodyWrapper" class="collapse in" style="">
-                                            <div id="pc_wallet_Body" class="ex-widget-collapse__content k-chart"
-                                                data-role="chart" style="position: relative;">
+        
+                                    </div>
+                                </div>
+                                
+                                
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="pc_offchainTx" class="ex-widget-collapse panel panel-default">
+                                            <div class="panel-heading" data-toggle="collapse" data-parent="#pc_offchainTx"
+                                                data-target="#pc_offchainTx .panel-collapse">
+                                                <div class="panel-title">
+                                                    Execute Offchain Transactions
+                                                </div>
+                                            </div>
+                                            <div class="panel-collapse collapse out" style="">
+                                                <div class="panel-body">
+                                                    <div class="ex-widget-collapse__loader">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <!-- <label>
+                                                                    Account 1
+                                                                </label> -->
+                                                                <!-- <h4 class="mt-5">Account 1 </h4> -->
+                                                                <div class="form-group">
+                                                                    <label>Amount to spend</label>
+                                                                    <input type="text" class="form-control"
+                                                                        id="pc_w1_amount" placeholder="amount in aettos">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label>Tools</label>
+                                                                <div class="form-group">
+                                                                    <button type="button" onclick="spendOffChain('wallet1')"
+                                                                        class="btn btn-success spendOffChain1 has-spinner">Spend</button>
+                                                                    <button type="button" onclick="leaveChannel('wallet1')"
+                                                                        class="btn btn-primary leaveChannel1 has-spinner">Leave</button>
+                                                                    <button type="button" onclick="reconnectChannel('wallet1')"
+                                                                        class="btn btn-primary reconnectChannel1 has-spinner">Reconnect</button>
+                                                                    <button type="button" onclick="closeChannel('wallet1')"
+                                                                        class="btn btn-danger closeChannel has-spinner">Close</button>
+                                                                </div>
+                                                            </div>
+                                                            <!-- <div class="col-md-6">
+                                                                <label>
+                                                                    Account 2
+                                                                </label>
+                                                                <div class="form-group">
+                                                                    Amount to spend:<input type="text" class="form-control"
+                                                                        id="pc_w2_amount" placeholder="amount in aettos">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <button type="button" onclick="spendOffChain('wallet2')"
+                                                                        class="btn btn-primary spendOffChain2 has-spinner">Spend</button>
+                                                                </div>
+                                                            </div> -->
+                                                        </div>
+                                                        <hr>
+                                                        <div class="row">
+                                                            <div class="form-group">
+                                                                <div class="col-md-12">
+                                                                    <table class="table table-bordered">
+                                                                        <thead>
+                                                                            <tr>
+                                                                              <th>SignedTx</th>
+                                                                              <th>Round</th>
+                                                                              <th>Spender</th>
+                                                                              <th>Beneficiary</th>
+                                                                              <th>Spender's Balance</th>
+                                                                              <th>Beneficiary's Balance</th>
+                                                                            </tr>
+                                                                          </thead>
+                                                                          <tbody>
+                                                                            
+                                                                          </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="pc_offchainTx_BodyWrapper" class="collapse out" style="">
+                                                        <div id="pc_offchainTx_Body" class="ex-widget-collapse__content k-chart"
+                                                            data-role="chart" style="position: relative;">
+                                                            hello
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="pc_setupChannel" class="ex-widget-collapse panel panel-default">
-                                    <div class="panel-heading" data-toggle="collapse" data-parent="#pc_setupChannel"
-                                        data-target="#pc_setupChannel .panel-collapse">
-                                        <div class="panel-title">
-                                            Setup Payment Channel
-                                        </div>
-                                    </div>
-                                    <div class="panel-collapse collapse out" style="">
-                                        <div class="panel-body">
-                                            <div class="ex-widget-collapse__loader">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <label>
-                                                            Account 1
-                                                        </label>
-                                                        <!-- <h4 class="mt-5">Account 1 </h4> -->
-                                                        <div class="form-group">
-                                                            Deposit:<input type="text" class="form-control"
-                                                                id="pc_w1_deposit" placeholder="amount in aettos">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <button type="button" onclick="setupChannel('wallet1')"
-                                                                class="btn btn-primary setupChannel1 has-spinner">Initiate</button>
-                                                            <button type="button" onclick="connectChannel('wallet1')"
-                                                                class="btn btn-primary connectChannel1 has-spinner">Accept</button>
-                                                            <button type="button" onclick="leaveChannel('wallet1')"
-                                                                class="btn btn-primary leaveChannel1 has-spinner">Leave</button>
-                                                            <button type="button" onclick="reconnectChannel('wallet1')"
-                                                                class="btn btn-primary reconnectChannel1 has-spinner">Reconnect</button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label>
-                                                            Account 2
-                                                        </label>
-                                                        <div class="form-group">
-                                                            Deposit:<input type="text" class="form-control"
-                                                                id="pc_w2_deposit" placeholder="amount in aettos">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <button type="button" onclick="setupChannel('wallet2')"
-                                                                class="btn btn-primary setupChannel2 has-spinner">Initiate</button>
-                                                            <button type="button" onclick="connectChannel('wallet2')"
-                                                                class="btn btn-primary connectChannel2 has-spinner">Accept</button>
-                                                            <button type="button" onclick="leaveChannel('wallet2')"
-                                                                class="btn btn-primary leaveChannel2 has-spinner">Leave</button>
-                                                            <button type="button" onclick="reconnectChannel('wallet2')"
-                                                                class="btn btn-primary reconnectChannel2 has-spinner">Reconnect</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="form-group">
-                                                        <div class="col-md-6">
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            ChannelId: <input type="text" class="form-control"
-                                                                id="channelId" disabled>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="pc_setupChannel_BodyWrapper" class="collapse out" style="">
-                                                <div id="pc_setupChannel_Body"
-                                                    class="ex-widget-collapse__content k-chart" data-role="chart"
-                                                    style="position: relative;">
-                                                    hello
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="pc_offchainTx" class="ex-widget-collapse panel panel-default">
-                                    <div class="panel-heading" data-toggle="collapse" data-parent="#pc_offchainTx"
-                                        data-target="#pc_offchainTx .panel-collapse">
-                                        <div class="panel-title">
-                                            Execute Offchain Transactions
-                                        </div>
-                                    </div>
-                                    <div class="panel-collapse collapse out" style="">
-                                        <div class="panel-body">
-                                            <div class="ex-widget-collapse__loader">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <label>
-                                                            Account 1
-                                                        </label>
-                                                        <!-- <h4 class="mt-5">Account 1 </h4> -->
-                                                        <div class="form-group">
-                                                            Amount to spend:<input type="text" class="form-control"
-                                                                id="pc_w1_amount" placeholder="amount in aettos">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <button type="button" onclick="spendOffChain('wallet1')"
-                                                                class="btn btn-primary spendOffChain1 has-spinner">Spend</button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label>
-                                                            Account 2
-                                                        </label>
-                                                        <div class="form-group">
-                                                            Amount to spend:<input type="text" class="form-control"
-                                                                id="pc_w2_amount" placeholder="amount in aettos">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <button type="button" onclick="spendOffChain('wallet2')"
-                                                                class="btn btn-primary spendOffChain2 has-spinner">Spend</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="form-group">
-                                                        <div class="col-md-12">
-                                                            <table class="table table-bordered">
-                                                                <thead>
-                                                                    <tr>
-                                                                      <th>TxId</th>
-                                                                      <th>Round</th>
-                                                                      <th>TxHash</th>
-                                                                      <th>Spender</th>
-                                                                      <th>Beneficiary</th>
-                                                                      <th>Amount</th>
-                                                                    </tr>
-                                                                  </thead>
-                                                                  <tbody>
-                                                                    
-                                                                  </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="pc_offchainTx_BodyWrapper" class="collapse out" style="">
-                                                <div id="pc_offchainTx_Body" class="ex-widget-collapse__content k-chart"
-                                                    data-role="chart" style="position: relative;">
-                                                    hello
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -646,6 +680,7 @@
     <script src="js/spendTransaction.js"></script>
     <script src="js/contract.js"></script>
     <script src="js/chatroom.js"></script>
+    <script src="js/paymentChannel.js"></script>
     <script src="js/jquery.buttonLoader.min.js"></script>
 
     <!-- <script src="js/src/mode-javascript.js" type="text/javascript" charset="utf-8"></script> -->
