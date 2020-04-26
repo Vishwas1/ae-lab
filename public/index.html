@@ -57,21 +57,23 @@
             </div>
             <div class="row" style="padding-left: 39px;">
                 <div class="col-md-12">
-                    <img class="logo"
+                    <img class="logo" 
                         src="https://forum.aeternity.com/uploads/db0917/original/1X/543f494a818af66690a1298689af3fdd0c6389a1.png">
                 </div>
             </div>
             <hr>
             <div class="row">
                 <div class="col-md-12 sidebarnav">
-                    <a href="#tab1default" class="active" data-toggle="tab">Introduction</a>
-                    <a href="#tab2default" data-toggle="tab">Account Creator</a>
-                    <a href="#tab3default" data-toggle="tab">Build Transaction</a>
-                    <a href="#tab4default" data-toggle="tab">Sign Transaction</a>
-                    <a href="#tab5default" data-toggle="tab">Decode Transaction</a>
-                    <a href="#tab6default" data-toggle="tab">Send Transaction</a>
-                    <a href="#tab7default" data-toggle="tab">Contract Editor</a>
-                    <a href="#tab8default" data-toggle="tab">Payment Channel</a>
+                    <a href="#tab1default" class="active" data-toggle="tab"><i class="fa fa-book" aria-hidden="true"></i> Introduction</a>
+                    <a href="#tab2default" data-toggle="tab"><i class="fa fa-address-book" aria-hidden="true"></i> Account Creator</a>
+                    <a href="#tab3default" data-toggle="tab"><i class="fa fa-wrench" aria-hidden="true"></i> Build Transaction</a>
+                    <a href="#tab4default" data-toggle="tab"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign Transaction</a>
+                    <a href="#tab5default" data-toggle="tab"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> Decode Transaction</a>
+                    <a href="#tab6default" data-toggle="tab"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> Send Transaction</a>
+                    <a href="#tab7default" data-toggle="tab"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Contract Editor</a>
+                    <a href="#tab8default" data-toggle="tab"><i class="fa fa-plug" aria-hidden="true"></i> Payment Channel</a>
+                    <a href="#tab9default" data-toggle="tab"><i class="fa fa-commenting-o" aria-hidden="true"></i> Payment Channel</a>
+                    
                 </div>
             </div>
         </div>
@@ -469,7 +471,57 @@
                                     <div class="panel-collapse collapse out" style="">
                                         <div class="panel-body">
                                             <div class="ex-widget-collapse__loader">
-                                                asdasdasdad
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label>
+                                                            Account 1
+                                                        </label>
+                                                        <!-- <h4 class="mt-5">Account 1 </h4> -->
+                                                        <div class="form-group">
+                                                            Amount to spend:<input type="text" class="form-control"
+                                                                id="pc_w1_amount" placeholder="amount in aettos">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="button" onclick="spendOffChain('wallet1')"
+                                                                class="btn btn-primary spendOffChain1 has-spinner">Spend</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label>
+                                                            Account 2
+                                                        </label>
+                                                        <div class="form-group">
+                                                            Amount to spend:<input type="text" class="form-control"
+                                                                id="pc_w2_amount" placeholder="amount in aettos">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="button" onclick="spendOffChain('wallet2')"
+                                                                class="btn btn-primary spendOffChain2 has-spinner">Spend</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <table class="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                      <th>TxId</th>
+                                                                      <th>Round</th>
+                                                                      <th>TxHash</th>
+                                                                      <th>Spender</th>
+                                                                      <th>Beneficiary</th>
+                                                                      <th>Amount</th>
+                                                                    </tr>
+                                                                  </thead>
+                                                                  <tbody>
+                                                                    
+                                                                  </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div id="pc_offchainTx_BodyWrapper" class="collapse out" style="">
                                                 <div id="pc_offchainTx_Body" class="ex-widget-collapse__content k-chart"
@@ -599,6 +651,7 @@
     <!-- <script src="js/src/mode-javascript.js" type="text/javascript" charset="utf-8"></script> -->
 
     <script>
+        document.getElementById("mySidenav").style.width = "250px";
         function openNav() {
             document.getElementById("mySidenav").style.width = "250px";
         }
