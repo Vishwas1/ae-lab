@@ -275,7 +275,37 @@
                                     <div class="panel-collapse collapse in" style="">
                                       <div class="panel-body">
                                         <div class="ex-widget-collapse__loader">
+                                            <div class="col-md-6">
+                                                <h4 class="mt-5">Wallet 1</h4>
+                                                <!-- <hr> -->
+                                                <div class="form-group">
+                                                    Private Key:<input type="text" class="form-control" id="pc_w1_privateKey" placeholder="private key" >
+                                                </div>
+                                                <div class="form-group">
+                                                    Public Key:<input type="text" class="form-control" id="pc_w1_publicKey" placeholder="public key" >
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="button" onclick="saveWallet('wallet1')" class="btn btn-primary saveWallet1 has-spinner">Save</button>
+                                                    <button type="button" onclick="updateBalance('wallet1')" class="btn btn-primary balanceWallet1 has-spinner">Balance</button>
+                                                    <label><span id="balanceWallet1_lbl">_ </span> (Aettos)</label>
+                                                </div>
+                                            </div>
                                             
+                                            <div class="col-md-6">
+                                                <h4 class="mt-5">Wallet 1 </h4>
+                                                <!-- <hr> -->
+                                                <div class="form-group">
+                                                    Private Key:<input type="text" class="form-control" id="pc_w2_privateKey" placeholder="private key" >
+                                                </div>
+                                                <div class="form-group">
+                                                    Public Key:<input type="text" class="form-control" id="pc_w2_publicKey" placeholder="public key" >
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="button" onclick="saveWallet('wallet2')" class="btn btn-primary saveWallet2 has-spinner">Save</button>
+                                                    <button type="button" onclick="updateBalance('wallet2')" class="btn btn-primary balanceWallet2 has-spinner">Update Balance</button>
+                                                    <label><span id="balanceWallet2_lbl">_ </span> (Aettos)</label>
+                                                </div>
+                                            </div>
                                         </div>
                                         </div>
                                         <div id="pc_wallet_BodyWrapper" class="collapse in" style="">
@@ -293,7 +323,7 @@
                                     <div class="panel-collapse collapse out" style="">
                                       <div class="panel-body">
                                         <div class="ex-widget-collapse__loader">
-                                          asdasdasdad
+                                            asdad
                                         </div>
                                         <div id="pc_setupChannel_BodyWrapper" class="collapse out" style="">
                                           <div id="pc_setupChannel_Body" class="ex-widget-collapse__content k-chart" data-role="chart" style="position: relative;">
