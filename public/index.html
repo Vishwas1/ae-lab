@@ -59,7 +59,8 @@
                             <li><a href="#tab4default" data-toggle="tab">Sign Transaction</a></li>
                             <li><a href="#tab5default" data-toggle="tab">Decode Transaction</a></li>
                             <li><a href="#tab6default" data-toggle="tab">Send Transaction</a></li>
-                            <li><a href="#tab7default" data-toggle="tab">Contract editor</a></li>
+                            <li><a href="#tab7default" data-toggle="tab">Contract Editor</a></li>
+                            <li><a href="#tab8default" data-toggle="tab">Payment Channel</a></li>
                         </ul>
                     </div>
                     <div class="panel-body">
@@ -264,6 +265,64 @@
                                 </div>
                               </div>
                             </div>
+                            <div class="tab-pane fade" id="tab8default">
+                                <div id="pc_wallet" class="ex-widget-collapse panel panel-default">
+                                    <div class="panel-heading" data-toggle="collapse" data-parent="#pc_wallet" data-target="#pc_wallet .panel-collapse">
+                                      <div class="panel-title">
+                                        Setup Wallets 
+                                      </div>
+                                    </div>
+                                    <div class="panel-collapse collapse in" style="">
+                                      <div class="panel-body">
+                                        <div class="ex-widget-collapse__loader">
+                                            
+                                        </div>
+                                        </div>
+                                        <div id="pc_wallet_BodyWrapper" class="collapse in" style="">
+                                          <div id="pc_wallet_Body" class="ex-widget-collapse__content k-chart" data-role="chart" style="position: relative;">
+                                          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="pc_setupChannel" class="ex-widget-collapse panel panel-default">
+                                    <div class="panel-heading" data-toggle="collapse" data-parent="#pc_setupChannel" data-target="#pc_setupChannel .panel-collapse">
+                                      <div class="panel-title">
+                                        Setup Payment Channel
+                                      </div>
+                                    </div>
+                                    <div class="panel-collapse collapse out" style="">
+                                      <div class="panel-body">
+                                        <div class="ex-widget-collapse__loader">
+                                          asdasdasdad
+                                        </div>
+                                        <div id="pc_setupChannel_BodyWrapper" class="collapse out" style="">
+                                          <div id="pc_setupChannel_Body" class="ex-widget-collapse__content k-chart" data-role="chart" style="position: relative;">
+                                            hello
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div id="pc_offchainTx" class="ex-widget-collapse panel panel-default">
+                                    <div class="panel-heading" data-toggle="collapse" data-parent="#pc_offchainTx" data-target="#pc_offchainTx .panel-collapse">
+                                      <div class="panel-title">
+                                        Execute Offchain Transactions
+                                      </div>
+                                    </div>
+                                    <div class="panel-collapse collapse out" style="">
+                                      <div class="panel-body">
+                                        <div class="ex-widget-collapse__loader">
+                                          asdasdasdad
+                                        </div>
+                                        <div id="pc_offchainTx_BodyWrapper" class="collapse out" style="">
+                                          <div id="pc_offchainTx_Body" class="ex-widget-collapse__content k-chart" data-role="chart" style="position: relative;">
+                                            hello
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -378,6 +437,9 @@
     <!-- <script src="js/src/mode-javascript.js" type="text/javascript" charset="utf-8"></script> -->
 
     <script>
+        // $( function() {
+        //     $( "#accordion" ).accordion();
+        // });
         // var editor = ace.edit("source_code");
         // var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
         //     editor.session.setMode(new JavaScriptMode());
