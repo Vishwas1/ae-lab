@@ -20,40 +20,67 @@
     <link href="css/chatroom.css" rel="stylesheet">
 </head>
 
-<body>
-
+<body>    
     <!-- Fixed navbar -->
     <div class="container">
         <div class="page-header">
-            <h3><img class="logo" src="https://forum.aeternity.com/uploads/db0917/original/1X/543f494a818af66690a1298689af3fdd0c6389a1.png"> | Laboratory</h3>
-            
-            <a href="https://github.com/Vishwas1/ae-lab" target="_blank">
-                <label class="pull-left" style="padding-top:1%">Contribute </label>
-            </a>
-            <a class="donate" target="_blank" data-toggle="modal" data-target="#donate"> 
-                <label class="pull-left" style="padding-top:1%; padding-left: 0.6%;"> | Donate(AEN)</label>
-            </a> 
-            <ul class="nav navbar-nav pull-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Test
-                        <span class="caret"></span></a>
-                    <!-- <ul class="dropdown-menu">
-                        <li><a href="#">Test</a></li>
-                        <li><a href="#">Public</a></li>
-                        <li><a href="#">Custom</a></li>
-                    </ul> -->
-                </li>
-            </ul>
-            <label class="pull-right" style="padding-top:1%">
-                https://testnet.aeternal.io
-            </label>
+            <div class="row">
+                <div class="col-md-8">
+                    <span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776;</span>
+                    <!-- <a href="https://github.com/Vishwas1/ae-lab" target="_blank">
+                        <label class="pull-left" style="padding-top:1%">Contribute </label>
+                    </a>
+                    <a class="donate" target="_blank" data-toggle="modal" data-target="#donate"> 
+                        <label class="pull-left" style="padding-top:1%; padding-left: 0.6%;"> | Donate(AEN)</label>
+                    </a>  -->
+                </div>
+                <div class="col-md-4">
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Test
+                                <span class="caret"></span></a>
+                        </li>
+                    </ul>
+                    <label class="pull-right" style="padding-top:1%">
+                        https://testnet.aeternal.io
+                    </label>
+                </div>
+            </div>
         </div>
+        
+        <div id="mySidenav" class="sidenav">
+            <div class="row" style="padding-left: 39px;">
+                <div class="col-md-12">
+                    <h1 style="font-size: x-large;">Laboratory</h1>
+                </div>
+            </div>
+            <div class="row" style="padding-left: 39px;">
+                <div class="col-md-12">                    
+                    <img class="logo" src="https://forum.aeternity.com/uploads/db0917/original/1X/543f494a818af66690a1298689af3fdd0c6389a1.png"> 
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-12 sidebarnav" >
+                    <a href="#tab1default" class="active" data-toggle="tab">Introduction</a>
+                    <a href="#tab2default" data-toggle="tab">Account Creator</a>
+                    <a href="#tab3default" data-toggle="tab">Build Transaction</a>
+                    <a href="#tab4default" data-toggle="tab">Sign Transaction</a>
+                    <a href="#tab5default" data-toggle="tab">Decode Transaction</a>
+                    <a href="#tab6default" data-toggle="tab">Send Transaction</a>
+                    <a href="#tab7default" data-toggle="tab">Contract Editor</a>
+                    <a href="#tab8default" data-toggle="tab">Payment Channel</a>
+                </div>
+            </div>
+        </div>
+        
         <div class="row">
             <div class="col-md-12">
                 <div class="panel with-nav-tabs panel-default">
-                    <div class="panel-heading">
+                    <!-- <div class="panel-heading">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tab1default" data-toggle="tab">Introduction</a></li>
+                            <li class="active">
+                                <a href="#tab1default" data-toggle="tab">Introduction</a></li>
                             <li><a href="#tab2default" data-toggle="tab">Account Creator</a></li>
                             <li><a href="#tab3default" data-toggle="tab">Build Transaction</a></li>
                             <li><a href="#tab4default" data-toggle="tab">Sign Transaction</a></li>
@@ -62,7 +89,7 @@
                             <li><a href="#tab7default" data-toggle="tab">Contract Editor</a></li>
                             <li><a href="#tab8default" data-toggle="tab">Payment Channel</a></li>
                         </ul>
-                    </div>
+                    </div> -->
                     <div class="panel-body">
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="tab1default">
@@ -275,8 +302,12 @@
                                     <div class="panel-collapse collapse in" style="">
                                       <div class="panel-body">
                                         <div class="ex-widget-collapse__loader">
+                                            <div class="row">
                                             <div class="col-md-6">
-                                                <h4 class="mt-5">Wallet 1</h4>
+                                                <!-- <h4 class="mt-5">Wallet 1</h4> -->
+                                                <label>
+                                                    Wallet 1
+                                                </label>
                                                 <!-- <hr> -->
                                                 <div class="form-group">
                                                     Private Key:<input type="text" class="form-control" id="pc_w1_privateKey" placeholder="private key" >
@@ -292,7 +323,10 @@
                                             </div>
                                             
                                             <div class="col-md-6">
-                                                <h4 class="mt-5">Wallet 1 </h4>
+                                                <!-- <h4 class="mt-5">Wallet 1 </h4> -->
+                                                <label>
+                                                    Wallet 2
+                                                </label>
                                                 <!-- <hr> -->
                                                 <div class="form-group">
                                                     Private Key:<input type="text" class="form-control" id="pc_w2_privateKey" placeholder="private key" >
@@ -306,6 +340,7 @@
                                                     <label><span id="balanceWallet2_lbl">_ </span> (Aettos)</label>
                                                 </div>
                                             </div>
+                                        </div>
                                         </div>
                                         </div>
                                         <div id="pc_wallet_BodyWrapper" class="collapse in" style="">
@@ -323,7 +358,47 @@
                                     <div class="panel-collapse collapse out" style="">
                                       <div class="panel-body">
                                         <div class="ex-widget-collapse__loader">
-                                            asdad
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>
+                                                        Account 1
+                                                    </label>
+                                                    <!-- <h4 class="mt-5">Account 1 </h4> -->
+                                                    <div class="form-group">
+                                                        Deposit:<input type="text" class="form-control" id="pc_w1_deposit" placeholder="amount in aettos" >
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <button type="button" onclick="setupChannel('wallet1')" class="btn btn-primary setupChannel1 has-spinner">Initiate</button>
+                                                        <button type="button" onclick="connectChannel('wallet1')" class="btn btn-primary connectChannel1 has-spinner">Accept</button>
+                                                        <button type="button" onclick="leaveChannel('wallet1')" class="btn btn-primary leaveChannel1 has-spinner">Leave</button>
+                                                        <button type="button" onclick="reconnectChannel('wallet1')" class="btn btn-primary reconnectChannel1 has-spinner">Reconnect</button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>
+                                                        Account 2
+                                                    </label>
+                                                    <div class="form-group">
+                                                        Deposit:<input type="text" class="form-control" id="pc_w2_deposit" placeholder="amount in aettos" >
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <button type="button" onclick="setupChannel('wallet2')" class="btn btn-primary setupChannel2 has-spinner">Initiate</button>
+                                                        <button type="button" onclick="connectChannel('wallet2')" class="btn btn-primary connectChannel2 has-spinner">Accept</button>
+                                                        <button type="button" onclick="leaveChannel('wallet2')" class="btn btn-primary leaveChannel2 has-spinner">Leave</button>
+                                                        <button type="button" onclick="reconnectChannel('wallet2')" class="btn btn-primary reconnectChannel2 has-spinner">Reconnect</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <div class="col-md-6">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        ChannelId: <input type="text" class="form-control" id="channelId" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div id="pc_setupChannel_BodyWrapper" class="collapse out" style="">
                                           <div id="pc_setupChannel_Body" class="ex-widget-collapse__content k-chart" data-role="chart" style="position: relative;">
@@ -467,12 +542,14 @@
     <!-- <script src="js/src/mode-javascript.js" type="text/javascript" charset="utf-8"></script> -->
 
     <script>
-        // $( function() {
-        //     $( "#accordion" ).accordion();
-        // });
-        // var editor = ace.edit("source_code");
-        // var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
-        //     editor.session.setMode(new JavaScriptMode());
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+
     </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Q4DHJSQ2N"></script>
