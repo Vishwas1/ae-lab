@@ -1,178 +1,278 @@
+// $(function () {
 const WTYPE = Object.freeze({
     WALLET1: 'wallet1',
-    WALLET2: 'wallet2' 
+    WALLET2: 'wallet2'
 })
 
-async function connectChannel(wallet){
-    let initiatorDeposit;
-    let responderDeposite;
-    let initiatorPublicKey;
-    let responderPublicKey;
-    let keypair;
-    const url = `${host}/connect`;
-    console.log(wallet)
-    switch(wallet){
-        case WTYPE.WALLET1: {
-            $('.connectChannel').buttonLoader('start');
-            initiatorDeposit = $('#pc_w1_deposit').val()
-            responderDeposite = $('#pc_w2_deposit').val()
-            initiatorPublicKey = $('#pc_w1_publicKey').val()
-            responderPublicKey = $('#pc_w2_publicKey').val()
-            keypair = {
-                secretKey: $('#pc_w1_privateKey').val(),
-                publicKey: $('#pc_w1_publicKey').val()
-            }
+const mTypes = Object.freeze({
+    LISTUSER: 'list-channel-users',
+    ADDUSER: 'add-channel-user',
+    ERROR: 'error',
+    TRANSACTION: 'transaction',
+    ACCEPT: 'channel-accept',
+    REJECT: 'channel-reject',
+    INITIATE: 'channel-initiate'
+})
+
+window.WebSocket = window.WebSocket || window.MozWebSocket;
+
+if (!window.WebSocket) {
+    console.log(`Sorry, but your browser doesn\'t support WebSocket.`)
+    alert(`Sorry, but your browser doesn\'t support WebSocket.`)
+    // return 
+}
+
+const wsurl = window.location.protocol === "https:" ? `wss://${window.location.host}` : `ws://${window.location.host}`
+var connection = new WebSocket(wsurl);
+connection.onopen = function () {
+    console.log('WS:: Connected!')
+}
+
+connection.onerror = function (error) {
+    const msg = 'Sorry, but there\'s some problem with your connection or the server is down.'
+    console.log('WS:: ', msg)
+    alert(msg);
+}
+
+connection.onmessage = function (message) {
+    console.log('WS:: Received a message = ', message)
+    let json;
+    try {
+        json = JSON.parse(message.data);
+    } catch (e) {
+        console.log('WS:: Invalid JSON: ', message.data);
+        return;
+    }
+
+    if (!json.type) return
+    switch (json.type) {
+        case mTypes.LISTUSER: {
+            console.log('WS:: New user added ', json.data)
+            const option = `<option>${json.data.publicKey} | ${json.data.alias} </option>`
+            $('#pc_w2_publicKey').append(option)
             break
         }
-        // case WTYPE.WALLET2: {
-        //     $('.connectChannel2').buttonLoader('start');
-        //     initiatorDeposit = $('#pc_w2_deposit').val()
-        //     responderDeposite = $('#pc_w1_deposit').val()
-        //     initiatorPublicKey = $('#pc_w2_publicKey').val()
-        //     responderPublicKey = $('#pc_w1_publicKey').val()
-        //     keypair = {
-        //         secretKey: $('#pc_w2_privateKey').val(),
-        //         publicKey: $('#pc_w2_publicKey').val()
-        //     }
-        //     break
-        // }
-    }
-   
-    const body =  {
-            initiatorPublicKey: initiatorPublicKey, 
-            responderPublicKey: responderPublicKey, 
-            initiatorAmount: initiatorDeposit == ""? 0 : initiatorDeposit, 
-            responderAmount: responderDeposite == "" ? 0 : responderDeposite, 
-            keypair: keypair
+
+        case mTypes.TRANSACTION: {
+            console.log('WS:: New transaction added ', json.data)
+            appendTx(json.data)
+            break
         }
-    console.log(body)
-    const resp =  await fetch(url, {
-        method : 'post',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body : JSON.stringify(body)
-    })
-    const json = await resp.json();
-    if (wallet == WTYPE.WALLET1)
+        case mTypes.ACCEPT: {
+            console.log('WS:: New channel accept message came ', json.data)
+            const body = {
+                init: json.data
+            }
+            fillDataIntoStatusModal(body)
+            $('#channelAcceptTxtArea').val(JSON.stringify(json.data))
+            $('.connectChannel1').attr('hidden')
+            // $("#acceptChannel").modal("show")
+        }
+    }
+}
+
+const fillDataIntoStatusModal = (body) => {
+    const { init, status } = body
+    if (init) {
+
+        $('#modal_initiator').text(init.initiatorPublicKey)
+        $('#modal_responder').text(init.responderPublicKey)
+        $('#modal_initiator_deposit').text(init.initiatorAmount)
+        $('#modal_responder_deposit').text(init.responderAmount)
+    }
+
+
+    if (status) {
+        $('#modal_channelId').text(status.channelId)
+        $('#modal_fsmId').text(status.fsmId)
+        $('#modal_round').text(status.round)
+        $('#modal_initiator_balance').text(status.initiatorbalance)
+        $('#modal_responder_balance').text(status.responderbalance)
+    }
+
+}
+
+function notify(message) {
+    connection.send(JSON.stringify(message));
+}
+
+function saveUser() {
+    $('.saveWallet1').buttonLoader('start');
+    setTimeout(() => {
+        const msg = {
+            type: mTypes.ADDUSER,
+            body: {
+                alias: $('#pc_w1_alias').val(),
+                publicKey: $('#pc_w1_publicKey').val()
+            }
+        }
+        console.log('Saving this new user ', msg)
+        notify(msg)
+        $('.saveWallet1').buttonLoader('stop');
+    }, 2000)
+}
+
+async function connectChannel(wallet) {
+    try {
+        let initiatorDeposit;
+        let responderDeposite;
+        let initiatorPublicKey;
+        let responderPublicKey;
+        let keypair;
+        const url = `${host}/connect`;
+        console.log(wallet)
+        switch (wallet) {
+            case WTYPE.WALLET1: {
+                $('.connectChannel1').buttonLoader('start');
+                initiatorDeposit = $('#modal_initiator_deposit').text()
+                responderDeposite = $('#modal_responder_deposit').text()
+                initiatorPublicKey = $('#pc_w1_publicKey').val()
+                responderPublicKey = $('#modal_responder').text()
+                keypair = {
+                    secretKey: $('#pc_w1_privateKey').val(),
+                    publicKey: $('#pc_w1_publicKey').val()
+                }
+                break
+            }
+        }
+
+        const body = JSON.parse($('#channelAcceptTxtArea').val())
+        body.keypair = keypair
+
+        console.log(body)
+        const resp = await fetch(url, {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+        const json = await resp.json();
+
         $('.connectChannel1').buttonLoader('stop');
-    // else
-    //     $('.connectChannel2').buttonLoader('stop');    
-    if(json && json.status != 200) alert(`Error: ${json.data}`)
+        $('.connectChannel1').removeAttr('hidden')
 
-    console.log(json)
-    $('#channelId').val(json.data.channelId)
+        if (json && json.status != 200) throw new Error(json.data)
+
+        console.log(json)
+        $('#modal_channelId').text(json.data.channelId)
+        await channelStatus(body)
+    } catch (e) {
+        $('.connectChannel1').buttonLoader('stop');
+        alert(`Error: ${e.toString()}`)
+    }
 }
 
-async function setupChannel(wallet){
-    let initiatorDeposit;
-    let responderDeposite;
-    let initiatorPublicKey;
-    let responderPublicKey;
-    let keypair;
-    const url = `${host}/setup`;
-    console.log(wallet)
-    switch(wallet){
-        case WTYPE.WALLET1: {
-            $('.setupChannel1').buttonLoader('start');
-            initiatorDeposit = $('#pc_w2_deposit').val()
-            responderDeposite = $('#pc_w1_deposit').val()
-            initiatorPublicKey = $('#pc_w2_publicKey').val()
-            responderPublicKey = $('#pc_w1_publicKey').val()
-            keypair = {
-                secretKey: $('#pc_w1_privateKey').val(),
-                publicKey: $('#pc_w1_publicKey').val()
+async function setupChannel(wallet) {
+    try {
+        let initiatorDeposit;
+        let responderDeposite;
+        let initiatorPublicKey;
+        let responderPublicKey;
+        let keypair;
+        const url = `${host}/setup`;
+        console.log(wallet)
+        switch (wallet) {
+            case WTYPE.WALLET1: {
+                $('.setupChannel1').buttonLoader('start');
+                initiatorDeposit = $('#pc_w2_deposit').val()
+                responderDeposite = $('#pc_w1_deposit').val()
+                initiatorPublicKey = $('#pc_w2_publicKey').find(":selected").text().split('|')[0].trim() //$('#pc_w2_publicKey').val()
+                responderPublicKey = $('#pc_w1_publicKey').val()
+                keypair = {
+                    secretKey: $('#pc_w1_privateKey').val(),
+                    publicKey: $('#pc_w1_publicKey').val()
+                }
+                break
             }
-            break
         }
-        // case WTYPE.WALLET2: {
-        //     $('.setupChannel2').buttonLoader('start');
-        //     initiatorDeposit = $('#pc_w1_deposit').val()
-        //     responderDeposite = $('#pc_w2_deposit').val()
-        //     initiatorPublicKey = $('#pc_w1_publicKey').val()
-        //     responderPublicKey = $('#pc_w2_publicKey').val()
-        //     keypair = {
-        //         secretKey: $('#pc_w2_privateKey').val(),
-        //         publicKey: $('#pc_w2_publicKey').val()
-        //     }
-        //     break
-        // }
-    }
 
-    const body =  {
-            initiatorPublicKey: initiatorPublicKey, 
-            responderPublicKey: responderPublicKey, 
-            initiatorAmount: initiatorDeposit == ""? 0 : initiatorDeposit, 
-            responderAmount: responderDeposite == "" ? 0 : responderDeposite, 
+        let body = {
+            initiatorPublicKey: initiatorPublicKey,
+            responderPublicKey: responderPublicKey,
+            initiatorAmount: initiatorDeposit == "" ? 0 : initiatorDeposit,
+            responderAmount: responderDeposite == "" ? 0 : responderDeposite,
             keypair: keypair
         }
-    
-    console.log(body)
-    
-    const resp =  await fetch(url, {
-        method : 'post',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body : JSON.stringify(body)
-    })
-    const json = await resp.json();
-    if (wallet == WTYPE.WALLET1)
+
+
+        //// Notifiation
+        const data = body
+        delete data[keypair]
+        console.log(body)
+        const msg = {
+            type: mTypes.INITIATE,
+            body: data
+        }
+        notify(msg)
+        //// Notifiation
+
+        console.log(body)
+
+        const resp = await fetch(url, {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+        const json = await resp.json();
         $('.setupChannel1').buttonLoader('stop');
-    // else
-    //     $('.setupChannel2').buttonLoader('stop');    
-    if(json && json.status != 200) alert(`Error: ${json.data}`)
-    console.log(json)
-    $('#channelId').val(json.data.channelId)
+        if (json && json.status != 200) alert(`Error: ${json.data}`)
+        console.log(json)
+        // $('#channelId').val(json.data.channelId)
+        $('#modal_channelId').text(json.data.channelId)
+        body.initiatorPublicKey = body.responderPublicKey
+        body.initiatorDeposit = body.responderDeposite
+        await channelStatus(body)
+        $('.connectChannel1').attr('hidden')
+    } catch (e) {
+        $('.setupChannel1').buttonLoader('stop');
+        alert(`Error: ${e.toString()}`)
+    }
 }
 
-async function leaveChannel(wallet){
+async function leaveChannel(wallet) {
     const url = `${host}/leave`;
-    let channelId = $('#channelId').val();
+    let channelId = $('#modal_channelId').text();
     let publicKey;
-    switch(wallet){
+    switch (wallet) {
         case WTYPE.WALLET1: {
             $('.leaveChannel1').buttonLoader('start');
             publicKey = $('#pc_w1_publicKey').val()
             break
         }
-        // case WTYPE.WALLET2: {
-        //     $('.leaveChannel2').buttonLoader('start');
-        //     publicKey = $('#pc_w2_publicKey').val()
-        //     break
-        // }
     }
 
-    const body =  {
-        channelId: channelId, 
-        publicKey: publicKey, 
+    const body = {
+        channelId: channelId,
+        publicKey: publicKey,
     }
 
-    const resp =  await fetch(url, {
-        method : 'post',
+    const resp = await fetch(url, {
+        method: 'post',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body : JSON.stringify(body)
+        body: JSON.stringify(body)
     })
     const json = await resp.json();
-    if (wallet == WTYPE.WALLET1)
-        $('.leaveChannel1').buttonLoader('stop');
-    // else
-    //     $('.leaveChannel2').buttonLoader('stop');    
-    if(json && json.status != 200) alert(`Error: ${json.data}`)
+
+    $('.leaveChannel1').buttonLoader('stop');
+
+    if (json && json.status != 200) alert(`Error: ${json.data}`)
 
     alert(json.data)
 }
 
-async function reconnectChannel(wallet){
+async function reconnectChannel(wallet) {
     const url = `${host}/reconnect`;
-    let channelId = $('#channelId').val();
+    let channelId = $('#modal_channelId').text();
     let keypair;
-    switch(wallet){
+    switch (wallet) {
         case WTYPE.WALLET1: {
             $('.reconnectChannel1').buttonLoader('start');
             keypair = {
@@ -181,118 +281,160 @@ async function reconnectChannel(wallet){
             }
             break
         }
-        // case WTYPE.WALLET2: {
-        //     $('.reconnectChannel2').buttonLoader('start');
-        //     keypair = {
-        //         secretKey: $('#pc_w2_privateKey').val(),
-        //         publicKey: $('#pc_w2_publicKey').val()
-        //     }
-        //     break
-        // }
     }
 
-    const body =  {
-        channelId: channelId, 
-        keypair: keypair, 
+    const body = {
+        channelId: channelId,
+        keypair: keypair,
     }
 
-    const resp =  await fetch(url, {
-        method : 'post',
+    const resp = await fetch(url, {
+        method: 'post',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body : JSON.stringify(body)
+        body: JSON.stringify(body)
     })
     const json = await resp.json();
-    if (wallet == WTYPE.WALLET1)
-        $('.reconnectChannel1').buttonLoader('stop');
-    // else
-    //     $('.reconnectChannel2').buttonLoader('stop');    
-    if(json && json.status != 200) alert(`Error: ${json.data}`)
+    $('.reconnectChannel1').buttonLoader('stop');
+    if (json && json.status != 200) alert(`Error: ${json.data}`)
 
-    json.data == true ?  alert('Reconnected!') : alert('Error: Could not reconnect!')
+    json.data == true ? alert('Reconnected!') : alert('Error: Could not reconnect!')
 
 }
 
-async function spendOffChain(wallet){
+async function spendOffChain(wallet) {
+
+
+
     const url = `${host}/offspend`;
-    let channelId = $('#channelId').val();
+    let channelId = $('#modal_channelId').text();
     let keypair;
     let amount;
     let receiverPublicKey;
-    switch(wallet){
-        case WTYPE.WALLET1: {
-            $('.spendOffChain1').buttonLoader('start');
-            keypair = {
-                secretKey: $('#pc_w1_privateKey').val(),
-                publicKey: $('#pc_w1_publicKey').val()
-            }
-            amount = $('#pc_w1_amount').val()
-            receiverPublicKey = $('#pc_w2_publicKey').val()
-            break
+    try {
+        const selected = $('#pc_w2_publicKey').find(":selected").text().split('|')[0].trim()
+        if (selected != "" && selected != "Select Address") {
+            receiverPublicKey = selected
+        } else {
+            receiverPublicKey = $('#modal_responder').text()
         }
-        // case WTYPE.WALLET2: {
-        //     $('.spendOffChain2').buttonLoader('start');
-        //     keypair = {
-        //         secretKey: $('#pc_w2_privateKey').val(),
-        //         publicKey: $('#pc_w2_publicKey').val()
-        //     }
-        //     amount = $('#pc_w2_amount').val()
-        //     receiverPublicKey = $('#pc_w1_publicKey').val()
-        //     break
-        // }
+    } catch (e) {
+        receiverPublicKey = $('#modal_responder').text()
     }
-    const body = {
-        keypair: keypair,
-        channelId: channelId,
-        amount: amount,
-        receiverPublicKey: receiverPublicKey,
-        memo: "Sending money to the shop keeper"
-    }
+    try {
 
-    const resp =  await fetch(url, {
-        method : 'post',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body : JSON.stringify(body)
-    })
-    const json = await resp.json();
-    if (wallet == WTYPE.WALLET1)
+        $('.spendOffChain1').buttonLoader('start');
+        keypair = {
+            secretKey: $('#pc_w1_privateKey').val(),
+            publicKey: $('#pc_w1_publicKey').val()
+        }
+        amount = $('#pc_w1_amount').val()
+        const body = {
+            keypair: keypair,
+            channelId: channelId,
+            amount: amount,
+            receiverPublicKey: receiverPublicKey,
+            memo: "Sending money to the shop keeper"
+        }
+
+        const resp = await fetch(url, {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+        const json = await resp.json();
+
         $('.spendOffChain1').buttonLoader('stop');
-    // else
-    //     $('.spendOffChain2').buttonLoader('stop');    
-    if(json && json.status != 200) alert(`Error: ${json.data}`)
 
-    const {result , status } = json.data
-    const { balances, state  } = status
-    const l = result.signedTx.length
-    
-    const tableRowData = {
-        signedTx: shortenStr(result.signedTx),
-        spender: shortenStr(body.keypair.publicKey),
-        beneficiary: shortenStr(body.receiverPublicKey),
-        spenderbal: balances[body.keypair.publicKey],
-        beneficiarybal: balances[receiverPublicKey],
-        round: state.round
+        if (json && json.status != 200) alert(`Error: ${json.data}`)
+
+        const { result, status } = json.data
+        const { balances, state } = status
+        const l = result.signedTx.length
+
+        const tableRowData = {
+            signedTx: result.signedTx,
+            spender: body.keypair.publicKey,
+            beneficiary: body.receiverPublicKey,
+            spenderbal: balances[body.keypair.publicKey],
+            beneficiarybal: balances[receiverPublicKey],
+            round: state.round
+        }
+
+        //TODO: notify the other user about this tx
+        const msg = {
+            type: mTypes.TRANSACTION,
+            body: tableRowData
+        }
+        notify(msg)
+
+        //TODO: also add this transaction to your list
+        appendTx(tableRowData)
+    } catch (e) {
+        $('.setupChannel1').buttonLoader('stop');
+        alert(`Error: ${e.toString()}`)
     }
 
-    const tr = `<tr>
-                <td>${tableRowData.signedTx}</td>
-                <td>${tableRowData.round}</td>
-                <td>${tableRowData.spender}</td>
-                <td>${tableRowData.beneficiary}</td>
-                <td>${tableRowData.spenderbal}</td>
-                <td>${tableRowData.beneficiarybal}</td>
-                </tr>`
+}
 
-    const tbody = $('.table-bordered tbody')
+async function channelStatus(init) {
+    try {
+        $('.channelStatus').buttonLoader('start');
+        const channelId = $('#modal_channelId').text()
+        const url = `${host}/status?channelId=${channelId}`;
+        const resp = await fetch(url)
+        const json = await resp.json()
+        $('.channelStatus').buttonLoader('stop');
+        if (json && json.status != 200) throw new Error(json.data)
+
+        $('.chdetails').removeAttr('hidden')
+
+        const { state, balances } = json.data
+
+        const yourPk = $('#pc_w1_publicKey').val()
+        const peer2Pk = Object.keys(balances).find(x => x != yourPk)
+        const body = {
+            init,
+            status: {
+                channelId: state.channelId,
+                fsmId: state.fsmId,
+                round: state.round,
+                initiatorbalance: balances[yourPk],
+                responderbalance: balances[peer2Pk],
+                status: state.status
+            }
+        }
+        fillDataIntoStatusModal(body)
+        $('.connectChannel1').removeAttr('hidden')
+        // $("#acceptChannel").modal("show")
+
+    } catch (e) {
+        $('.channelStatus').buttonLoader('stop');
+        alert(`Error: ${e.toString()}`)
+    }
+}
+
+const appendTx = (tableRowData) => {
+    const color = tableRowData.beneficiary === $('#pc_w1_publicKey').val() ? "lightgreen" : "#ff000036";
+    const tr = `<tr style="background-color:${color}">
+                    <td>${shortenStr(tableRowData.signedTx)}</td>
+                    <td>${tableRowData.round}</td>
+                    <td>${shortenStr(tableRowData.spender)}</td>
+                    <td>${shortenStr(tableRowData.beneficiary)}</td>
+                    <td>${tableRowData.spenderbal}</td>
+                    <td>${tableRowData.beneficiarybal}</td>
+                    </tr>`
+
+    const tbody = $('.txTable tbody')
     tbody.append(tr);
 }
 
 const shortenStr = (str) => {
     const l = str.length
-    return str.substring(0, 10) + '...' + str.substring(l-5,l)
+    return str.substring(0, 15) + '...' + str.substring(l - 5, l)
 }

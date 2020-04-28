@@ -3,7 +3,7 @@ const app = express()
 const port = process.env.PORT || 3000
 const bodyParser = require('body-parser')
 const http = require('http')
-const ws = require('./wsserver')
+const ws = require('./ws/channelSocket')
 
 const allowedOrigins = ['http://localhost:3000', 'https://ae-labs.herokuapp.com/'];
 

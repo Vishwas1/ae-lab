@@ -28,12 +28,12 @@
             <div class="row">
                 <div class="col-md-8">
                     <span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776;</span>
-                    <!-- <a href="https://github.com/Vishwas1/ae-lab" target="_blank">
+                    <a href="https://github.com/Vishwas1/ae-lab" target="_blank">
                         <label class="pull-left" style="padding-top:1%">Contribute </label>
                     </a>
-                    <a class="donate" target="_blank" data-toggle="modal" data-target="#donate"> 
+                    <a class="donate" target="_blank" data-toggle="modal" data-target="#donate">
                         <label class="pull-left" style="padding-top:1%; padding-left: 0.6%;"> | Donate(AEN)</label>
-                    </a>  -->
+                    </a>
                 </div>
                 <div class="col-md-4">
                     <ul class="nav navbar-nav pull-right">
@@ -58,23 +58,32 @@
             </div>
             <div class="row" style="padding-left: 39px;">
                 <div class="col-md-12">
-                    <img class="logo" 
+                    <img class="logo"
                         src="https://forum.aeternity.com/uploads/db0917/original/1X/543f494a818af66690a1298689af3fdd0c6389a1.png">
                 </div>
             </div>
             <hr>
             <div class="row">
                 <div class="col-md-12 sidebarnav">
-                    <a href="#tab1default" class="active" data-toggle="tab"><i class="fa fa-book" aria-hidden="true"></i> Introduction</a>
-                    <a href="#tab2default" data-toggle="tab"><i class="fa fa-address-book" aria-hidden="true"></i> Account Creator</a>
-                    <a href="#tab3default" data-toggle="tab"><i class="fa fa-wrench" aria-hidden="true"></i> Build Transaction</a>
-                    <a href="#tab4default" data-toggle="tab"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign Transaction</a>
-                    <a href="#tab5default" data-toggle="tab"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> Decode Transaction</a>
-                    <a href="#tab6default" data-toggle="tab"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> Send Transaction</a>
-                    <a href="#tab7default" data-toggle="tab"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Contract Editor</a>
-                    <a href="#tab8default" data-toggle="tab"><i class="fa fa-plug" aria-hidden="true"></i> Payment Channel</a>
-                    <a href="#tab9default" data-toggle="tab"><i class="fa fa-commenting-o" aria-hidden="true"></i> Payment Channel</a>
-                    
+                    <a href="#tab1default" class="active" data-toggle="tab"><i class="fa fa-book"
+                            aria-hidden="true"></i> Introduction</a>
+                    <a href="#tab2default" data-toggle="tab"><i class="fa fa-address-book" aria-hidden="true"></i>
+                        Account Creator</a>
+                    <a href="#tab3default" data-toggle="tab"><i class="fa fa-wrench" aria-hidden="true"></i> Build
+                        Transaction</a>
+                    <a href="#tab4default" data-toggle="tab"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign
+                        Transaction</a>
+                    <a href="#tab5default" data-toggle="tab"><i class="fa fa-envelope-open-o" aria-hidden="true"></i>
+                        Decode Transaction</a>
+                    <a href="#tab6default" data-toggle="tab"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> Send
+                        Transaction</a>
+                    <a href="#tab7default" data-toggle="tab"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        Contract Editor</a>
+                    <a href="#tab8default" data-toggle="tab"><i class="fa fa-plug" aria-hidden="true"></i> Payment
+                        Channel</a>
+                    <a href="#tab9default" data-toggle="tab"><i class="fa fa-commenting-o" aria-hidden="true"></i>
+                        Payment Channel</a>
+
                 </div>
             </div>
         </div>
@@ -352,37 +361,16 @@
                                                                         id="pc_w1_publicKey" placeholder="public key">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <!-- <button type="button" onclick="saveWallet('wallet1')"
-                                                                        class="btn btn-primary saveWallet1 has-spinner">Save</button> -->
-                                                                    <button type="button" onclick="updateBalance('wallet1')"
+                                                                    <button type="button" onclick="saveUser()"
+                                                                        class="btn btn-primary saveWallet1 has-spinner">Save</button>
+                                                                    <button type="button"
+                                                                        onclick="updateBalance('wallet1')"
                                                                         class="btn btn-primary balanceWallet1 has-spinner">Balance</button>
                                                                     <label><span id="balanceWallet1_lbl">_ </span>
                                                                         (Aettos)</label>
                                                                 </div>
                                                             </div>
-        
-                                                            <!-- <div class="col-md-6">
-                                                                <label>
-                                                                    Wallet 2
-                                                                </label>
-                                                                <div class="form-group">
-                                                                    Private Key:<input type="text" class="form-control"
-                                                                        id="pc_w2_privateKey" placeholder="private key">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    Public Key:<input type="text" class="form-control"
-                                                                        id="pc_w2_publicKey" placeholder="public key">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <button type="button" onclick="saveWallet('wallet2')"
-                                                                        class="btn btn-primary saveWallet2 has-spinner">Save</button>
-                                                                    <button type="button" onclick="updateBalance('wallet2')"
-                                                                        class="btn btn-primary balanceWallet2 has-spinner">Update
-                                                                        Balance</button>
-                                                                    <label><span id="balanceWallet2_lbl">_ </span>
-                                                                        (Aettos)</label>
-                                                                </div>
-                                                            </div> -->
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -396,7 +384,8 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div id="pc_setupChannel" class="ex-widget-collapse panel panel-default">
-                                            <div class="panel-heading" data-toggle="collapse" data-parent="#pc_setupChannel"
+                                            <div class="panel-heading" data-toggle="collapse"
+                                                data-parent="#pc_setupChannel"
                                                 data-target="#pc_setupChannel .panel-collapse">
                                                 <div class="panel-title">
                                                     Setup Payment Channel
@@ -411,79 +400,147 @@
                                                                     Account 1
                                                                 </label>                                                         -->
                                                                 <div class="form-group">
-                                                                    My Peer Deposit:<input type="text" class="form-control"
-                                                                        id="pc_w1_deposit" placeholder="amount in aettos">
+                                                                    My Deposit:<input type="text" class="form-control"
+                                                                        id="pc_w1_deposit"
+                                                                        placeholder="amount in aettos">
+                                                                </div>
+                                                                <label>Peer 2</label>
+                                                                <div class="form-group">
+                                                                    <select class="form-control" id="pc_w2_publicKey">
+                                                                        <option>Select Address</option>
+                                                                    </select>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    Peer2 Deposit:<input type="text" class="form-control"
-                                                                       id="pc_w2_deposit" placeholder="amount in aettos">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    Peer2 Address:<input type="text" class="form-control"
-                                                                       id="pc_w2_publicKey" placeholder="public key of peer2">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <button type="button" onclick="setupChannel('wallet1')"
-                                                                        class="btn btn-primary setupChannel1 has-spinner">Initiate</button>
-                                                                    <button type="button" onclick="connectChannel('wallet1')"
-                                                                        class="btn btn-primary connectChannel1 has-spinner">Accept</button>
-                                                                </div>
-                                                            </div>
-                                                            <!-- <div class="col-md-6">
-                                                                <label>
-                                                                    Account 2
-                                                                </label>
-                                                                <div class="form-group">
-                                                                    Deposit:<input type="text" class="form-control"
-                                                                        id="pc_w2_deposit" placeholder="amount in aettos">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <button type="button" onclick="setupChannel('wallet2')"
-                                                                        class="btn btn-primary setupChannel2 ">Initiate</button>
-                                                                    <button type="button" onclick="connectChannel('wallet2')"
-                                                                        class="btn btn-primary connectChannel2 ">Accept</button>
-                                                                    <button type="button" onclick="leaveChannel('wallet2')"
-                                                                        class="btn btn-primary leaveChannel2 has-spinner">Leave</button>
-                                                                    <button type="button" onclick="reconnectChannel('wallet2')"
-                                                                        class="btn btn-primary reconnectChannel2 has-spinner">Reconnect</button>
-                                                                </div>
-                                                            </div> -->
-                                                        </div>
-                                                        <hr>
-                                                        <div class="row">
-                                                            <div class="form-group">
-                                                                <div class="col-md-6">
-                                                                    <label>ChannelId</label>
-                                                                     <input type="text" class="form-control"
-                                                                        id="channelId">
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label>FsmId</label>
                                                                     <input type="text" class="form-control"
-                                                                        id="fsmId">
+                                                                        id="pc_w2_deposit"
+                                                                        placeholder="amount in aettos">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <button type="button"
+                                                                        onclick="setupChannel('wallet1')"
+                                                                        class="btn btn-primary setupChannel1 has-spinner"
+                                                                        style="margin-top:3%;">Initiate</button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div id="pc_setupChannel_BodyWrapper" class="collapse out" style="">
                                                         <div id="pc_setupChannel_Body"
-                                                            class="ex-widget-collapse__content k-chart" data-role="chart"
-                                                            style="position: relative;">
+                                                            class="ex-widget-collapse__content k-chart"
+                                                            data-role="chart" style="position: relative;">
                                                             hello
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-        
+
                                     </div>
                                 </div>
-                                
-                                
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="pc_channelStatus" class="ex-widget-collapse panel panel-default">
+                                            <div class="panel-heading" data-toggle="collapse"
+                                                data-parent="#pc_channelStatus"
+                                                data-target="#pc_channelStatus .panel-collapse">
+                                                <div class="panel-title">
+                                                    Channel Status
+                                                </div>
+                                            </div>
+                                            <div class="panel-collapse collapse out" style="">
+                                                <div class="panel-body">
+                                                    <div class="ex-widget-collapse__loader">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <h4>
+                                                                    Channel Id : <span id="modal_channelId"></span>
+                                                                </h4>
+                                                                <hr>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-8">
+                                                                <div class="form-group">
+                                                                    <label>FsmId : </label><span
+                                                                        id="modal_fsmId"></span>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Your Address : </label><span
+                                                                        id="modal_initiator"></span>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Peer2 Address : </label><span
+                                                                        id="modal_responder"></span>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Your Balance : </label><span
+                                                                        id="modal_initiator_balance"></span>
+                                                                    <textarea
+                                                                        placeholder="Request message will be shown here"
+                                                                        rows="12" cols="50" id="channelAcceptTxtArea"
+                                                                        hidden></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label>Round : </label><span
+                                                                        id="modal_round"></span>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Your Deposit : </label><span
+                                                                        id="modal_initiator_deposit"></span>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Peer2 Deposit : </label><span
+                                                                        id="modal_responder_deposit"></span>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Peer2 Balance : </label><span
+                                                                        id="modal_responder_balance"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+
+                                                                <div class="form-group">
+                                                                    <button type="button"
+                                                                        onclick="connectChannel('wallet1')"
+                                                                        class="btn btn-primary connectChannel1 has-spinner">Accept</button>
+                                                                    <button type="button" onclick="channelStatus()"
+                                                                        class="btn btn-primary channelStatus has-spinner">Status</button>
+                                                                    <button type="button"
+                                                                        onclick="leaveChannel('wallet1')"
+                                                                        class="btn btn-primary leaveChannel1 has-spinner">Leave</button>
+                                                                    <button type="button"
+                                                                        onclick="reconnectChannel('wallet1')"
+                                                                        class="btn btn-primary reconnectChannel1 has-spinner">Reconnect</button>
+                                                                    <button type="button"
+                                                                        onclick="closeChannel('wallet1')"
+                                                                        class="btn btn-danger closeChannel has-spinner">Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="pc_offchainTx_BodyWrapper" class="collapse out" style="">
+                                                        <div id="pc_offchainTx_Body"
+                                                            class="ex-widget-collapse__content k-chart"
+                                                            data-role="chart" style="position: relative;">
+                                                            hello
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div id="pc_offchainTx" class="ex-widget-collapse panel panel-default">
-                                            <div class="panel-heading" data-toggle="collapse" data-parent="#pc_offchainTx"
+                                            <div class="panel-heading" data-toggle="collapse"
+                                                data-parent="#pc_offchainTx"
                                                 data-target="#pc_offchainTx .panel-collapse">
                                                 <div class="panel-title">
                                                     Execute Offchain Transactions
@@ -494,68 +551,49 @@
                                                     <div class="ex-widget-collapse__loader">
                                                         <div class="row">
                                                             <div class="col-md-6">
-                                                                <!-- <label>
-                                                                    Account 1
-                                                                </label> -->
-                                                                <!-- <h4 class="mt-5">Account 1 </h4> -->
                                                                 <div class="form-group">
                                                                     <label>Amount to spend</label>
                                                                     <input type="text" class="form-control"
-                                                                        id="pc_w1_amount" placeholder="amount in aettos">
+                                                                        id="pc_w1_amount"
+                                                                        placeholder="amount in aettos">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label>Tools</label>
+                                                                <!-- <label>Tools</label>    -->
                                                                 <div class="form-group">
-                                                                    <button type="button" onclick="spendOffChain('wallet1')"
-                                                                        class="btn btn-success spendOffChain1 has-spinner">Spend</button>
-                                                                    <button type="button" onclick="leaveChannel('wallet1')"
-                                                                        class="btn btn-primary leaveChannel1 has-spinner">Leave</button>
-                                                                    <button type="button" onclick="reconnectChannel('wallet1')"
-                                                                        class="btn btn-primary reconnectChannel1 has-spinner">Reconnect</button>
-                                                                    <button type="button" onclick="closeChannel('wallet1')"
-                                                                        class="btn btn-danger closeChannel has-spinner">Close</button>
+                                                                    <button type="button"
+                                                                        onclick="spendOffChain('wallet1')"
+                                                                        class="btn btn-success spendOffChain1 has-spinner"
+                                                                        style="margin-top: 4.5%;">Spend</button>
                                                                 </div>
                                                             </div>
-                                                            <!-- <div class="col-md-6">
-                                                                <label>
-                                                                    Account 2
-                                                                </label>
-                                                                <div class="form-group">
-                                                                    Amount to spend:<input type="text" class="form-control"
-                                                                        id="pc_w2_amount" placeholder="amount in aettos">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <button type="button" onclick="spendOffChain('wallet2')"
-                                                                        class="btn btn-primary spendOffChain2 has-spinner">Spend</button>
-                                                                </div>
-                                                            </div> -->
                                                         </div>
                                                         <hr>
                                                         <div class="row">
                                                             <div class="form-group">
                                                                 <div class="col-md-12">
-                                                                    <table class="table table-bordered">
+                                                                    <table class="table table-bordered txTable">
                                                                         <thead>
                                                                             <tr>
-                                                                              <th>SignedTx</th>
-                                                                              <th>Round</th>
-                                                                              <th>Spender</th>
-                                                                              <th>Beneficiary</th>
-                                                                              <th>Spender's Balance</th>
-                                                                              <th>Beneficiary's Balance</th>
+                                                                                <th>SignedTx</th>
+                                                                                <th>Round</th>
+                                                                                <th>Spender</th>
+                                                                                <th>Beneficiary</th>
+                                                                                <th>Spender's Balance</th>
+                                                                                <th>Beneficiary's Balance</th>
                                                                             </tr>
-                                                                          </thead>
-                                                                          <tbody>
-                                                                            
-                                                                          </tbody>
+                                                                        </thead>
+                                                                        <tbody>
+
+                                                                        </tbody>
                                                                     </table>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div id="pc_offchainTx_BodyWrapper" class="collapse out" style="">
-                                                        <div id="pc_offchainTx_Body" class="ex-widget-collapse__content k-chart"
+                                                        <div id="pc_offchainTx_Body"
+                                                            class="ex-widget-collapse__content k-chart"
                                                             data-role="chart" style="position: relative;">
                                                             hello
                                                         </div>
@@ -565,7 +603,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -598,7 +636,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <!--Chat Room COde End-->
 
@@ -657,6 +694,59 @@
 
         </div>
     </div>
+    <div class="modal fade" id="acceptChannel" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Channel Accept Request</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- <div class="form-group">  
+                            <label>Your Address  : </label><span id="modal_initiator"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Your Deposit  : </label><span id="modal_initiator_deposit"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Peer2 Address : </label><span id="modal_responder"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Peer2 Deposit : </label><span id="modal_responder_deposit"></span>
+                            <textarea placeholder="Request message will be shown here" rows="12" cols="50" id="channelAcceptTxtArea" hidden></textarea>
+                        </div> -->
+                    <hr>
+                    <!-- <div class="chdetails" hidden>
+                            <div class="form-group">
+                                <label>ChannelId     : </label><span id="modal_channelId"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>FsmId         : </label><span id="modal_fsmId"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Round         : </label><span id="modal_round"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Your Balance  : </label><span id="modal_initiator_balance"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Peer2 Balance : </label><span id="modal_responder_balance"></span>
+                            </div>
+                        </div> -->
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="connectChannel('wallet1')"
+                        class="btn btn-primary connectChannel1 has-spinner">Accept</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <footer class="footer">
         <div class="container">
             <a href="https://hypermine.in/" target="_blank"><span class="text-muted">All content on this site is
@@ -679,7 +769,7 @@
     <script src="js/decodeTransaction.js"></script>
     <script src="js/spendTransaction.js"></script>
     <script src="js/contract.js"></script>
-    <script src="js/chatroom.js"></script>
+    <!-- <script src="js/chatroom.js"></script> -->
     <script src="js/paymentChannel.js"></script>
     <script src="js/jquery.buttonLoader.min.js"></script>
 
