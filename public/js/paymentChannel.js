@@ -50,12 +50,15 @@ connection.onmessage = function (message) {
             console.log('WS:: New user added ', json.data)
             const option = `<option>${json.data.publicKey} | ${json.data.alias} </option>`
             $('#pc_w2_publicKey').append(option)
+            collapsePanelActivity('pc_setupChannel', 'in')
+            toast('Peer connected')
             break
         }
 
         case mTypes.TRANSACTION: {
             console.log('WS:: New transaction added ', json.data)
             appendTx(json.data)
+            toast('New transaction')
             break
         }
         case mTypes.ACCEPT: {
@@ -66,9 +69,23 @@ connection.onmessage = function (message) {
             fillDataIntoStatusModal(body)
             $('#channelAcceptTxtArea').val(JSON.stringify(json.data))
             $('.connectChannel1').attr('hidden')
-            // $("#acceptChannel").modal("show")
+            collapsePanelActivity('pc_channelStatus','in')
+            toast('Channel request came')
+            break
         }
     }
+}
+
+const toast = (message) => {
+
+    const toast = `<div class="toast"><i class="fa fa-info" aria-hidden="true">${message}</i><span class="spanclose">x</span></div>`
+
+    $('.notificationbar').append(toast)
+}
+
+const collapsePanelActivity = (id, action) => {
+    $(`#${id} .panel-collapse`).removeClass(`${action}`)
+    $(`#${id} .panel-collapse`).addClass(`${action}`)
 }
 
 const fillDataIntoStatusModal = (body) => {
@@ -108,7 +125,12 @@ function saveUser() {
         }
         console.log('Saving this new user ', msg)
         notify(msg)
-        $('.saveWallet1').buttonLoader('stop');
+        $('.saveWallet1').buttonLoader('stop')
+        collapsePanelActivity('pc_setupChannel','in')
+
+        $('#pc_w1_alias').hide()
+        $('#alias_lbl').text(msg.body.alias)
+
     }, 2000)
 }
 
@@ -305,15 +327,18 @@ async function reconnectChannel(wallet) {
 }
 
 async function spendOffChain(wallet) {
-
-
-
     const url = `${host}/offspend`;
     let channelId = $('#modal_channelId').text();
     let keypair;
     let amount;
     let receiverPublicKey;
+    let spenderAlias 
+    let receiverAlias
     try {
+        
+        // spenderAlias = $('#pc_w1_alias').val()
+        // receiverAlias = $('#pc_w2_publicKey').find(":selected").text().split('|')[1].trim()
+            
         const selected = $('#pc_w2_publicKey').find(":selected").text().split('|')[0].trim()
         if (selected != "" && selected != "Select Address") {
             receiverPublicKey = selected
@@ -336,6 +361,8 @@ async function spendOffChain(wallet) {
             channelId: channelId,
             amount: amount,
             receiverPublicKey: receiverPublicKey,
+            spenderAlias,
+            receiverAlias,
             memo: "Sending money to the shop keeper"
         }
 
@@ -363,8 +390,13 @@ async function spendOffChain(wallet) {
             beneficiary: body.receiverPublicKey,
             spenderbal: balances[body.keypair.publicKey],
             beneficiarybal: balances[receiverPublicKey],
+            spenderAlias,
+            receiverAlias,
+            amount: body.amount,
             round: state.round
         }
+
+        console.log(tableRowData)
 
         //TODO: notify the other user about this tx
         const msg = {
@@ -420,21 +452,24 @@ async function channelStatus(init) {
 }
 
 const appendTx = (tableRowData) => {
+    console.log(tableRowData)
     const color = tableRowData.beneficiary === $('#pc_w1_publicKey').val() ? "lightgreen" : "#ff000036";
     const tr = `<tr style="background-color:${color}">
                     <td>${shortenStr(tableRowData.signedTx)}</td>
                     <td>${tableRowData.round}</td>
                     <td>${shortenStr(tableRowData.spender)}</td>
                     <td>${shortenStr(tableRowData.beneficiary)}</td>
-                    <td>${tableRowData.spenderbal}</td>
-                    <td>${tableRowData.beneficiarybal}</td>
+                    <td>${tableRowData.amount}</td>
                     </tr>`
+                    // <td>${tableRowData.spenderbal}</td>
+                    // <td>${tableRowData.beneficiarybal}</td>
 
     const tbody = $('.txTable tbody')
     tbody.append(tr);
 }
 
 const shortenStr = (str) => {
+    str = str.toString()
     const l = str.length
     return str.substring(0, 15) + '...' + str.substring(l - 5, l)
 }

@@ -1,3 +1,31 @@
+.notificationbar{
+    border-top: 1px solid #80808042;
+    float: right;
+    /* height: 100%; */
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    margin-left: 67%;
+    padding: 10px;
+    overflow: auto;
+}
+
+.toast{
+    width: 100%;
+    width: 100%;
+    background-color: #8080806b;
+    color: #0000008c;
+    padding: 10px;
+    box-shadow: 2px 2px #e4b7b7;
+    border-radius: 3px;
+    margin-top: 2%;
+}
+
+.spanclose{
+    float: right;
+    color: #0000008c;
+}
+
 /* for css */
 .sidenav {
     height: 89%;

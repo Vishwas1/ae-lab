@@ -87,7 +87,11 @@
                 </div>
             </div>
         </div>
-
+        <div  class="notificationbar">
+            <!-- <div class="toast">
+                toasts
+            </div> -->
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="panel with-nav-tabs panel-default">
@@ -349,8 +353,9 @@
                                                                 </label> -->
                                                                 <!-- <hr> -->
                                                                 <div class="form-group">
-                                                                    Alias:<input type="text" class="form-control"
+                                                                    Alias:<input type="text" class="form-control alias_cls"
                                                                         id="pc_w1_alias" placeholder="set your alias">
+                                                                        <h4 id="alias_lbl"></h4>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     Private Key:<input type="text" class="form-control"
@@ -391,7 +396,7 @@
                                                     Setup Payment Channel
                                                 </div>
                                             </div>
-                                            <div class="panel-collapse collapse in" style="">
+                                            <div class="panel-collapse collapse out" style="">
                                                 <div class="panel-body">
                                                     <div class="ex-widget-collapse__loader">
                                                         <div class="row">
@@ -502,12 +507,17 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-md-12">
+                                                            <div class="col-md-8">
 
                                                                 <div class="form-group">
                                                                     <button type="button"
                                                                         onclick="connectChannel('wallet1')"
                                                                         class="btn btn-primary connectChannel1 has-spinner">Accept</button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+
+                                                                <div class="form-group">
                                                                     <button type="button" onclick="channelStatus()"
                                                                         class="btn btn-primary channelStatus has-spinner">Status</button>
                                                                     <button type="button"
@@ -579,8 +589,7 @@
                                                                                 <th>Round</th>
                                                                                 <th>Spender</th>
                                                                                 <th>Beneficiary</th>
-                                                                                <th>Spender's Balance</th>
-                                                                                <th>Beneficiary's Balance</th>
+                                                                                <th>Amount</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -639,6 +648,8 @@
     </div>
     <!--Chat Room COde End-->
 
+        
+      
     <div class="modal fade" id="keyInputModal" role="dialog">
         <div class="modal-dialog">
 
@@ -738,8 +749,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" onclick="connectChannel('wallet1')"
-                        class="btn btn-primary connectChannel1 has-spinner">Accept</button>
+                    <!-- <button type="button" onclick="connectChannel('wallet1')"
+                        class="btn btn-primary connectChannel1 has-spinner">Accept</button> -->
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
