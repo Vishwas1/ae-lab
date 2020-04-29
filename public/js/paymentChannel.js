@@ -78,7 +78,7 @@ connection.onmessage = function (message) {
 
 const toast = (message) => {
 
-    const toast = `<div class="toast"><i class="fa fa-info" aria-hidden="true">${message}</i><span class="spanclose">x</span></div>`
+    const toast = `<div class="toast"><i class="fa fa-info" aria-hidden="true"> ${message}</i><span class="spanclose">x</span></div>`
 
     $('.notificationbar').append(toast)
 }
