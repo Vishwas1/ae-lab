@@ -1,9 +1,22 @@
-const { Node, MemoryAccount, Universal, Crypto } = require('@aeternity/aepp-sdk')
+const { Node, MemoryAccount, Universal, Crypto, ChainNode } = require('@aeternity/aepp-sdk')
 const  fetch = require('node-fetch')
 
 function Account(keypair = {}, network){
     this.keyPair = keypair
+    if(!keypair){
+        this.keyPair = this.create()
+    }
     this.network = network
+
+    const AE_AMOUNT_FORMATS = {
+        AE: 'ae',
+        MILI_AE: 'miliAE',
+        MICRO_AE: 'microAE',
+        NANO_AE: 'nanoAE',
+        PICO_AE: 'picoAE',
+        FEMTO_AE: 'femtoAE',
+        AETTOS: 'aettos'
+      }
 
     this.wallet = () => {
         return new Promise(async (resolve, reject) => {
@@ -29,31 +42,25 @@ function Account(keypair = {}, network){
         })
     }
 
-    this.fund = publicKey => {
-        if (!publicKey) {
-            return Promise.reject(`invalid public key`);
-        }
-        return fetch(`https://faucet.aepps.com/account/${publicKey}`, {
-            method: 'POST'
-        }).then(z => z.json());
+    this.fund = async publicKey => {
+        const wallet = await this.wallet()
+        await wallet.spend(5, publicKey, { denomination: AE_AMOUNT_FORMATS.AE }) // 
+        return Promise.resolve(await this.balance(publicKey))
+        // if (!publicKey) {
+        //     return Promise.reject(`invalid public key`);
+        // }
+        // return fetch(`https://faucet.aepps.com/account/${publicKey}`, {
+        //     method: 'POST'
+        // }).then(z => z.json());
     }
 
     this.balance = async (publicKey) => {
-        console.log('inside balance =', publicKey)
-        console.log(this.network.internalUrl)
-        const url = `${this.network.internalUrl}/accounts/${publicKey}`
-        console.log(url)
-        let json = {}
-        try{
-            const res = await fetch(url)
-            json = await res.json()
-        }catch(e){
-console.log(e)
-        }
-        return json
+        const node = await Node({ url: this.network.url, internalUrl: this.network.internalUrl })
+        const chainNode = await ChainNode({ nodes: [{ name: 'test', instance: node }], })
+        return Promise.resolve(await chainNode.balance(publicKey))
     }
     
-    this.create = () => Promise.resolve(Crypto.generateKeyPair());
+    this.create = () => Crypto.generateKeyPair();
 
     // this.spend = (receieverPublicKey) => Promise.reject("Method not implemented")
 

@@ -13,6 +13,12 @@ module.exports = function(app) {
 
   app.route('/status')
     .get(channel.status);
+  
+  app.route('/balance')
+    .get(channel.accountbalance);
+
+  app.route('/fund')
+    .get(channel.fund);
 
   app.route('/reconnect')
     .post(channel.reconnect);
@@ -22,6 +28,7 @@ module.exports = function(app) {
   
   app.route('/leave')
     .post(channel.leave);
+
 
 };
 
