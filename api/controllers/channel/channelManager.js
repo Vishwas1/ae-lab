@@ -59,7 +59,11 @@ function ChannelManager(network){
      */
     this.balance = async (channelId) => {
         const { channel,params } = getChannel(channelId)
-        return await channel.balances([params.initiatorId, params.responderId]);
+        const balances = await channel.balances([params.initiatorId, params.responderId]);
+        const account = new Account()
+        balances[params.initiatorId] = account.toAe(balances[params.initiatorId])
+        balances[params.responderId] = account.toAe(balances[params.responderId])
+        return balances
     };
 
     /**
@@ -127,14 +131,15 @@ function ChannelManager(network){
             return Promise.reject(`please send all the config parameters {network: (${JSON.stringify(network)}), initiatorId: (${JSON.stringify(initiatorId)}), responderId: (${JSON.stringify(responderId)}), initiatorDeposit: (${JSON.stringify(initiatorDeposit)}),host: (${JSON.stringify(host)}), port: (${JSON.stringify(port)}), role: (${JSON.stringify(role)}), keypair: ${JSON.stringify(keypair)}}`)
         }
 
+        const account = new Account()
         const params = {
             url: this.network.channelUrl,
     
             initiatorId: initiatorId,
             responderId: responderId,
     
-            initiatorAmount: initiatorDeposit,
-            responderAmount: responderDeposit,
+            initiatorAmount: account.toAettos(initiatorDeposit),
+            responderAmount: account.toAettos(responderDeposit),
     
             pushAmount: 0,
             channelReserve: 0,
@@ -191,7 +196,7 @@ function ChannelManager(network){
         return channel.update(
             senderPublicKey, 
             receiverPublicKey,
-            parseInt(amount),
+            account.toAettos(amount),
             async (tx) => wallet.signTransaction(tx),
             [memo]
         ).then(async (result) => {

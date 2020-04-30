@@ -11,7 +11,8 @@ const mTypes = Object.freeze({
     TRANSACTION: 'transaction',
     ACCEPT: 'channel-accept',
     REJECT: 'channel-reject',
-    INITIATE: 'channel-initiate'
+    INITIATE: 'channel-initiate',
+    CLOSE: 'channel-close'
 })
 
 window.WebSocket = window.WebSocket || window.MozWebSocket;
@@ -60,6 +61,11 @@ connection.onmessage = function (message) {
             appendTx(json.data)
             toast('New transaction')
             break
+        }
+        case mTypes.CLOSE: {
+            console.log('WS:: Channel is clsed ', json.data)
+
+
         }
         case mTypes.ACCEPT: {
             console.log('WS:: New channel accept message came ', json.data)
@@ -115,7 +121,7 @@ function notify(message) {
 
 function saveUser() {
     $('.saveWallet1').buttonLoader('start');
-    setTimeout(() => {
+    setTimeout(async () => {
         const msg = {
             type: mTypes.ADDUSER,
             body: {
@@ -130,6 +136,7 @@ function saveUser() {
 
         $('#pc_w1_alias').hide()
         $('#alias_lbl').text(msg.body.alias)
+        await updateBalance()
 
     }, 2000)
 }
@@ -310,6 +317,13 @@ async function reconnectChannel(wallet) {
         keypair: keypair,
     }
 
+    const data = await callAPI(url, body)
+    $('.reconnectChannel1').buttonLoader('stop');
+    data == true ? alert('Reconnected!') : alert('Error: Could not reconnect!')
+
+}
+
+async function callAPI (url, body) {
     const resp = await fetch(url, {
         method: 'post',
         headers: {
@@ -319,11 +333,8 @@ async function reconnectChannel(wallet) {
         body: JSON.stringify(body)
     })
     const json = await resp.json();
-    $('.reconnectChannel1').buttonLoader('stop');
-    if (json && json.status != 200) alert(`Error: ${json.data}`)
-
-    json.data == true ? alert('Reconnected!') : alert('Error: Could not reconnect!')
-
+    if (json && json.status != 200) throw new Error(json.data)
+    return json.data
 }
 
 async function spendOffChain(wallet) {
@@ -451,6 +462,41 @@ async function channelStatus(init) {
     }
 }
 
+async function closeChannel() {
+    try{        
+        $('.closeChannel').buttonLoader('start');
+        const url = `${host}/close`;
+        const channelId = $('#modal_channelId').text();
+        
+        const keypair = {
+            secretKey: $('#pc_w1_privateKey').val(),
+            publicKey: $('#pc_w1_publicKey').val()
+        }
+        const body = {
+            channelId,
+            keypair
+        }
+        debugger
+
+        const data = await callAPI(url,body)
+        if(data.txType === "signedTx"){
+            $('.closeChannel').buttonLoader('stop')
+            await updateBalance()
+            const mess = `Channel is closed by ${shortenStr(keypair.publicKey)}`
+            alert(mess)
+            //TODO: notify the other user about this
+            // const msg = {
+            //     type: mTypes.TRANSACTION,
+            //     body: tableRowData
+            // }
+            // notify(mess)
+        }
+    }catch(e){
+        $('.closeChannel').buttonLoader('stop')
+        alert(`Error: ${e.toString()}`)
+    }
+}
+
 const appendTx = (tableRowData) => {
     console.log(tableRowData)
     const color = tableRowData.beneficiary === $('#pc_w1_publicKey').val() ? "lightgreen" : "#ff000036";
@@ -473,3 +519,23 @@ const shortenStr = (str) => {
     const l = str.length
     return str.substring(0, 15) + '...' + str.substring(l - 5, l)
 }
+
+const updateBalance = () => {
+    try{
+        $('.balanceWallet1').buttonLoader('start')
+        setTimeout(async () => {
+            const publicKey = $('#pc_w1_publicKey').val()
+            const url = `${host}/balance?publicKey=${publicKey}`;
+            const resp = await fetch(url)
+            const json = await resp.json()
+            const bal = json.data
+            $('#balanceWallet1_lbl').text(bal)
+            $('.balanceWallet1').buttonLoader('stop')
+        }, 1000)
+    }catch(e){
+        $('.balanceWallet1').buttonLoader('stop')
+        alert(e.message)
+    }
+}
+
+

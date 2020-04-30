@@ -1,5 +1,7 @@
-const { Node, MemoryAccount, Universal, Crypto, ChainNode } = require('@aeternity/aepp-sdk')
+const { Node, MemoryAccount, Universal, Crypto, ChainNode, AmountFormatter } = require('@aeternity/aepp-sdk')
 const  fetch = require('node-fetch')
+
+const { format, toAettos, AE_AMOUNT_FORMATS, toAe, formatAmount  } = AmountFormatter
 
 function Account(keypair = {}, network){
     this.keyPair = keypair
@@ -57,9 +59,11 @@ function Account(keypair = {}, network){
     this.balance = async (publicKey) => {
         const node = await Node({ url: this.network.url, internalUrl: this.network.internalUrl })
         const chainNode = await ChainNode({ nodes: [{ name: 'test', instance: node }], })
-        return Promise.resolve(await chainNode.balance(publicKey))
+        return Promise.resolve(toAe(await chainNode.balance(publicKey)))
     }
-    
+
+    this.toAettos = toAettos
+    this.toAe = toAe
     this.create = () => Crypto.generateKeyPair();
 
     // this.spend = (receieverPublicKey) => Promise.reject("Method not implemented")

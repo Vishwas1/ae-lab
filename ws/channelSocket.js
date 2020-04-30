@@ -21,7 +21,8 @@ module.exports = (server) => {
         INITIATE: 'channel-initiate',
         CLOSE: 'channel-close',
         LEAVE: 'channel-leave',
-        RECONNECT: 'channel-reconnect'
+        RECONNECT: 'channel-reconnect',
+        CLOSE: 'channel-close'
     }) 
     
     originIsAllowed = (origin) => {
@@ -89,6 +90,17 @@ module.exports = (server) => {
                     console.log('Forwarding the message to ', beneficiary)
                     receiverClient.sendUTF(JSON.stringify({
                         type: mTypes.TRANSACTION,
+                        data: body
+                    }))
+                    break
+                }
+                case mTypes.CLOSE: {
+                    console.log('New channel transaction message')
+                    const { peer1, peer2 } = body
+                    const receiverClient = clients[users[peer2].clientIndex] 
+                    console.log('Forwarding the message to ', peer2)
+                    receiverClient.sendUTF(JSON.stringify({
+                        type: mTypes.CLOSE,
                         data: body
                     }))
                     break
