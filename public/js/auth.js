@@ -45,6 +45,9 @@ $(document).ready(function () {
         $('.auth--check').show()
         $('.auth--uncheck').hide()
     } else {
+        let pubKey = formatBech32('one1m6mucnf577j2uecark5swpeexz79st8jgl77yy',false,8,8)
+        
+        $('.formatBech32').text( pubKey)
         $('.auth--check').hide()
         $('.auth--uncheck').show()
     }
