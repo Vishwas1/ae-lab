@@ -3,10 +3,7 @@ module.exports = function(app, keycloak) {
   var channel = require('../controllers/channelController');
     
 
-  app.get('/testing',  keycloak.protect(),  (req, res) => {
-    keycloak.
-    return res.json("Hello")
-  })
+  app.get('/testing',  keycloak.protect(),  (req, res) => res.json("Hello"))
   app.route('/setup')
     .post(channel.setup);
 
