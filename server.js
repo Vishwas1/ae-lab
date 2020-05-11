@@ -1,9 +1,25 @@
 const express = require('express')
+const session = require('express-session');
+const Keycloak = require('keycloak-connect');
+
 const app = express()
 const port = process.env.PORT || 3000
 const bodyParser = require('body-parser')
 const http = require('http')
-const ws = require('./wsserver')
+const ws = require('./ws/channelSocket')
+
+const memoryStore = new session.MemoryStore();
+const keycloak = new Keycloak({ store: memoryStore });
+
+//session
+app.use(session({
+  secret:'this_should_be_long_text',
+  resave: false,
+  saveUninitialized: true,
+  store: memoryStore
+}));
+
+app.use(keycloak.middleware());
 
 const allowedOrigins = ['http://localhost:3000', 'https://ae-labs.herokuapp.com/'];
 
@@ -42,6 +58,8 @@ walletRoutes(app);
 const contractRoutes = require('./api/routes/contractRoute')
 contractRoutes(app);
 
+const channelRoutes =  require('./api/routes/channelRouter')
+channelRoutes(app, keycloak)
 
 server.listen(port);
 console.log('AELabs RESTful API server started on: ' + port);

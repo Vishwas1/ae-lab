@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="https://forum.aeternity.com/uploads/db0917/optimized/2X/7/712d06bf19a65d01061d234824706ad31b012acb_2_32x32.png">
+    <link rel="icon"
+        href="https://forum.aeternity.com/uploads/db0917/optimized/2X/7/712d06bf19a65d01061d234824706ad31b012acb_2_32x32.png">
 
     <title>Aeternity</title>
     <!-- Bootstrap core CSS -->
@@ -21,54 +22,200 @@
 </head>
 
 <body>
-
     <!-- Fixed navbar -->
     <div class="container">
         <div class="page-header">
-            <h3><img class="logo" src="https://forum.aeternity.com/uploads/db0917/original/1X/543f494a818af66690a1298689af3fdd0c6389a1.png"> | Laboratory</h3>
-            
-            <a href="https://github.com/Vishwas1/ae-lab" target="_blank">
-                <label class="pull-left" style="padding-top:1%">Contribute </label>
-            </a>
-            <a class="donate" target="_blank" data-toggle="modal" data-target="#donate"> 
-                <label class="pull-left" style="padding-top:1%; padding-left: 0.6%;"> | Donate(AEN)</label>
-            </a> 
-            <ul class="nav navbar-nav pull-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Test
-                        <span class="caret"></span></a>
-                    <!-- <ul class="dropdown-menu">
-                        <li><a href="#">Test</a></li>
-                        <li><a href="#">Public</a></li>
-                        <li><a href="#">Custom</a></li>
-                    </ul> -->
-                </li>
-            </ul>
-            <label class="pull-right" style="padding-top:1%">
-                https://testnet.aeternal.io
-            </label>
+            <div class="row">
+                <div class="col-md-8">
+                    <span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776;</span>
+                    
+                </div>
+                <div class="col-md-4">
+                    <div class="auth--check">
+                        <label class="pull-right" style="padding-top:1%">
+                            <a href="#" id="btn--profile" onclick="openNavR()" class="btn btn-default btn-icon mr-4 login">
+                                <span class="btn-inner--icon">
+                                    <i class="fa fa-user pull-right" aria-hidden="true"> Profile</i>
+                                </span>
+                            </a>
+                        </label>
+                    </div>
+                    <div class="auth--uncheck">
+                        <label class="pull-right" style="padding-top:1%">
+                            <a href="#" id="btn--login" onclick="login()" class="btn btn-default btn-icon mr-4 login">
+                                <span class="btn-inner--icon">
+                                    <img style="max-width: 20px;" src="asset/hypersign_icon.png">
+                                </span>
+                                <span class="btn-inner--text">Login</span>
+                            </a>
+                        </label>
+                    </div>
+                    
+                </div>
+                <!-- <div class="col-md-4">
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Test
+                                <span class="caret"></span></a>
+                        </li>
+                    </ul>
+                    <label class="pull-right" style="padding-top:1%">
+                        https://testnet.aeternal.io
+                    </label>
+                </div> -->
+            </div>
         </div>
+
+        <div id="mySidenav" class="sidenav">
+            <div class="row" style="padding-left: 39px;">
+                <div class="col-md-9">
+                    <h1 style="font-size: x-large;">Laboratory</h1>
+                </div>
+                <div class="col-md-3">
+                    <span onclick="closeNav()" style="font-size: x-large;"><i class="fa fa-close pull-right" aria-hidden="true"></i></span>
+                </div>
+            </div>
+            <div class="row" style="padding-left: 39px;">
+                <div class="col-md-12">
+                    <img class="logo"
+                        src="https://forum.aeternity.com/uploads/db0917/original/1X/543f494a818af66690a1298689af3fdd0c6389a1.png">
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-12 sidebarnav">
+                    <a href="#tab1default" class="active" data-toggle="tab"><i class="fa fa-book"
+                            aria-hidden="true"></i> Introduction</a>
+                    <a href="#tab2default" data-toggle="tab"><i class="fa fa-address-book" aria-hidden="true"></i>
+                        Account Creator</a>
+                    <a href="#tab3default" data-toggle="tab"><i class="fa fa-wrench" aria-hidden="true"></i> Build
+                        Transaction</a>
+                    <a href="#tab4default" data-toggle="tab"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign
+                        Transaction</a>
+                    <a href="#tab5default" data-toggle="tab"><i class="fa fa-envelope-open-o" aria-hidden="true"></i>
+                        Decode Transaction</a>
+                    <a href="#tab6default" data-toggle="tab"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> Send
+                        Transaction</a>
+                    <a href="#tab7default" data-toggle="tab"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        Contract Editor</a>
+                    <!-- <a href="#tab8default" data-toggle="tab"><i class="fa fa-plug" aria-hidden="true"></i> Payment
+                        Channel</a> -->
+                    <a href="#tab9default" data-toggle="tab"><i class="fa fa-calendar" aria-hidden="true"></i> Workshops</a>
+                    <a href="#tab10default" data-toggle="tab"><i class="fa fa-commenting-o" aria-hidden="true"></i>
+                        Profile </a>
+
+                </div>
+            </div>
+        </div>
+        <div id="mySidenavR" class="sidenavR">
+            <div class="panel__header panel__header--reverse">
+                <close-icon class="right-panel-close icon-button" onclick="closeNavR()" >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
+                        <path
+                            d="M1.41 13.31l5.25-5.24 5.24 5.24 1.41-1.41-5.24-5.24 5.24-5.25L11.9 0 6.66 5.24 1.41 0 0 1.41l5.24 5.25L0 11.9z">
+                        </path>
+                    </svg></close-icon>
+                <!-- ko if: showActionMute() -->
+                <mute-icon class="right-panel-mute icon-button"
+                    data-bind="clickOrDrag: clickToToggleMute, css: {'right-panel-mute--active': activeConversation() &amp;&amp; activeConversation().showNotificationsNothing()}"
+                    data-uie-name="do-mute"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                        <path
+                            d="M12 3.2l2-1.4a1 1 0 0 1 1.2 1.6L1.6 13a1 1 0 0 1-1.1-1.6l1.3-.9v-.2S2.7 8.5 3 7.5c.4-1.2 1-4.3 1-4.3C4.3 1.4 6 0 8 0a4 4 0 0 1 4 3.2zm1 4.2v.1l1.2 2.7c.4 1-.1 1.8-1.2 1.8H6.4L13 7.4zM10 14a2 2 0 1 1-4 0h4z">
+                        </path>
+                    </svg>
+                </mute-icon>
+            
+            </div>
+            <div class="panel__content" data-bind="fadingscrollbar" style="--scrollbar-color: rgba(0, 0, 0, 0);">
+                <!-- ko if: isSingleUserMode(activeConversation()) -->
+                <!-- ko if: isServiceMode() -->
+                <!-- /ko -->
+                <!-- ko ifnot: isServiceMode() -->
+                <!-- ko if: firstParticipant() -->
+                <div class="panel-user-details" >
+                    <div class="panel-participant">
+                        <div class="panel-participant__head">
+                            <div class="panel-participant__head__name" >
+                                <span class="userName"></span>
+                            </div>
+                        </div>
+                        <div  class="user-avatar avatar-xl ">
+                            <div class="participant-avatar accent-color-4">
+                                <div class="avatar-background"></div>
+                                <!-- ko if: isUser -->
+                                <div class="avatar-initials" >
+                                  <span class="userInitial"></span>
+                                </div>
+                                <!-- /ko -->
+                                <!-- ko if: isService -->
+                                <!-- /ko -->
+                                <div class="avatar-image"></div>
+                                <!-- ko if: isUser -->
+                                <div class="avatar-badge"></div>
+                                <!-- /ko -->
+                                <div class="avatar-border"></div>
+                                <!-- ko if: isTemporaryGuest() -->
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <hr>
+                <div class="conversation-details__read-receipts">
+                    <div class="panel__info-text panel__info-text--head panel__info-text--margin-bottom">Info</div>
+                    <div class="panel__info-text panel__info-text--margin-bottom">
+                        <span class="label accent-color-2">Email: </span>
+                        <span class="userEmail"></span>
+                    </div>
+                    
+                    <div class="panel__info-text panel__info-text--margin-bottom">
+                        <span class="label accent-color-2">Public Key: </span>
+                        <span class="formatBech32"></span>
+                    </div>
+                    <hr>
+                </div>
+                <div class="panel__action-item">
+                    <div class="panel__action-item__icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M1 7h14v7a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7zm6 2a1 1 0 1 0 0 2h2a1 1 0 0 0 0-2H7zM2.5 0h11c.8 0 1.2 0 1.5.3.3.1.6.4.7.7.2.3.3.7.3 1.5V4c0 .6-.4 1-1 1H1a1 1 0 0 1-1-1V2.5C0 1.7 0 1.3.3 1 .4.7.7.4 1 .3c.3-.2.7-.3 1.5-.3z">
+                            </path>
+                        </svg></div>
+                    <div class="panel__action-item__text"><a href="#" onclick="logout()" >Logout</a></div>
+                </div>
+            </div>
+          
+        </div>
+        
         <div class="row">
             <div class="col-md-12">
                 <div class="panel with-nav-tabs panel-default">
-                    <div class="panel-heading">
+                    <!-- <div class="panel-heading">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tab1default" data-toggle="tab">Introduction</a></li>
+                            <li class="active">
+                                <a href="#tab1default" data-toggle="tab">Introduction</a></li>
                             <li><a href="#tab2default" data-toggle="tab">Account Creator</a></li>
                             <li><a href="#tab3default" data-toggle="tab">Build Transaction</a></li>
                             <li><a href="#tab4default" data-toggle="tab">Sign Transaction</a></li>
                             <li><a href="#tab5default" data-toggle="tab">Decode Transaction</a></li>
                             <li><a href="#tab6default" data-toggle="tab">Send Transaction</a></li>
-                            <li><a href="#tab7default" data-toggle="tab">Contract editor</a></li>
+                            <li><a href="#tab7default" data-toggle="tab">Contract Editor</a></li>
+                            <li><a href="#tab8default" data-toggle="tab">Payment Channel</a></li>
                         </ul>
-                    </div>
+                    </div> -->
                     <div class="panel-body">
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="tab1default">
                                 <div class="container">
                                     <h2 class="mt-5">Aeternity Laboratory</h2>
-                                    <p class="">The AEternity lab is a set of tools that enables people to try out and learn about the AEternity network. <p>
-                                    <p>The laboratory can build transactions, sign them, and submit them to the network. By default, <a href="https://testnet.aeternal.io">AEternity test network</a> is selected. However, user can choose to use his private network</p>
+                                    <p class="">The AEternity lab is a set of tools that enables people to Experience and Use AEternity network. <p>
+                                            <p>The laboratory can build transactions, sign them, and submit them to the
+                                                 network. By default</p>
+                                            <p><a href="https://testnet.aeternal.io">AEternity
+                                                test network</a> is selected. However, user can choose to use his
+                                            private network</p>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="tab2default">
@@ -77,7 +224,8 @@
                                     <p>User can create cryptographic keypairs.</p>
                                     <p>These keypairs can be used on the Aeternity network where one is required.</p>
                                     <p>
-                                        <button type="button" class="btn btn-primary generateKeyPair has-spinner" onclick="generateKeyPair()" >Generate Keypair</button>
+                                        <button type="button" class="btn btn-primary generateKeyPair has-spinner"
+                                            onclick="generateKeyPair()">Generate Keypair</button>
                                         <table class="table table-bordered">
                                             <tr>
                                                 <th>Public Key</th>
@@ -89,9 +237,10 @@
                                             </tr>
                                         </table>
                                     </p>
-                                <hr/>
+                                    <hr />
                                     <p>
-                                        <a href="https://faucet.aepps.com/" target="_blank">Get some Aen please click Faucet Link</a>
+                                        <a href="https://faucet.aepps.com/" target="_blank">Get some Aen please click
+                                            Faucet Link</a>
                                     </p>
                                 </div>
                             </div>
@@ -99,11 +248,13 @@
                                 <form action="#" class="col-md-6">
                                     <div class="form-group">
                                         <label for="sender">Sender:</label>
-                                        <input type="text" class="form-control" placeholder="Spender public key (starting with ak_....)" id="sender">
+                                        <input type="text" class="form-control"
+                                            placeholder="Spender public key (starting with ak_....)" id="sender">
                                     </div>
                                     <div class="form-group">
                                         <label for="reciever">Receiver:</label>
-                                        <input type="text" class="form-control" placeholder="Receiver public key (starting with ak_....)" id="reciever">
+                                        <input type="text" class="form-control"
+                                            placeholder="Receiver public key (starting with ak_....)" id="reciever">
                                     </div>
                                     <div class="form-group">
                                         <label for="amount">Amount (ættos):</label>
@@ -113,156 +264,510 @@
                                         <label for="payload">Payload:</label>
                                         <input type="text" class="form-control" id="payload">
                                     </div>
-                                    
-                                    <button type="button" onclick="buildTx()" class="btn btn-primary buildTx has-spinner">Build Tx</button>
+
+                                    <button type="button" onclick="buildTx()"
+                                        class="btn btn-primary buildTx has-spinner">Build Tx</button>
                                 </form>
                                 <form action="#" class="col-md-6">
                                     <div class="form-group">
-                                        <label for="sender">Raw Tx:</label> 
-                                        <textarea placeholder="To get raw tx fill the form and press buildTx button" class="form-control" rows="12" cols="50" id="build_rawTx"></textarea>
+                                        <label for="sender">Raw Tx:</label>
+                                        <textarea placeholder="To get raw tx fill the form and press buildTx button"
+                                            class="form-control" rows="12" cols="50" id="build_rawTx"></textarea>
                                     </div>
-                                    
+
                                 </form>
                             </div>
                             <div class="tab-pane fade" id="tab4default">
                                 <form action="#" class="col-md-6">
-                                    
+
                                     <div class="form-group">
                                         <label for="sender">Raw Tx:</label>
-                                        <textarea placeholder="Copy and paste Raw Transaction from previous tab." class="form-control" rows="8"
-                                            cols="50" id="sign_rawTx"></textarea>
+                                        <textarea placeholder="Copy and paste Raw Transaction from previous tab."
+                                            class="form-control" rows="8" cols="50" id="sign_rawTx"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="sender">Private Key:</label>
-                                        <input type="text" class="form-control" id="sign_privateKey" placeholder="Spender private key" >
+                                        <input type="text" class="form-control" id="sign_privateKey"
+                                            placeholder="Spender private key">
                                     </div>
                                     <div class="form-group">
                                         <label for="sender">Public Key:</label>
-                                        <input type="text" class="form-control" id="sign_publicKey" placeholder="Spender public key (starting with ak_....)" >
+                                        <input type="text" class="form-control" id="sign_publicKey"
+                                            placeholder="Spender public key (starting with ak_....)">
                                     </div>
-                                <button type="button" onclick="signTx()" class="btn btn-primary signTx has-spinner">Sign Tx</button>
+                                    <button type="button" onclick="signTx()"
+                                        class="btn btn-primary signTx has-spinner">Sign Tx</button>
                                 </form>
                                 <form action="#" class="col-md-6">
-                                
+
                                     <div class="form-group">
                                         <label for="sender">Signed Tx:</label>
-                                        <textarea placeholder="To get signed tx fill the form and press signTx button" class="form-control" rows="8"
-                                            cols="50" id="sign_signedTx"></textarea>
+                                        <textarea placeholder="To get signed tx fill the form and press signTx button"
+                                            class="form-control" rows="8" cols="50" id="sign_signedTx"></textarea>
                                     </div>
-                                    
+
                                 </form>
                             </div>
                             <div class="tab-pane fade" id="tab5default">
                                 <form action="#" class="col-md-6">
-                                
+
                                     <div class="form-group">
                                         <label for="sender">Signed / Raw Tx:</label>
-                                        <textarea placeholder="Paste Signed Transaction from previous tab." class="form-control" rows="8"
-                                            cols="50" id="decode_signedTx"></textarea>
+                                        <textarea placeholder="Paste Signed Transaction from previous tab."
+                                            class="form-control" rows="8" cols="50" id="decode_signedTx"></textarea>
                                     </div>
-                                    
-                                    <button type="button" onclick="decodeTx()" class="btn btn-primary decodeTx has-spinner">Decode Tx</button>
+
+                                    <button type="button" onclick="decodeTx()"
+                                        class="btn btn-primary decodeTx has-spinner">Decode Tx</button>
                                 </form>
                                 <form action="#" class="col-md-6">
-                                
+
                                     <div class="form-group">
                                         <label for="sender">Parsed Tx:</label>
-                                        <textarea placeholder="{}" class="form-control" rows="8"
-                                            cols="50" id="decode_parsedTx"></textarea>
+                                        <textarea placeholder="{}" class="form-control" rows="8" cols="50"
+                                            id="decode_parsedTx"></textarea>
                                     </div>
-                                
+
                                 </form>
                             </div>
                             <div class="tab-pane fade" id="tab6default">
                                 <form action="#" class="col-md-6">
-                                
+
                                     <div class="form-group">
                                         <label for="sender">Raw Tx:</label>
-                                        <textarea placeholder="Paste raw Transaction from previous tab." class="form-control" rows="8"
-                                            cols="50" id="spend_rawTx"></textarea>
+                                        <textarea placeholder="Paste raw Transaction from previous tab."
+                                            class="form-control" rows="8" cols="50" id="spend_rawTx"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="sender">Private Key:</label>
-                                        <input type="text" class="form-control" id="spend_privateKey" placeholder="Spender private key" >
+                                        <input type="text" class="form-control" id="spend_privateKey"
+                                            placeholder="Spender private key">
                                     </div>
                                     <div class="form-group">
                                         <label for="sender">Public Key:</label>
-                                        <input type="text" class="form-control" id="spend_publicKey" placeholder="Spender public key (starting with ak_....)" >
+                                        <input type="text" class="form-control" id="spend_publicKey"
+                                            placeholder="Spender public key (starting with ak_....)">
                                     </div>
                                     <!-- Default unchecked -->
                                     <div class="custom-control custom-checkbox col-md-6">
-                                        <input type="checkbox" class="custom-control-input" id="spend_verify" title="Check to validate your transction before submittting">
+                                        <input type="checkbox" class="custom-control-input" id="spend_verify"
+                                            title="Check to validate your transction before submittting">
                                         <label class="custom-control-label" for="defaultUnchecked">Verify Tx</label>
                                     </div>
                                     <div class="custom-control custom-checkbox col-md-6">
-                                        <input type="checkbox" class="custom-control-input" id="spend_waitMining" title="Check to wait till mining is done. This may take sometime">
+                                        <input type="checkbox" class="custom-control-input" id="spend_waitMining"
+                                            title="Check to wait till mining is done. This may take sometime">
                                         <label class="custom-control-label" for="defaultUnchecked">Wait Mining</label>
                                     </div>
-                                    <button type="button" onclick="submitTx()" class="btn btn-primary submitTx has-spinner">Submit Tx</button>
+                                    <button type="button" onclick="submitTx()"
+                                        class="btn btn-primary submitTx has-spinner">Submit Tx</button>
                                 </form>
                                 <form action="#" class="col-md-6">
-                                
+
                                     <div class="form-group">
                                         <label for="sender">Result :</label>
-                                        <textarea placeholder="{}" class="form-control" rows="8"
-                                            cols="50" id="spend_result"></textarea>
+                                        <textarea placeholder="{}" class="form-control" rows="8" cols="50"
+                                            id="spend_result"></textarea>
                                     </div>
-                                
+
                                 </form>
                             </div>
                             <div class="tab-pane fade" id="tab7default">
-                              <div class="row">
-                                <div class="col-md-9">
-                                    <pre id="editor"></pre>
-                                    <!-- <textarea placeholder="/** Your Sophia code **/" class="form-control" rows="8"
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <pre id="editor"></pre>
+                                        <!-- <textarea placeholder="/** Your Sophia code **/" class="form-control" rows="8"
                                             cols="50" id="source_code"></textarea> -->
-                                    <div class="form-group">
-                                        <button type="button" data-toggle="modal" data-target="#keyInputModal"
-                                            class="btn btn-primary compileContract has-spinner">Compile</button>
-                                        <button type="button" onclick="deployContract()" class="btn btn-primary deployContract has-spinner">Deploy</button>
+                                        <div class="form-group">
+                                            <button type="button" data-toggle="modal" data-target="#keyInputModal"
+                                                class="btn btn-primary compileContract has-spinner">Compile</button>
+                                            <button type="button" onclick="deployContract()"
+                                                class="btn btn-primary deployContract has-spinner">Deploy</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <form action="#" class="">
+                                            <div class="form-group">
+                                                <label>
+                                                    ⬆ Call Function
+                                                </label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>
+                                                    ContractId
+                                                </label>
+                                                <input class="form-control" type="text" id="contractId" disabled />
+                                                <label>
+                                                    Methods
+                                                </label>
+                                                <select id="methods" class="form-control">
+                                                </select>
+                                                <label>
+                                                    Args
+                                                </label>
+                                                <input placeholder="comma seperated arguments" class="form-control args"
+                                                    type="text" id="args" />
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="button" onclick="callContractMethod()"
+                                                    class="btn btn-primary callContractMethod has-spinner">
+                                                    Call
+                                                </button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <form action="#" class="">
-                                        <div class="form-group">
-                                            <label>
-                                                ⬆ Call Function
-                                            </label>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>
-                                                ContractId
-                                            </label>
-                                            <input  class="form-control" type="text" id="contractId" disabled/>
-                                            <label>
-                                                Methods
-                                            </label>
-                                            <select id="methods" class="form-control">
-                                            </select>
-                                            <label>
-                                                Args
-                                            </label>
-                                            <input placeholder="comma seperated arguments"  class="form-control args" type="text" id="args" />
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="button" onclick="callContractMethod()" class="btn btn-primary callContractMethod has-spinner">
-                                                Call
-                                            </button>
-                                        </div>
-                                    </form>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form action="#" class="">
+                                            <div class="form-group">
+                                                <label>Console</label>
+                                                <textarea id="console" class="console form-control" row="8"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
-                              </div>
-                              <hr/>
-                              <div class="row">
-                                <div class="col-md-12">
-                                    <form action="#" class="">
-                                        <div class="form-group">
-                                            <label>Console</label>
-                                            <textarea id="console" class="console form-control" row="8" ></textarea> 
+                            </div>
+                            <div class="tab-pane fade" id="tab8default">
+                                <div class="auth--check">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div id="pc_wallet" class="ex-widget-collapse panel panel-default">
+                                                <div class="panel-heading" data-toggle="collapse" data-parent="#pc_wallet"
+                                                    data-target="#pc_wallet .panel-collapse">
+                                                    <div class="panel-title">
+                                                        Setup Wallets
+                                                    </div>
+                                                </div>
+                                                <div class="panel-collapse collapse in" style="">
+                                                    <div class="panel-body">
+                                                        <div class="ex-widget-collapse__loader">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <!-- <h4 class="mt-5">Wallet 1</h4> -->
+                                                                    <!-- <label>
+                                                                                                        Wallet 1
+                                                                                                    </label> -->
+                                                                    <!-- <hr> -->
+                                                                    <div class="form-group">
+                                                                        Alias:<input type="text" class="form-control alias_cls" id="pc_w1_alias"
+                                                                            placeholder="set your alias">
+                                                                        <h4 id="alias_lbl"></h4>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        Private Key:<input type="text" class="form-control" id="pc_w1_privateKey"
+                                                                            placeholder="private key">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        Public Key:<input type="text" class="form-control" id="pc_w1_publicKey"
+                                                                            placeholder="public key">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button type="button" onclick="saveUser()"
+                                                                            class="btn btn-primary saveWallet1 has-spinner">Save</button>
+                                                                        <button type="button" onclick="updateBalance('wallet1')"
+                                                                            class="btn btn-primary balanceWallet1 has-spinner">Balance</button>
+                                                                        <label><span id="balanceWallet1_lbl">_ </span>
+                                                                            (AE)</label>
+                                                                    </div>
+                                                                </div>
+                                    
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="pc_wallet_BodyWrapper" class="collapse in" style="">
+                                                        <div id="pc_wallet_Body" class="ex-widget-collapse__content k-chart" data-role="chart"
+                                                            style="position: relative;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </form>
+                                        <div class="col-md-6">
+                                            <div id="pc_setupChannel" class="ex-widget-collapse panel panel-default">
+                                                <div class="panel-heading" data-toggle="collapse" data-parent="#pc_setupChannel"
+                                                    data-target="#pc_setupChannel .panel-collapse">
+                                                    <div class="panel-title">
+                                                        Setup Payment Channel
+                                                    </div>
+                                                </div>
+                                                <div class="panel-collapse collapse out" style="">
+                                                    <div class="panel-body">
+                                                        <div class="ex-widget-collapse__loader">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <!-- <label>
+                                                                                                        Account 1
+                                                                                                    </label>                                                         -->
+                                                                    <div class="form-group">
+                                                                        My Deposit:<input type="text" class="form-control" id="pc_w1_deposit"
+                                                                            placeholder="amount in AE">
+                                                                    </div>
+                                                                    <label>Peer 2</label>
+                                                                    <div class="form-group">
+                                                                        <select class="form-control" id="pc_w2_publicKey">
+                                                                            <option>Select Address</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <input type="text" class="form-control" id="pc_w2_deposit"
+                                                                            placeholder="amount in AE">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button type="button" onclick="setupChannel('wallet1')"
+                                                                            class="btn btn-primary setupChannel1 has-spinner"
+                                                                            style="margin-top:3%;">Initiate</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="pc_setupChannel_BodyWrapper" class="collapse out" style="">
+                                                            <div id="pc_setupChannel_Body" class="ex-widget-collapse__content k-chart" data-role="chart"
+                                                                style="position: relative;">
+                                                                hello
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div id="pc_channelStatus" class="ex-widget-collapse panel panel-default">
+                                                <div class="panel-heading" data-toggle="collapse" data-parent="#pc_channelStatus"
+                                                    data-target="#pc_channelStatus .panel-collapse">
+                                                    <div class="panel-title">
+                                                        Channel Status
+                                                    </div>
+                                                </div>
+                                                <div class="panel-collapse collapse out" style="">
+                                                    <div class="panel-body">
+                                                        <div class="ex-widget-collapse__loader">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <h4>
+                                                                        Channel Id : <span id="modal_channelId"></span>
+                                                                    </h4>
+                                                                    <hr>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-8">
+                                                                    <div class="form-group">
+                                                                        <label>FsmId : </label><span id="modal_fsmId"></span>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Your Address : </label><span id="modal_initiator"></span>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Peer2 Address : </label><span id="modal_responder"></span>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Your Balance : </label><span id="modal_initiator_balance"></span>
+                                                                        <textarea placeholder="Request message will be shown here" rows="12" cols="50"
+                                                                            id="channelAcceptTxtArea" hidden></textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="form-group">
+                                                                        <label>Round : </label><span id="modal_round"></span>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Your Deposit : </label><span id="modal_initiator_deposit"></span>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Peer2 Deposit : </label><span id="modal_responder_deposit"></span>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Peer2 Balance : </label><span id="modal_responder_balance"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-8">
+                                    
+                                                                    <div class="form-group">
+                                                                        <button type="button" onclick="connectChannel('wallet1')"
+                                                                            class="btn btn-primary connectChannel1 has-spinner">Accept</button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                    
+                                                                    <div class="form-group">
+                                                                        <button type="button" onclick="channelStatus()"
+                                                                            class="btn btn-primary channelStatus has-spinner">Status</button>
+                                                                        <button type="button" onclick="leaveChannel('wallet1')"
+                                                                            class="btn btn-primary leaveChannel1 has-spinner">Leave</button>
+                                                                        <button type="button" onclick="reconnectChannel('wallet1')"
+                                                                            class="btn btn-primary reconnectChannel1 has-spinner">Reconnect</button>
+                                                                        <button type="button" onclick="closeChannel('wallet1')"
+                                                                            class="btn btn-danger closeChannel has-spinner">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="pc_offchainTx_BodyWrapper" class="collapse out" style="">
+                                                            <div id="pc_offchainTx_Body" class="ex-widget-collapse__content k-chart" data-role="chart"
+                                                                style="position: relative;">
+                                                                hello
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div id="pc_offchainTx" class="ex-widget-collapse panel panel-default">
+                                                <div class="panel-heading" data-toggle="collapse" data-parent="#pc_offchainTx"
+                                                    data-target="#pc_offchainTx .panel-collapse">
+                                                    <div class="panel-title">
+                                                        Execute Offchain Transactions
+                                                    </div>
+                                                </div>
+                                                <div class="panel-collapse collapse out" style="">
+                                                    <div class="panel-body">
+                                                        <div class="ex-widget-collapse__loader">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>Amount to spend</label>
+                                                                        <input type="text" class="form-control" id="pc_w1_amount"
+                                                                            placeholder="amount in aettos">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <!-- <label>Tools</label>    -->
+                                                                    <div class="form-group">
+                                                                        <button type="button" onclick="spendOffChain('wallet1')"
+                                                                            class="btn btn-success spendOffChain1 has-spinner"
+                                                                            style="margin-top: 4.5%;">Spend</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="form-group">
+                                                                    <div class="col-md-12">
+                                                                        <table class="table table-bordered txTable">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>SignedTx</th>
+                                                                                    <th>Round</th>
+                                                                                    <th>Spender</th>
+                                                                                    <th>Beneficiary</th>
+                                                                                    <th>Amount</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                    
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="pc_offchainTx_BodyWrapper" class="collapse out" style="">
+                                                            <div id="pc_offchainTx_Body" class="ex-widget-collapse__content k-chart" data-role="chart"
+                                                                style="position: relative;">
+                                                                hello
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
+                                <div class="auth--uncheck">
+                                    <header class="section-header text-center">
+                                        <h2 class="section-title">Authentication Required</h2>
+                                        <p class="section-subtitle">
+                                            Kindly login before accessing this content.
+                                        </p>
+                                        <p class="section-subtitle">
+                                            You would need to install our Hypersign Authenticator mobile app.
+                                        </p>
+                                    </header>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab9default">
+                                <div class="container">
+                                    <header class="section-header text-center">
+                                        <h2 class="section-title">Events &amp; Workshops</h2>
+                                        <p class="section-subtitle">Come learn, share and connect with us in person.</p>
+                                    </header>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="upcoming" role="tabpanel" aria-labelledby="upcoming">
+                                            <div class="row">
+                                                <div class="col-md-4 col-12">
+                                                    <div itemscope="" itemtype="http://schema.org/Event" class="card event-card">
+                                                        <img itemprop="image" class="card-img-top" src="/asset/card1.png"
+                                                            width="10%" height="10%" alt="Study Jæm - Ekiti State">
+                                                        <div class="card-body">
+                                                            <p itemprop="identifier" class="tagging beginner float-right">Beginner</p>
+                                                            <h5 itemprop="name" class="card-title">Study Jæm - SMV Engineering College</h5>
+                                                            <table>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td width="15%" class="text-blue"><i class="fa fa-calendar"></i></td>
+                                                                        <td itemprop="startDate" class="section-subtitle" >15th May - 17th May 2020</td>
+                                                                    </tr>
+                                                                    <tr itemprop="location" itemscope="" itemtype="http://schema.org/Place">
+                                                                        <td class="text-red"><i class="fa fa-map-marker"></i></td>
+                                                                        <td itemprop="name" class="section-subtitle" >Online (Zoom)</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-green"><i class="fa  fa-clock-o"></i></td>
+                                                                        <td class="section-subtitle" > 19:00hrs - 21:00hrs (IST)</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            
+                                                            <a itemprop="url" href="#"
+                                                                onclick="login()"
+                                                                class="button auth--uncheck float-right">Register</a>
+                                                            <p itemprop="identifier" class="tagging beginner float-right auth--check">Applied</p>
+
+                                                            <meta itemprop="description" content="Event/Workshop @hypermine">
+                                                            <meta itemprop="performer" content="hypermine">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab10default">
+                                <div class="container">
+                                
+                                    <header class="section-header text-center">
+                                        <h2 class="section-title">Login with</h2>                                    
+                                    </header>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="upcoming" role="tabpanel" aria-labelledby="upcoming">
+                                            <div class="row">
+                                                <div class="col-md-12 col-12">
+                                                    <div class="text-center">
+                                                        <a href="#" class="btn btn-default btn-icon mr-4">
+                                                            <span class="btn-inner--icon"><img style="max-width: 30px;" src="asset/hypersign_icon.png"></span>
+                                                            <span class="btn-inner--text">Hypersign</span>
+                                                        </a>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -271,37 +776,38 @@
         </div>
     </div>
     <!-- Charoom code begin-->
-        <div class="show-chat-btn" id="show-chat-btn"><i class="fa fa-comments-o fa-5x"></i></div>
-        <div class="content chat" id="chat" style="z-index: 999;     display: none;">
-            <div class="row" style="padding-left:4px">
-                <div class="fa fa fa-close" id="close"></div>
-            </div>
-            <div class="row">
-                <div class="col-md-9">
-                    <label>Chat Room</label>
-        
-                    <div id="content" class="overflow-auto">
-        
-                    </div>
-                    <div>
-                        <span id="status">Connecting...</span>
-                        <input type="text" id="input" disabled="disabled" />
-        
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <label> Active People</label>
-                    <div class="active-members list-group" id="activeusr">
-                    </div>
-                </div>
-            </div>
-        
+    <div class="show-chat-btn" id="show-chat-btn"><i class="fa fa-comments-o fa-5x"></i></div>
+    <div class="content chat" id="chat" style="z-index: 999;     display: none;">
+        <div class="row" style="padding-left:4px">
+            <div class="fa fa fa-close" id="close"></div>
         </div>
+        <div class="row">
+            <div class="col-md-9">
+                <label>Chat Room</label>
+
+                <div id="content" class="overflow-auto">
+
+                </div>
+                <div>
+                    <span id="status">Connecting...</span>
+                    <input type="text" id="input" disabled="disabled" />
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label> Active People</label>
+                <div class="active-members list-group" id="activeusr">
+                </div>
+            </div>
+        </div>
+    </div>
     <!--Chat Room COde End-->
 
+        
+      
     <div class="modal fade" id="keyInputModal" role="dialog">
         <div class="modal-dialog">
-    
+
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
@@ -311,7 +817,8 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="sender">Private Key:</label>
-                        <input type="text" class="form-control" id="modal_sign_privateKey" placeholder="Spender private key">
+                        <input type="text" class="form-control" id="modal_sign_privateKey"
+                            placeholder="Spender private key">
                     </div>
                     <div class="form-group">
                         <label for="sender">Public Key:</label>
@@ -321,24 +828,25 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" onclick="compileContract()" class="btn btn-default" data-dismiss="modal">Ok</button>
+                    <button type="button" onclick="compileContract()" class="btn btn-default"
+                        data-dismiss="modal">Ok</button>
                 </div>
             </div>
-    
+
         </div>
     </div>
     <div class="modal fade" id="donate" role="dialog">
         <div class="modal-dialog">
-    
+
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Donate, only if it really helped you!</h4>
                 </div>
-                <div class="modal-body" >
+                <div class="modal-body">
                     <div class="form-group" style="padding-left: 30%;">
-                        <img src="asset/donate.png"/>
+                        <img src="asset/donate.png" />
                     </div>
                     <div class="form-group">
                         <label for="">[AEN]: </label>
@@ -349,13 +857,68 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
-    
+
         </div>
     </div>
+    <div class="modal fade" id="acceptChannel" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Channel Accept Request</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- <div class="form-group">  
+                            <label>Your Address  : </label><span id="modal_initiator"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Your Deposit  : </label><span id="modal_initiator_deposit"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Peer2 Address : </label><span id="modal_responder"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Peer2 Deposit : </label><span id="modal_responder_deposit"></span>
+                            <textarea placeholder="Request message will be shown here" rows="12" cols="50" id="channelAcceptTxtArea" hidden></textarea>
+                        </div> -->
+                    <hr>
+                    <!-- <div class="chdetails" hidden>
+                            <div class="form-group">
+                                <label>ChannelId     : </label><span id="modal_channelId"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>FsmId         : </label><span id="modal_fsmId"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Round         : </label><span id="modal_round"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Your Balance  : </label><span id="modal_initiator_balance"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Peer2 Balance : </label><span id="modal_responder_balance"></span>
+                            </div>
+                        </div> -->
+
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" onclick="connectChannel('wallet1')"
+                        class="btn btn-primary connectChannel1 has-spinner">Accept</button> -->
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <footer class="footer">
         <div class="container">
-            <a href="https://hypermine.in/" target="_blank"><span class="text-muted">All content on this site is copyright. All Rights Reserved. ©Hypermine 2020</span></a>
-            <a href="https://hypermine.in/" target="_blank"><img class="pull-right foot-logo" src="asset/PWD_HMT_T.png" /></a>
+            <a href="https://hypermine.in/" target="_blank"><span class="text-muted">All content on this site is
+                    copyright. All Rights Reserved. ©Hypermine 2020</span></a>
+            <a href="https://hypermine.in/" target="_blank"><img class="pull-right foot-logo"
+                    src="asset/PWD_HMT_T.png" /></a>
         </div>
     </footer>
 
@@ -365,22 +928,40 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script src="js/src/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/keycloak-js@10.0.0/dist/keycloak.min.js"></script>
     <script src="js/cookie.js"></script>
+    <script src="js/util.js"></script>
     <script src="js/accountCreator.js"></script>
     <script src="js/buildTransaction.js"></script>
     <script src="js/signTransaction.js"></script>
     <script src="js/decodeTransaction.js"></script>
     <script src="js/spendTransaction.js"></script>
     <script src="js/contract.js"></script>
-    <script src="js/chatroom.js"></script>
+    <!-- <script src="js/chatroom.js"></script> -->
+    <script src="js/paymentChannel.js"></script>
+    <script src="js/auth.js"></script>
     <script src="js/jquery.buttonLoader.min.js"></script>
-    
+
     <!-- <script src="js/src/mode-javascript.js" type="text/javascript" charset="utf-8"></script> -->
 
     <script>
-        // var editor = ace.edit("source_code");
-        // var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
-        //     editor.session.setMode(new JavaScriptMode());
+        document.getElementById("mySidenav").style.width = "250px";
+        function openNav() {
+            $('#mySidenav').show()
+            // document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            $('#mySidenav').hide()
+            // document.getElementById("mySidenav").style.width = "0";
+        }
+        function closeNavR() {
+            $('#mySidenavR').hide()
+            // document.getElementById("mySidenav").style.width = "0";
+        }
+        function openNavR() {
+            $('#mySidenavR').show()
+        }
     </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Q4DHJSQ2N"></script>
