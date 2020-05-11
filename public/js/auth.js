@@ -1,5 +1,5 @@
 
-    const keycloak = new Keycloak('http://ae-labs.herokuapp.com//keycloak.json');
+    const keycloak = new Keycloak('https://ae-labs.herokuapp.com//keycloak.json');
     // const keycloak = new Keycloak(window.location.host+'/keycloak.json');
 
     const logout = () => {
