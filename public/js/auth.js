@@ -1,51 +1,58 @@
-{/* <script src="http://192.168.1.5:8080/auth/js/keycloak.js"></script> */}
-    /* If the keycloak.json file is in a different location you can specify it:
 
-    Try adding file to application first, if you fail try the another method mentioned below. Both works perfectly.
+    const keycloak = new Keycloak('https://ae-labs.herokuapp.com/keycloak.json');
 
-    var keycloak = Keycloak('http://localhost:8080/myapp/keycloak.json'); */
-
-    /* Else you can declare constructor manually  */
-
-    // var keycloak = Keycloak({
-    //     url: 'http://192.168.1.5:8080/auth',
-    //     realm: 'master',
-    //     clientId: 'hs-playground-local'
-    // });
-
-
-    // keycloak.init({onLoad: 'check-sso' })
-    // .then(function(authenticated) {
-    //     alert(authenticated ? 'authenticated' : 'not authenticated');
-    // }).catch(function() {
-    //     alert('failed to initialize');
-    // });
-
-    // function logout() {
-    //     keycloak.logout('http://192.168.1.5:8080/auth/realms/Internal_Projects/protocol/openid-connect/logout?redirect_uri=encodedRedirectUri')
-    //     //alert("Logged Out");
-    // }
-
-const checkAuth = (cname) => {
-
-    let cvalue = getCookie(cname);
-    console.log(`cookie value for ${cname} is ${cvalue}`)
-    if (cvalue != "") {
-        console.log(`Setting value for ${cname} is ${cvalue} in textbox`)
-        return cvalue
-    } else {
-        return false
+    const logout = () => {
+        keycloak.logout()
     }
-}
-$(document).ready(function () {
 
-    if (checkAuth('token'))
-    {
-        alert('Cookie is set')
-        $('.auth--check').show()
-        $('.auth--uncheck').hide()
-    } else {
-        $('.auth--check').hide()
-        $('.auth--uncheck').show()
+    const login = () => {
+        keycloak.login()
     }
-});
+
+    const setUserProfile = () => {
+        //Setting data to be displayed on the side var
+
+        //PubKey
+        $('.formatBech32').text('')
+        // let pubKey = formatBech32(keycloak.subject.toS)
+        let str = keycloak.subject
+        let last4Chr = str.substr(str.length - 7);
+        let firt4Chr = str.substr(0,6);
+        $('.formatBech32').text(firt4Chr + '...' + last4Chr)
+
+        //UserName  
+        let userName = keycloak.tokenParsed.preferred_username
+        $('.userName').text(userName)
+
+        //Email
+        $('.userEmail').text(keycloak.tokenParsed.email)
+
+        //User Initial
+        $('.userInitial').text(userName.substring(0, 2).toUpperCase())
+
+    }
+
+    $(document).ready(function () {
+        
+        //If user is looged 
+        // Chec if someone is loogedin the session
+        // Then dont do anything keep in the same browser
+
+        //if user is not logged
+        
+        keycloak.init({ onLoad: 'check-sso' }).then(function (authenticated) {
+            if (authenticated) {
+                setUserProfile()
+                $('.auth--check').show()
+                $('.auth--uncheck').hide()
+            } else {
+                $('.auth--check').hide()
+                $('.auth--uncheck').show()
+            }
+        }).catch(function () {
+            debugger
+            alert('failed to initialize');
+        });
+    });
+
+

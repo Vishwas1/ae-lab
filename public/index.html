@@ -28,26 +28,21 @@
             <div class="row">
                 <div class="col-md-8">
                     <span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776;</span>
-                    <!-- <a href="https://github.com/Vishwas1/ae-lab" target="_blank">
-                        <label class="pull-left" style="padding-top:1%">Contribute </label>
-                    </a>
-                    <a class="donate" target="_blank" data-toggle="modal" data-target="#donate">
-                        <label class="pull-left" style="padding-top:1%; padding-left: 0.6%;"> | Donate(AEN)</label>
-                    </a> -->
+                    
                 </div>
                 <div class="col-md-4">
                     <div class="auth--check">
                         <label class="pull-right" style="padding-top:1%">
-                            <a href="#" id="btn--login" onclick="openNavR()" class="btn btn-default btn-icon mr-4 login">
+                            <a href="#" id="btn--profile" onclick="openNavR()" class="btn btn-default btn-icon mr-4 login">
                                 <span class="btn-inner--icon">
-                                    <i class="fa fa-profile pull-right" aria-hidden="true"></i>
+                                    <i class="fa fa-user pull-right" aria-hidden="true"> Profile</i>
                                 </span>
                             </a>
                         </label>
                     </div>
                     <div class="auth--uncheck">
                         <label class="pull-right" style="padding-top:1%">
-                            <a href="#" id="btn--login" onclick="openNavR()" class="btn btn-default btn-icon mr-4 login">
+                            <a href="#" id="btn--login" onclick="login()" class="btn btn-default btn-icon mr-4 login">
                                 <span class="btn-inner--icon">
                                     <img style="max-width: 20px;" src="asset/hypersign_icon.png">
                                 </span>
@@ -141,13 +136,17 @@
                 <div class="panel-user-details" >
                     <div class="panel-participant">
                         <div class="panel-participant__head">
-                            <div class="panel-participant__head__name" >Irfan_hypermine</div>
+                            <div class="panel-participant__head__name" >
+                                <span class="userName"></span>
+                            </div>
                         </div>
                         <div  class="user-avatar avatar-xl ">
                             <div class="participant-avatar accent-color-4">
                                 <div class="avatar-background"></div>
                                 <!-- ko if: isUser -->
-                                <div class="avatar-initials" data-bind="text: initials()">IR</div>
+                                <div class="avatar-initials" >
+                                  <span class="userInitial"></span>
+                                </div>
                                 <!-- /ko -->
                                 <!-- ko if: isService -->
                                 <!-- /ko -->
@@ -161,15 +160,35 @@
                             </div>
                         </div>
                     </div>
+                    <hr>
+                </div>
+                <hr>
+                <div class="conversation-details__read-receipts">
+                    <div class="panel__info-text panel__info-text--head panel__info-text--margin-bottom">Info</div>
+                    <div class="panel__info-text panel__info-text--margin-bottom">
+                        <span class="label accent-color-2">Email: </span>
+                        <span class="userEmail"></span>
+                    </div>
+                    
+                    <div class="panel__info-text panel__info-text--margin-bottom">
+                        <span class="label accent-color-2">Public Key: </span>
+                        <span class="formatBech32"></span>
+                    </div>
+                    <hr>
+                </div>
+                <div class="panel__action-item">
+                    <div class="panel__action-item__icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M1 7h14v7a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7zm6 2a1 1 0 1 0 0 2h2a1 1 0 0 0 0-2H7zM2.5 0h11c.8 0 1.2 0 1.5.3.3.1.6.4.7.7.2.3.3.7.3 1.5V4c0 .6-.4 1-1 1H1a1 1 0 0 1-1-1V2.5C0 1.7 0 1.3.3 1 .4.7.7.4 1 .3c.3-.2.7-.3 1.5-.3z">
+                            </path>
+                        </svg></div>
+                    <div class="panel__action-item__text"><a href="#" onclick="logout()" >Logout</a></div>
                 </div>
             </div>
-            <hr>
+          
         </div>
-        <div  class="notificationbar">
-            <!-- <div class="toast">
-                toasts
-            </div> -->
-        </div>
+        
         <div class="row">
             <div class="col-md-12">
                 <div class="panel with-nav-tabs panel-default">
@@ -191,8 +210,7 @@
                             <div class="tab-pane fade in active" id="tab1default">
                                 <div class="container">
                                     <h2 class="mt-5">Aeternity Laboratory</h2>
-                                    <p class="">The AEternity lab is a set of tools that enables people to try out and
-                                        learn about the AEternity network. <p>
+                                    <p class="">The AEternity lab is a set of tools that enables people to Experience and Use AEternity network. <p>
                                             <p>The laboratory can build transactions, sign them, and submit them to the
                                                  network. By default</p>
                                             <p><a href="https://testnet.aeternal.io">AEternity
@@ -711,10 +729,14 @@
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
-                                                            <a itemprop="url" href="https://aekiti.com/workshop/study-jaem-ekiti-state"
-                                                                class="button float-right">Register</a>
-                                                            <meta itemprop="description" content="Event/Workshop @ ækiti">
-                                                            <meta itemprop="performer" content="ækiti">
+                                                            
+                                                            <a itemprop="url" href="#"
+                                                                onclick="login()"
+                                                                class="button auth--uncheck float-right">Register</a>
+                                                            <p itemprop="identifier" class="tagging beginner float-right auth--check">Applied</p>
+
+                                                            <meta itemprop="description" content="Event/Workshop @hypermine">
+                                                            <meta itemprop="performer" content="hypermine">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -906,7 +928,9 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script src="js/src/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/keycloak-js@10.0.0/dist/keycloak.min.js"></script>
     <script src="js/cookie.js"></script>
+    <script src="js/util.js"></script>
     <script src="js/accountCreator.js"></script>
     <script src="js/buildTransaction.js"></script>
     <script src="js/signTransaction.js"></script>
