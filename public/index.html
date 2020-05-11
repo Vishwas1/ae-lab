@@ -67,12 +67,18 @@
         </div>
 
         <div id="mySidenav" class="sidenav">
+            <div class="panel__header panel__header--reverse">
+                <close-icon class="right-panel-close icon-button" onclick="closeNav()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
+                        <path
+                            d="M1.41 13.31l5.25-5.24 5.24 5.24 1.41-1.41-5.24-5.24 5.24-5.25L11.9 0 6.66 5.24 1.41 0 0 1.41l5.24 5.25L0 11.9z">
+                        </path>
+                    </svg>
+                </close-icon>
+            </div>
             <div class="row" style="padding-left: 39px;">
                 <div class="col-md-9">
                     <h1 style="font-size: x-large;">Laboratory</h1>
-                </div>
-                <div class="col-md-3">
-                    <span onclick="closeNav()" style="font-size: x-large;"><i class="fa fa-close pull-right" aria-hidden="true"></i></span>
                 </div>
             </div>
             <div class="row" style="padding-left: 39px;">
@@ -101,8 +107,8 @@
                     <!-- <a href="#tab8default" data-toggle="tab"><i class="fa fa-plug" aria-hidden="true"></i> Payment
                         Channel</a> -->
                     <a href="#tab9default" data-toggle="tab"><i class="fa fa-calendar" aria-hidden="true"></i> Workshops</a>
-                    <a href="#tab10default" data-toggle="tab"><i class="fa fa-commenting-o" aria-hidden="true"></i>
-                        Profile </a>
+                    <!-- <a href="#tab10default" data-toggle="tab"><i class="fa fa-commenting-o" aria-hidden="true"></i>
+                        Profile </a> -->
 
                 </div>
             </div>
