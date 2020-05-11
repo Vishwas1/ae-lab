@@ -1,9 +1,8 @@
 
-    const keycloak = new Keycloak('http://192.168.1.2:5000/keycloak.json');
+    const keycloak = new Keycloak('https://ae-labs.herokuapp.com/keycloak.json');
 
     const logout = () => {
-        let logoutUrl = keycloak.createLogoutUrl()
-        keycloak.logout(logoutUrl)
+        keycloak.logout()
     }
 
     const login = () => {
@@ -15,8 +14,11 @@
 
         //PubKey
         $('.formatBech32').text('')
-        let pubKey = formatBech32(keycloak.subject, false,4,4)
-        $('.formatBech32').text(pubKey)
+        // let pubKey = formatBech32(keycloak.subject.toS)
+        let str = keycloak.subject
+        let last4Chr = str.substr(str.length - 7);
+        let firt4Chr = str.substr(0,6);
+        $('.formatBech32').text(firt4Chr + '...' + last4Chr)
 
         //UserName  
         let userName = keycloak.tokenParsed.preferred_username
@@ -39,7 +41,6 @@
         //if user is not logged
         
         keycloak.init({ onLoad: 'check-sso' }).then(function (authenticated) {
-            debugger
             if (authenticated) {
                 setUserProfile()
                 $('.auth--check').show()
@@ -52,18 +53,6 @@
             debugger
             alert('failed to initialize');
         });
-        // if (checkAuth('token'))
-        // {
-        //     alert('Cookie is set')
-        //     $('.auth--check').show()
-        //     $('.auth--uncheck').hide()
-        // } else {
-        //     let pubKey = formatBech32('one1m6mucnf577j2uecark5swpeexz79st8jgl77yy',false,8,8)
-
-        //     $('.formatBech32').text( pubKey)
-        //     $('.auth--check').hide()
-        //     $('.auth--uncheck').show()
-        // }
     });
 
 

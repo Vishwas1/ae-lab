@@ -127,7 +127,6 @@
                 </mute-icon>
             
             </div>
-            <hr>
             <div class="panel__content" data-bind="fadingscrollbar" style="--scrollbar-color: rgba(0, 0, 0, 0);">
                 <!-- ko if: isSingleUserMode(activeConversation()) -->
                 <!-- ko if: isServiceMode() -->
@@ -730,10 +729,14 @@
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
-                                                            <a itemprop="url" href="https://aekiti.com/workshop/study-jaem-ekiti-state"
-                                                                class="button float-right">Register</a>
-                                                            <meta itemprop="description" content="Event/Workshop @ ækiti">
-                                                            <meta itemprop="performer" content="ækiti">
+                                                            
+                                                            <a itemprop="url" href="#"
+                                                                onclick="login()"
+                                                                class="button auth--uncheck float-right">Register</a>
+                                                            <p itemprop="identifier" class="tagging beginner float-right auth--check">Applied</p>
+
+                                                            <meta itemprop="description" content="Event/Workshop @hypermine">
+                                                            <meta itemprop="performer" content="hypermine">
                                                         </div>
                                                     </div>
                                                 </div>
