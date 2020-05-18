@@ -4,11 +4,10 @@
     // const keycloak = new Keycloak(window.location.host+'/keycloak.json');
 
     const logout = () => {
-        document.cookie = 'KC_RESTART=; path=/; domain=.www.hsauth.hypermine.in; expires=' + new Date(0).toUTCString();
-        document.cookie = 'AUTH_SESSION_ID=; path=/; domain=.www.hsauth.hypermine.in; expires=' + new Date(0).toUTCString();
-        document.cookie = 'HYPERSIGN_QRCODE_SOLVED=; path=/; domain=.www.hsauth.hypermine.in; expires=' + new Date(0).toUTCString();
-        // keycloak.logout()
-        debugger
+        // document.cookie = 'KC_RESTART=; path=/; domain=.www.hsauth.hypermine.in; expires=' + new Date(0).toUTCString();
+        // document.cookie = 'AUTH_SESSION_ID=; path=/; domain=.www.hsauth.hypermine.in; expires=' + new Date(0).toUTCString();
+        // document.cookie = 'HYPERSIGN_QRCODE_SOLVED=; path=/; domain=.www.hsauth.hypermine.in; expires=' + new Date(0).toUTCString();
+        keycloak.logout()
     }
 
     const login = () => {
