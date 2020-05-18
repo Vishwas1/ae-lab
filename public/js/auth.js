@@ -1,8 +1,12 @@
+    let link = 'https://' +window.location.host + '/keycloak.json'
 
-    const keycloak = new Keycloak('https://ae-labs.herokuapp.com//keycloak.json');
+    const keycloak = new Keycloak(link);
     // const keycloak = new Keycloak(window.location.host+'/keycloak.json');
 
     const logout = () => {
+        document.cookie = 'KC_RESTART=; path=/; domain=.www.hsauth.hypermine.in; expires=' + new Date(0).toUTCString();
+        document.cookie = 'AUTH_SESSION_ID=; path=/; domain=.www.hsauth.hypermine.in; expires=' + new Date(0).toUTCString();
+        document.cookie = 'HYPERSIGN_QRCODE_SOLVED=; path=/; domain=.www.hsauth.hypermine.in; expires=' + new Date(0).toUTCString();
         keycloak.logout()
     }
 
