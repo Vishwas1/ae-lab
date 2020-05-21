@@ -58,6 +58,7 @@
             debugger
             alert('failed to initialize');
         });
+        
     });
 
 
