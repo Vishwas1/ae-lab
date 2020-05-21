@@ -1,6 +1,10 @@
     // let link = 'https://' +window.location.host + '/keycloak.json'
     const  kcconfig = require('../keycloak.json')
-    const keycloak = new Keycloak(kcconfig);
+    const keycloak = new Keycloak({
+        url: "https://www.hsauth.hypermine.in/keycloak/auth",
+        relam: "master",
+        clientId: "ae-lab"
+    });
     
     const logout = () => {
         keycloak.logout()
@@ -51,8 +55,7 @@
                 $('.auth--uncheck').show()
             }
         }).catch(function () {
-            debugger
-            alert('failed to initialize');
+            console.log('failed to initialize');
         });
         
     });
