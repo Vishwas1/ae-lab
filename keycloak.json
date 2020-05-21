@@ -4,5 +4,6 @@
     "ssl-required": "external",
     "resource": "ae-lab",
     "public-client": true,
-    "confidential-port": 0
+    "confidential-port": 0,
+    "clientId": "ae-lab"
 }
