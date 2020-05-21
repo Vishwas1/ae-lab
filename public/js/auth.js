@@ -1,10 +1,6 @@
     // let link = 'https://' +window.location.host + '/keycloak.json'
     const  kcconfig = require('../keycloak.json')
-    const keycloak = new Keycloak({
-        url: "https://www.hsauth.hypermine.in/keycloak/auth",
-        relam: "master",
-        clientId: "ae-lab"
-    });
+    const keycloak = new Keycloak(kcconfig);
     
     const logout = () => {
         keycloak.logout()
