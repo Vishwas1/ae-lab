@@ -5,6 +5,7 @@
         "auth-server-url": "https://www.hsauth.hypermine.in/keycloak/auth",
         "ssl-required": "external",
         "resource": "ae-lab",
+        "clientId": "ae-lab",
         "public-client": true,
         "confidential-port": 0
     }
