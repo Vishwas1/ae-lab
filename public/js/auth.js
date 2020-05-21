@@ -1,19 +1,11 @@
     // let link = 'https://' +window.location.host + '/keycloak.json'
     let link = 'https://ae-labs.herokuapp.com/keycloak.json'
 
-    // const kcConfig = require('../keycloak.json')
-    
-    // const config = {
-    //     "realm": "master",
-    //     "auth-server-url": "https://www.hsauth.hypermine.in/keycloak/auth",
-    //     "ssl-required": "external",
-    //     "resource": "ae-lab",
-    //     "public-client": true,
-    //     "confidential-port": 0,
-    //     "clientId": 'ae-lab',
-    //     "enable-cors": true
-    // }
-    const keycloak = new Keycloak(link);
+    const keycloak = new Keycloak({
+        url: 'https://www.hsauth.hypermine.in/keycloak/auth',
+        realm: 'master',
+        clientId: 'ae-lab'
+    });
     // const keycloak = new Keycloak(window.location.host+'/keycloak.json');
 
     const logout = () => {
