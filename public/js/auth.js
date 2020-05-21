@@ -1,6 +1,14 @@
     let link = 'https://' +window.location.host + '/keycloak.json'
 
-    const keycloak = new Keycloak(link);
+    const config = {
+        "realm": "master",
+        "auth-server-url": "https://www.hsauth.hypermine.in/keycloak/auth",
+        "ssl-required": "external",
+        "resource": "ae-lab",
+        "public-client": true,
+        "confidential-port": 0
+    }
+    const keycloak = new Keycloak(config);
     // const keycloak = new Keycloak(window.location.host+'/keycloak.json');
 
     const logout = () => {
