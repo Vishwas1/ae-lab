@@ -1,4 +1,5 @@
-    let link = 'https://' +window.location.host + '/keycloak.json'
+    // let link = 'https://' +window.location.host + '/keycloak.json'
+    const kcConfig = require('../keycloak.json')
 
     
     // const config = {
@@ -11,7 +12,7 @@
     //     "clientId": 'ae-lab',
     //     "enable-cors": true
     // }
-    const keycloak = new Keycloak(link);
+    const keycloak = new Keycloak(kcConfig);
     // const keycloak = new Keycloak(window.location.host+'/keycloak.json');
 
     const logout = () => {
