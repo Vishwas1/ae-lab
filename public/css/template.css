@@ -675,3 +675,33 @@ Auth related
 .auth--uncheck {
     display: none;
 }
+
+
+/**
+Training collapse
+**/
+
+.collapse-header{
+    padding: 5px;
+    width: 100%;
+    height: 30px;
+    background: #80808059;
+    border: 1px solid #00000036;
+    margin-top: 2px;
+    font-size: small;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.collapse-body{
+    border: 1px solid #00000021;
+    border-radius: 0px 0px 2px 2px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.iframe{
+    width: 96%;
+    height: 400px;
+}
+

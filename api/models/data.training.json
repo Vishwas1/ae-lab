@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Blockchain Fundamental Course",
+        "id": "bfc",
+        "duration": "",
+        "start-datetime": "",
+        "end-datetime": "",
+        "discription": "This is a series of Blockchain tutorials which is designed specifically for college students. I tried to simplify the course as much as possible so that students understand the tech in a very simple manner.",
+        "git-repo": "",
+        "youtube-playlist": "https://www.youtube.com/playlist?list=PL0P6uQ2TDTG2mNJen3aQK-fVk4EIqb56R",
+        "file": "data.blockchain-fundamental.json"
+
+    }
+]

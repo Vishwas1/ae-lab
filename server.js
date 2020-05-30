@@ -61,6 +61,9 @@ contractRoutes(app);
 const channelRoutes =  require('./api/routes/channelRouter')
 channelRoutes(app, keycloak)
 
+const trainingRoutes =  require('./api/routes/trainingRouter')
+trainingRoutes(app)
+
 server.listen(port);
 console.log('AELabs RESTful API server started on: ' + port);
 

@@ -1,0 +1,68 @@
+{
+    "name": "Blockchain Fundamental Course",
+    "id": "bfc",
+    "discription": "This is a series of Blockchain tutorials which is designed specifically for college students. I tried to simplify the course as much as possible so that students understand the tech in a very simple manner.",
+    "duration":"",
+    "git-repo": "",
+    "youtube-playlist": "https://www.youtube.com/playlist?list=PL0P6uQ2TDTG2mNJen3aQK-fVk4EIqb56R",
+    "syllabus": [
+        {
+            "chId": "ch-1",
+            "title": "Course overview and onboarding",
+            "duration": "",
+            "topics": [
+                {
+                    "tid": "1",
+                    "title": "Course overview and onboarding",
+                    "url": "https://www.youtube.com/embed/QsM3hLcXdZg",
+                    "description": "In this video I will provide the overview of course."
+                }
+            ]
+        },
+        {
+            "chId": "ch0",
+            "title": "Brief overview of web technology",
+            "duration": "",
+            "topics": [
+                {
+                    "tid": "1",
+                    "title": "Web Technology",
+                    "url": "https://www.youtube.com/embed/uhnjFFkjuCA",
+                    "description": "In this video I will talk about Webpage, website and Web technology"
+                    
+                },
+                {
+                    "tid": "2",
+                    "title": "Client-Server, 3 Tier",
+                    "url": "https://www.youtube.com/embed/iPADkD4_h9Y",
+                    "description": "In this video I will talk about client-server model, 3tier architecture"
+                },
+                {
+                    "tid": "3",
+                    "title": "Centralised System",
+                    "url": "https://www.youtube.com/embed/d4FwSsPR2tM",
+                    "description": "In this video I will talk about centralised systems, its advantages and disadvantages."
+                }
+            ]
+        },
+        {
+            "chId": "ch1",
+            "title": "Introduction of Blockchain",
+            "duration": "",
+            "topics": [
+                {
+                    "tid": "1",
+                    "title": "Trust & Problem",
+                    "url": "https://www.youtube.com/embed/c70CVqZHJrs",
+                    "description": "In this video I will talk about Trust and Problem with trust"
+                },
+                {
+                    "tid": "2",
+                    "title": "Peer to Peer Model",
+                    "url": "https://www.youtube.com/embed/taJj6p_VADI",
+                    "description": "In this video I will talk about P2P model, how it is different from client-server model? Advantages etc."
+                }
+            ]
+        }
+    ]
+}
