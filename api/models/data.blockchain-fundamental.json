@@ -61,6 +61,80 @@
                     "title": "Peer to Peer Model",
                     "url": "https://www.youtube.com/embed/taJj6p_VADI",
                     "description": "In this video I will talk about P2P model, how it is different from client-server model? Advantages etc."
+                },
+                {
+                    "tid": "3",
+                    "title": "Decentralised and Distributed Systems",
+                    "url": "https://www.youtube.com/embed/6EUwAh1FEYA",
+                    "description": "In this video I will talk about decentralised systems, distributed systems and their differences - centralised vs decentralised vs distributed"
+                },
+                {
+                    "tid": "4",
+                    "title": "What is Blockchain?",
+                    "url": "https://www.youtube.com/embed/qQrWzAWsVcs",
+                    "description": "In this video I will talk about basic of blockchain, what it is? its usecases? its types? etc"
+                }
+            ]
+        },
+        {
+            "chId": "ch2",
+            "title": "Cryptocurrency",
+            "duration": "",
+            "topics": [
+                {
+                    "tid": "1",
+                    "title": "An Introduction",
+                    "url": "https://www.youtube.com/embed/Z414c0vf2gs",
+                    "description": "In this video I will talk about fundamental concept of cryptocurrency"
+                },
+                {
+                    "tid": "2",
+                    "title": "Wallets",
+                    "url": "https://www.youtube.com/embed/-G1RgM4CYhQ",
+                    "description": "In this video I will talk about wallets; Software wallet, hardware wallet, paper wallet, web wallet etc."
+                },
+                {
+                    "tid": "3",
+                    "title": "Lab",
+                    "url": "https://www.youtube.com/embed/6EUwAh1FEYA",
+                    "description": "In this video I will do lab; generate keypair, form transaction, sign transaction, spend;"
+                }
+            ]
+        },
+        {
+            "chId": "ch3",
+            "title": "Cryptography",
+            "duration": "",
+            "topics": [
+                {
+                    "tid": "1",
+                    "title": "An Introduction",
+                    "url": "https://youtu.be/embed/PNmJo1519ZU",
+                    "description": "In this video I will talk about basic concept of cryptography"
+                },
+                {
+                    "tid": "2",
+                    "title": "Hashing",
+                    "url": "https://www.youtube.com/embed/vM2mAY2MofU",
+                    "description": "In this video I will talk about basic hashing and hash function "
+                },
+                {
+                    "tid": "3",
+                    "title": "Symmetric Key Cryptography",
+                    "url": "https://www.youtube.com/embed/grFmF5Ja2hE",
+                    "description": "In this video I will talk about symmetric key cryptography"
+                },
+                {
+                    "tid": "4",
+                    "title": "Asymmetric cryptography (Encryption-Decryption)",
+                    "url": "https://www.youtube.com/embed/alEVBAyUt0Y",
+                    "description": "In this video I will talk about Asymmetric key cryptography."
+                },
+                {
+                    "tid": "5",
+                    "title": "Asymmetric cryptography (Digital signature)",
+                    "url": "https://www.youtube.com/embed/IjXUtA_ZqGg",
+                    "description": "In this video I will talk about concepts of digital signature."
                 }
             ]
         }
