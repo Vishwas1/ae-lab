@@ -3,7 +3,7 @@ async function buildTx(params) {
     console.log('Build TX')
     $('.buildTx').buttonLoader('start');
 
-    const url = `${host}/build`;
+    const url = `${host}/api/wallet/build`;
     
     const body = {
         sender: $('#sender').val(),

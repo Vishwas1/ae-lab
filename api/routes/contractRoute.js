@@ -1,18 +1,12 @@
 'use strict';
-module.exports = function(app) {
-  var contract = require('../controllers/contractController');
-    
-  app.route('/compile')
-    .post(contract.compileContract);
+const { Router }  = require('express')
+const router = Router()
+const contract = require('../controllers/contractController');
 
-  app.route('/deploy')
-    .post(contract.deployContract);
+router.post('/compile', contract.compileContract);
+router.post('/deploy', contract.deployContract);
+router.post('/call', contract.callContractMethod);
+router.post('/methods', contract.getContractMethods);
 
-  app.route('/call')
-    .post(contract.callContractMethod);
-
-  app.route('/methods')
-    .post(contract.getContractMethods);
-
-};
+module.exports = router
 

@@ -52,7 +52,7 @@ const compileContract = async () => {
     $('#console').val("");
     $('.compileContract').buttonLoader('start');
 
-    const url = `${host}/compile`;
+    const url = `${host}/api/contract/compile`;
     
     const keypair = {
         privateKey: $('#modal_sign_privateKey').val(),
@@ -94,7 +94,7 @@ const deployContract = async () => {
     $('#console').val("");
     $('.deployContract').buttonLoader('start');
 
-    const url = `${host}/deploy`;
+    const url = `${host}/api/contract/deploy`;
     const source = editor.getValue();    
     const keypair = {
         privateKey: getCookie("privateKey"),
@@ -147,7 +147,7 @@ const callContractMethod = async () => {
     $('#console').val("");
     $('.callContractMethod').buttonLoader('start');
 
-    const url = `${host}/call`;
+    const url = `${host}/api/contract/call`;
     
     const keypair = {
         privateKey: getCookie("privateKey"),

@@ -41,22 +41,19 @@ app.use((req, res, next) => {
 });
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
 app.use(express.static('public'))
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + 'index.html'));
 });
 
-
 const walletRoutes = require('./api/routes/walletRoute')
-walletRoutes(app);
+app.use('/api/wallet', walletRoutes)
 
 const contractRoutes = require('./api/routes/contractRoute')
-contractRoutes(app);
+app.use('/api/contract', contractRoutes)
 
 const channelRoutes =  require('./api/routes/channelRouter')
 channelRoutes(app, keycloak)

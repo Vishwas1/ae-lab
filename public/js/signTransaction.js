@@ -1,6 +1,6 @@
 async function signTx() {
   console.log('Sign TX')
-  const url = `${host}/sign`;
+  const url = `${host}/api/wallet/sign`;
     $('.signTx').buttonLoader('start');
 
   const keypair = {

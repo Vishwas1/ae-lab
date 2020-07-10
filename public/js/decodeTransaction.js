@@ -1,6 +1,6 @@
 async function decodeTx() {
   console.log('Decode TX')
-  const url = `${host}/decode`;
+  const url = `${host}/api/wallet/decode`;
   $('.decodeTx').buttonLoader('start');
 
   const body = {

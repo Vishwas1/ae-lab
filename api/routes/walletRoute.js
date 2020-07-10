@@ -1,32 +1,17 @@
 'use strict';
-module.exports = function(app) {
-  var wallet = require('../controllers/walletController');
-    
-  app.route('/network')
-    .post(wallet.setNetwork)
+const wallet = require('../controllers/walletController');
+const { Router }  = require('express')
+const router = Router()
 
-  app.route('/account')
-    .get(wallet.generateKeyPair);
-  
-  app.route('/build')
-    .post(wallet.buildTx);
+router.post('/network', wallet.setNetwork)
+router.get('/account',wallet.generateKeyPair);
+router.post('/build', wallet.buildTx);
+router.post('/sign', wallet.signTx);
+router.post('/decode',wallet.parseTx);
+router.post('/spend', wallet.spendTx)
 
-  app.route('/sign')
-    .post(wallet.signTx);
-
-  app.route('/decode')
-    .post(wallet.parseTx);
-
-  app.route('/spend')
-    .post(wallet.spendTx)
-
-};
+module.exports = router
 
 
-/*
-Configure network
-Account Creator
-Build Transaction
-Sign Transaction
-Decode Transaction
-*/
+
+

@@ -3,7 +3,7 @@ async function submitTx(params) {
     console.log('Spend TX')
     $('.submitTx').buttonLoader('start');
 
-    const url = `${host}/spend`;
+    const url = `${host}/api/wallet/spend`;
     
     const body = {
         secretKey: $('#spend_privateKey').val(),
