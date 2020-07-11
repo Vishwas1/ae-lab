@@ -26,43 +26,36 @@
     <div class="container">
         <div class="page-header">
             <div class="row">
-                <div class="col-md-8">
-                    <span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776;</span>
-                    
+                <div class="col-md-6">
+                    <span style="font-size:28px;cursor:pointer" onclick="openNav()">&#9776;</span>
                 </div>
-                <div class="col-md-4">
-                    <div class="auth--check">
-                        <label class="pull-right" style="padding-top:1%">
-                            <a href="#" id="btn--profile" onclick="openNavR()" class="btn btn-default btn-icon mr-4 login">
-                                <span class="btn-inner--icon">
-                                    <i class="fa fa-user pull-right" aria-hidden="true"> Profile</i>
-                                </span>
-                            </a>
-                        </label>
+                <div class="col-md-6">    
+                    <div class="btn-group mr-2" role="group" aria-label="First group" style="margin-left: 52%;margin-top: 0.5%;"> 
+                        <button type="button" class="networkButtonTest btn btn-primary" onclick="selectNetwork('TESTNET')">TEST</button>
+                        <button type="button" class="networkButtonCustom btn btn-secondary" data-toggle="modal" data-target="#setNetwork" >CUSTOM</button>
+                    </div>                
+                    <div class="btn-group mr-2" role="group" aria-label="Second group" style="float: right;">
+                        <div class="auth--check">
+                            <label class="pull-right" style="padding-top:1%">
+                                <a href="#" id="btn--profile" onclick="openNavR()" class="btn btn-default btn-icon mr-4 login">
+                                    <span class="btn-inner--icon">
+                                        <i class="fa fa-user pull-right" aria-hidden="true"> Profile</i>
+                                    </span>
+                                </a>
+                            </label>
+                        </div>
+                        <div class="auth--uncheck">
+                            <label class="pull-right" style="padding-top:1%">
+                                <a href="#" id="btn--login" onclick="login()" class="btn btn-default btn-icon mr-4 login">
+                                    <span class="btn-inner--icon">
+                                        <img style="max-width: 20px;" src="asset/hypersign_icon.png">
+                                    </span>
+                                    <span class="btn-inner--text">Login</span>
+                                </a>
+                            </label>
+                        </div>
                     </div>
-                    <div class="auth--uncheck">
-                        <label class="pull-right" style="padding-top:1%">
-                            <a href="#" id="btn--login" onclick="login()" class="btn btn-default btn-icon mr-4 login">
-                                <span class="btn-inner--icon">
-                                    <img style="max-width: 20px;" src="asset/hypersign_icon.png">
-                                </span>
-                                <span class="btn-inner--text">Login</span>
-                            </a>
-                        </label>
-                    </div>
-                    
                 </div>
-                <!-- <div class="col-md-4">
-                    <ul class="nav navbar-nav pull-right">
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Test
-                                <span class="caret"></span></a>
-                        </li>
-                    </ul>
-                    <label class="pull-right" style="padding-top:1%">
-                        https://testnet.aeternal.io
-                    </label>
-                </div> -->
             </div>
         </div>
 
@@ -919,6 +912,61 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal fade" id="setNetwork" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Provide Your Keys</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="sender">Type:</label>
+                                <input type="text" class="form-control" value="CUSTOM" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="sender">Node Url:</label>
+                                <input type="text" class="form-control" id="setnet_nodeurl" placeholder="http://localhost:3013">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="sender">NetworkId:</label>
+                                <input type="text" class="form-control" id="setnet_networkId" placeholder="ae_privatenet">
+                            </div>
+                            <div class="form-group">
+                                <label for="sender">Compiler Url:</label>
+                                <input type="text" class="form-control" id="setnet_comurl" placeholder="http://localhost:3013">
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="sender">Channel Url:</label>
+                                <input type="text" class="form-control" id="setnet_churl" placeholder="http://localhost:3014">
+                            </div>  
+                            
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="sender">Funder Private Key:</label>
+                                <input type="text" class="form-control" id="setnet_minerkey" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="selectNetwork('CUSTOM')" class="btn btn-default"
+                        data-dismiss="modal">Ok</button>
                 </div>
             </div>
 
