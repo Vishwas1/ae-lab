@@ -226,13 +226,18 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="tab2default">
-                                <div class="container">
-                                    <!-- <h2 class="mt-5">1. Keypair generator</h2> -->
-                                    <p>User can create cryptographic keypairs.</p>
-                                    <p>These keypairs can be used on the Aeternity network where one is required.</p>
+                                <form action="#" class="col-md-12">
+                                    <h2 class="mt-5">Wallet</h2>
+                                    <p>User can create cryptographic keypairs and fund the account with 5AE to spend it. 
+                                        These keypairs can be futher used on the Aeternity network (testnet or privatenet) to avail features like smart contracts, state channels etc.</p>
+                                    <hr/>
                                     <p>
                                         <button type="button" class="btn btn-primary generateKeyPair has-spinner"
                                             onclick="generateKeyPair()">Generate Keypair</button>
+                                        <button type="button" class="btn btn-primary fundAccount has-spinner"
+                                            onclick="fundAccount()">Fund (5AE)</button>
+                                        <button type="button" class="btn btn-primary checkBalance has-spinner"
+                                            onclick="checkBalance()">Balance</button>
                                         <table class="table table-bordered">
                                             <tr>
                                                 <th>Public Key</th>
@@ -242,14 +247,13 @@
                                                 <th>Private Key</th>
                                                 <td id="secretKey"></td>
                                             </tr>
+                                            <tr>
+                                                <th>Balance(AE)</th>
+                                                <td id="balance"></td>
+                                            </tr>
                                         </table>
                                     </p>
-                                    <hr />
-                                    <p>
-                                        <a href="https://faucet.aepps.com/" target="_blank">Get some Aen please click
-                                            Faucet Link</a>
-                                    </p>
-                                </div>
+                                </form>
                             </div>
                             <div class="tab-pane fade" id="tab3default">
                                 <form action="#" class="col-md-6">
