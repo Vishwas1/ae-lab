@@ -70,9 +70,6 @@ app.use((req, res, next) => {
   }else{
     network = network_conf.test
   }
-  
-  console.log(network)
-
   var origin = req.headers.origin;
   if(allowedOrigins.indexOf(origin) > -1){
     res.setHeader('Access-Control-Allow-Origin', origin);
