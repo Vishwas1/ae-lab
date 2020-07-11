@@ -16,12 +16,6 @@ module.exports = function(app, keycloak) {
   app.route('/status')
     .get(channel.status);
   
-  app.route('/balance')
-    .get(channel.accountbalance);
-
-  app.route('/fund')
-    .get(channel.fund);
-
   app.route('/reconnect')
     .post(channel.reconnect);
 
