@@ -45,15 +45,18 @@ function Account(keypair = {}, network){
     }
 
     this.fund = async publicKey => {
-        const wallet = await this.wallet()
-        await wallet.spend(5, publicKey, { denomination: AE_AMOUNT_FORMATS.AE }) // 
+        if (!publicKey) return Promise.reject(`invalid public key`)
+        if(this.network.type == "CUSTOM"){
+            const wallet = await this.wallet()
+            await wallet.spend(5, publicKey, { denomination: AE_AMOUNT_FORMATS.AE }) // 
+        }else{   
+            const resp = await fetch(`https://faucet.aepps.com/account/${publicKey}`, {
+                method: 'POST'
+            })
+            const json =  await resp.json()
+            console.log(json)
+        }
         return Promise.resolve(await this.balance(publicKey))
-        // if (!publicKey) {
-        //     return Promise.reject(`invalid public key`);
-        // }
-        // return fetch(`https://faucet.aepps.com/account/${publicKey}`, {
-        //     method: 'POST'
-        // }).then(z => z.json());
     }
 
     this.balance = async (publicKey) => {

@@ -1,4 +1,6 @@
-const { Crypto, TxBuilder,Node, RpcWallet, RpcAepp, MemoryAccount, Universal } = require('@aeternity/aepp-sdk')
+const { Crypto, TxBuilder,Node, RpcWallet, RpcAepp, MemoryAccount, Universal, Keystore } = require('@aeternity/aepp-sdk')
+const { getAddressFromPriv } = Keystore
+const { Account} = require('./channel/account')
 
 const {
   statusTypeEnum,
@@ -129,6 +131,34 @@ const generateKeyPair = (req, res) => {
   }
 }
 
+const balance = async (req, res) => {
+  try{
+      const account = new Account({}, req.network);
+      const result = await account.balance(req.query.publicKey)
+      return sendFormattedResponse(res, result, statusTypeEnum.OK); 
+  }catch(e){
+      return sendFormattedResponse(res, e.message, statusTypeEnum.ERROR);
+  }
+}
+
+const fund = async (req, res) => {
+  try{
+    let minerAccount = {}
+    if(req.network.minerPrivateKey){
+      minerAccount = {
+        secretKey: req.network.minerPrivateKey,
+        publicKey: getAddressFromPriv(req.network.minerPrivateKey)
+      }
+    }
+    console.log(minerAccount)
+    const account = new Account(minerAccount, req.network);
+    const result = await account.fund(req.query.publicKey)
+    return sendFormattedResponse(res, result, statusTypeEnum.OK); 
+  }catch(e){
+    return sendFormattedResponse(res, e.message, statusTypeEnum.ERROR);
+  }
+}
+
 module.exports = {
   test: (req, res) => {
     res.json('hello!')
@@ -142,5 +172,7 @@ module.exports = {
   buildTx,
   signTx,
   parseTx,
-  spendTx
+  spendTx,
+  balance,
+  fund
 }

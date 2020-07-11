@@ -8,6 +8,8 @@ module.exports = {
             networkId: 'ae_devnet'
         },
         test: {
+            type: "TESTNET",
+            minerPrivateKey: "",
             url: process.env.TEST_URL || 'https://testnet.aeternity.io',
             internalUrl: process.env.TEST_INTERNAL_URL || 'https://testnet.aeternity.io',
             channelUrl: process.env.CHANNEL_URL || 'wss://testnet.aeternity.io:443/channel',
