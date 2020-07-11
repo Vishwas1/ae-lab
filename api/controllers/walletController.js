@@ -6,13 +6,9 @@ const {
 } = require('../utils/utils')
 
 
-const url = process.env.TEST_URL || 'https://sdk-testnet.aepps.com'
-const internalUrl = process.env.TEST_INTERNAL_URL || 'https://sdk-testnet.aepps.com'
-const compilerUrl = process.env.COMPILER_URL || 'https://compiler.aepps.com'
-const networkId = process.env.TEST_NETWORK_ID || 'ae_devnet'
 
-
-const getSDKInstance = async () => {
+const getSDKInstance = async (network) => {
+  const { url, internalUrl } = network
   const node = await Node({ url, internalUrl })
   const aepp = await RpcAepp({
     name: 'AEPP',
@@ -35,6 +31,7 @@ const spendTx = async (req, res) => {
     if(!publicKey || publicKey == "") throw new Error("publicKey is null or empty")
     if(!rawTx || rawTx == "") throw new Error("Raw Transaction is null or empty")
 
+    const { url, internalUrl } = req.network
     const node = await Node({ url, internalUrl })
     const account = MemoryAccount({ keypair: { secretKey: secretKey, publicKey: publicKey } })
     const nodes = [{ name: 'testnet-node', instance: node }]
@@ -63,6 +60,7 @@ const signTx = async (req, res) => {
     if(!rawTx || rawTx == " ") throw new Error("Raw Transaction is null or empty")
 
 
+    const { url, internalUrl } = req.network
     const node = await Node({ url, internalUrl })
     const account = MemoryAccount({ keypair: { secretKey: secretKey, publicKey: publicKey } })
     const nodes = [{ name: 'testnet-node', instance: node }]
@@ -107,7 +105,7 @@ const buildTx = async (req, res) => {
     if(!receiver || receiver == " ") throw new Error("Receiver publicKey is null or empty")
     if(!amount || amount == " ") throw new Error("Amount publicKey is null or empty")
 
-    const aepp =  await getSDKInstance();
+    const aepp =  await getSDKInstance(req.network);
     const rawTx = await aepp.spendTx({ senderId: sender, recipientId: receiver, amount: amount, payload: payload })
     const data = {
       rawTx

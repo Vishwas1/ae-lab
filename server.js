@@ -1,5 +1,7 @@
 const express = require('express')
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const network_conf = require('./config').network
 const Keycloak = require('keycloak-connect');
 
 const app = express()
@@ -20,7 +22,7 @@ app.use(session({
 }));
 
 app.use(keycloak.middleware());
-
+app.use(cookieParser());
 const allowedOrigins = ['http://localhost:3000', 'https://ae-labs.herokuapp.com/'];
 
 const server = http.createServer(app) //Creating HTTP server using express
@@ -30,6 +32,47 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
 app.use((req, res, next) => {
+  let network = {}
+  if (req.cookies && req.cookies['NETWORK_CONFIG']) {
+    let cookie_conf;
+    try{
+      cookie_conf = JSON.parse(req.cookies['NETWORK_CONFIG'])
+      console.log(cookie_conf)
+      switch(cookie_conf.type){
+        case "CUSTOM": {
+          const nodeUrl = cookie_conf.url;
+          const chUrl = cookie_conf.channelUrl
+          network = {
+            url: nodeUrl, 
+            internalUrl: nodeUrl, 
+            channelUrl: chUrl ? `${chUrl.replace('http', 'ws')}/channel` : "",
+            compilerUrl: '',
+            networkId: cookie_conf.networkId,
+            minerPrivateKey: cookie_conf.minerPrivateKey
+          }
+          break;
+        }
+        case "TESTNET": {
+          network = network_conf.test
+          break
+        }
+        case "MAINNET": {
+          network = network_conf.test
+          break
+        }
+        default: {
+          network = network_conf.test
+        }
+      }
+    }catch(e){
+      network = network_conf.test
+    }
+  }else{
+    network = network_conf.test
+  }
+  
+  console.log(network)
+
   var origin = req.headers.origin;
   if(allowedOrigins.indexOf(origin) > -1){
     res.setHeader('Access-Control-Allow-Origin', origin);
@@ -37,6 +80,7 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.header('Access-Control-Allow-Credentials', true);
+  req.network = network
   return next();
 });
 
