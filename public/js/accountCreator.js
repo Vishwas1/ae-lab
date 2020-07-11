@@ -54,60 +54,75 @@ function selectNetwork(network){
 }
 
 generateKeyPair = async (params)  => {
-    debugger;
-    console.log('Account Creator')
-    $('.generateKeyPair').buttonLoader('start');
-
-    const url = `${host}/api/wallet/account`;
-    const resp = await fetch(url);    
-    const json = await resp.json();
-
-    // $('.generateKeyPair').buttonLoader('stop');
-    setTimeout(function () {
+    try{
+        console.log('Account Creator')
+        $('.generateKeyPair').buttonLoader('start');
+        const url = `${host}/api/wallet/account`;
+        const resp = await fetch(url);    
+        const json = await resp.json();
+        setTimeout(function () {
+            $('.generateKeyPair').buttonLoader('stop');
+            let pubKey = document.getElementById('publicKey')
+            pubKey.textContent = json.data.publicKey;
+    
+            let secretKey = document.getElementById('secretKey')
+            secretKey.textContent = json.data.secretKey;
+    
+            let balance = document.getElementById('balance')
+            balance.textContent = "0";
+        }, 1000);
+    }catch(e){
         $('.generateKeyPair').buttonLoader('stop');
-        let pubKey = document.getElementById('publicKey')
-        pubKey.textContent = json.data.publicKey;
-
-        let secretKey = document.getElementById('secretKey')
-        secretKey.textContent = json.data.secretKey;
-
-        let balance = document.getElementById('balance')
-        balance.textContent = "0";
-    }, 1000);
+        console.error(e)
+        alert(`Error: ${e.message}`)
+    }
 }
 
 fundAccount = async ()  => {
-    $('.fundAccount').buttonLoader('start');
-    const publicKey = $('#publicKey').text()
-    if(!publicKey){
-        alert('Error: No publickey is set. Try Generate Keypair button first')
+    try{
+        $('.fundAccount').buttonLoader('start');
+        const publicKey = $('#publicKey').text()
+        if(!publicKey){
+            alert('Error: No publickey is set. Try Generate Keypair button first')
+            $('.fundAccount').buttonLoader('stop');
+            return
+        }
+        const url = `${host}/api/wallet/fund?publicKey=${publicKey}`;
+        const resp = await fetch(url);    
+        const json = await resp.json();
+        setTimeout(function () {
+            $('.fundAccount').buttonLoader('stop');
+            let balance = document.getElementById('balance')
+            balance.textContent = json.data;
+        }, 1000);
+    }catch(e){
         $('.fundAccount').buttonLoader('stop');
-        return
+        console.error(e)
+        alert(`Error: ${e.message}`)
     }
-    const url = `${host}/api/wallet/fund?publicKey=${publicKey}`;
-    const resp = await fetch(url);    
-    const json = await resp.json();
-    setTimeout(function () {
-        $('.fundAccount').buttonLoader('stop');
-        let balance = document.getElementById('balance')
-        balance.textContent = json.data;
-    }, 1000);
 }
 
 checkBalance = async () => {
-    $('.checkBalance').buttonLoader('start');
-    const publicKey = $('#publicKey').text()
-    if(!publicKey){
-        alert('Error: No publickey is set. Try Generate Keypair button first')
+    try{
+        $('.checkBalance').buttonLoader('start');
+        const publicKey = $('#publicKey').text()
+        if(!publicKey){
+            alert('Error: No publickey is set. Try Generate Keypair button first')
+            $('.checkBalance').buttonLoader('stop');
+            return
+        }
+        const url = `${host}/api/wallet/balance?publicKey=${publicKey}`;
+        const resp = await fetch(url);    
+        const json = await resp.json();
+        setTimeout(function () {
+            $('.checkBalance').buttonLoader('stop');
+            let balance = document.getElementById('balance')
+            balance.textContent = json.data;
+        }, 1000)
+    }catch(e){
         $('.checkBalance').buttonLoader('stop');
-        return
+        console.error(e)
+        alert(`Error: ${e.message}`)
     }
-    const url = `${host}/api/wallet/balance?publicKey=${publicKey}`;
-    const resp = await fetch(url);    
-    const json = await resp.json();
-    setTimeout(function () {
-        $('.checkBalance').buttonLoader('stop');
-        let balance = document.getElementById('balance')
-        balance.textContent = json.data;
-    }, 1000)
+    
 }
