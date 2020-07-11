@@ -48,7 +48,8 @@ app.use((req, res, next) => {
             channelUrl: chUrl ? `${chUrl.replace('http', 'ws')}/channel` : "",
             compilerUrl: '',
             networkId: cookie_conf.networkId,
-            minerPrivateKey: cookie_conf.minerPrivateKey
+            minerPrivateKey: cookie_conf.minerPrivateKey,
+            type: "CUSTOM"
           }
           break;
         }
