@@ -76,6 +76,7 @@ curl http://127.0.0.1:3013/v2/blocks/top
 ## Check balance
 
 https://testnet.aeternity.io/v2/accounts/ak_2qRZHvkWy1oo1ktgu5kC8yPwtyRsNnx3CSSLH4bRnBS7B8TtfU
+http://localhost:3013/v2/transactions/th_2k85uheYPgzpyvXPyjXoWrHetLt6SpYjMFQHTSTRyx3S7sWDrZ
 
 ## References
 
