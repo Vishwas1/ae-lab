@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
     <!-- Custom styles for this template -->
     <link href="css/template.css" rel="stylesheet">
     <link href="css/chatroom.css" rel="stylesheet">
@@ -209,14 +208,31 @@
                     <div class="panel-body">
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="tab1default">
-                                <div class="container">
-                                    <h2 class="mt-5">Aeternity Laboratory</h2>
-                                    <p class="">The AEternity lab is a set of tools that enables people to Experience and Use AEternity network. <p>
-                                            <p>The laboratory can build transactions, sign them, and submit them to the
-                                                 network. By default</p>
-                                            <p><a href="https://testnet.aeternal.io">AEternity
-                                                test network</a> is selected. However, user can choose to use his
-                                            private network</p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h2 class="mt-5">Aeternity Laboratory</h2>
+                                        <hr/>
+                                        <p class="">The AEternity lab is a tool that enable people to experience and use AEternity blockchain network quickly & easily.
+                                                    One can build transactions, sign them, and submit them to the
+                                                         network. They can also play around with smart contracts and state channel. By default <a href="https://testnet.aeternal.io">AEternity
+                                                        test network</a> is selected as network setting. However, user can choose to use his
+                                                    custom network as well.</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div style="float:right">
+                                            <div
+                                            class="github-card"
+                                            data-github="vishwas1/ae-lab"
+                                            data-width="400"
+                                            data-height
+                                            data-theme="default"
+                                        ></div>
+                                        <p>
+                                            <h5>Encourage us by giving this repo a <b>star</b> or by <a data-toggle="modal" data-target="#donate" href="#">donating</a>! :)</h5>
+                                        </p>
+                                        </div>
+                                        
+                                    </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="tab2default">
@@ -908,7 +924,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">[AEN]: </label>
-                        ak_5fG8Y5ATM2x5V9dEBDNFXvF9PaU9aa2XAk2K2JqD4W17RF74y
+                        ak_2Ry38fBWT8LWF47cS8gRkCfMmTuCx1M1VMEdXuobs5PjfJBkzC
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -923,7 +939,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Provide Your Keys</h4>
+                    <h4 class="modal-title">Network Setting</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -1079,6 +1095,7 @@
     </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Q4DHJSQ2N"></script>
+    <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
