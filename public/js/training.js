@@ -34,7 +34,6 @@ const loadtraining = async () => {
 }
 
 const showVideo = (elm) => {
-    debugger
     const link = elm.getAttribute("youtube-link") 
     let html = `
         <iframe class="iframe" src="${link}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

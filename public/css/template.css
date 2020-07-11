@@ -329,6 +329,7 @@
     background-color: #a94442; /* active bg color */
 }
 .footer {
+    z-index: 999999999999;
   position: fixed;
   bottom: 0;
   width: 100%;
